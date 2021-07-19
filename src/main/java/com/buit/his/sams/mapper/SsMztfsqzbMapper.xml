@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 门诊退费申请主表 -->
+<mapper namespace="com.buit.his.sams.dao.SsMztfsqzbDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        JLXH as jlxh,JGID as jgid,SSKSDM as ssksdm,TFSQDH as tfsqdh,TFSJ as tfsj,TFRDM as tfrdm,MZHM as mzhm,JZDH as jzdh
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO SS_MZTFSQZB (
+            JLXH ,
+            JGID ,
+            SSKSDM ,
+            TFSQDH ,
+            TFSJ ,
+            TFRDM ,
+            MZHM ,
+            JZDH 
+        ) VALUES (
+            #{jlxh} ,
+            #{jgid} ,
+            #{ssksdm} ,
+            #{tfsqdh} ,
+            #{tfsj} ,
+            #{tfrdm} ,
+            #{mzhm} ,
+            #{jzdh} 
+        )
+    </insert>
+    
+    <update id="update" >
+    UPDATE SS_MZTFSQZB
+    <trim prefix="SET" suffixOverrides=",">
+                    <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                        JGID = #{jgid} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(ssksdm)">
+                        SSKSDM = #{ssksdm} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(tfsqdh)">
+                        TFSQDH = #{tfsqdh} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(tfsj)">
+                        TFSJ = #{tfsj} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(tfrdm)">
+                        TFRDM = #{tfrdm} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(mzhm)">
+                        MZHM = #{mzhm} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(jzdh)">
+                        JZDH = #{jzdh} 
+                    </if>
+        </trim>
+            WHERE
+        JLXH = #{jlxh} 
+        </update>
+
+    <delete id="deleteById">
+        DELETE FROM SS_MZTFSQZB WHERE
+        JLXH = #{jlxh} 
+    </delete>
+    
+    <delete id="removeByEntity">
+        DELETE FROM SS_MZTFSQZB <include refid="where"/>  
+    </delete>
+    
+    <select id="getById" resultType="SsMztfsqzb">
+        SELECT <include refid="columns" />
+            FROM SS_MZTFSQZB 
+            WHERE 
+        JLXH = #{jlxh} 
+    </select>
+    
+    <sql id="where">
+        <where>                          
+<!--                <if test="@sqlt.Ognl@isNotEmpty(jlxh)"> -->
+<!--                     AND JLXH = #{jlxh} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(jgid)"> -->
+<!--                     AND JGID = #{jgid} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(ssksdm)"> -->
+<!--                     AND SSKSDM = #{ssksdm} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(tfsqdh)"> -->
+<!--                     AND TFSQDH = #{tfsqdh} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(tfsj)"> -->
+<!--                     AND TFSJ = #{tfsj} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(tfrdm)"> -->
+<!--                     AND TFRDM = #{tfrdm} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(mzhm)"> -->
+<!--                     AND MZHM = #{mzhm} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(jzdh)"> -->
+<!--                     AND JZDH = #{jzdh} -->
+<!--                </if> -->
+        </where>
+    </sql>
+        
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM SS_MZTFSQZB 
+        <include refid="where"/>    
+    </select>
+    
+    <select id="findByEntity" resultType="SsMztfsqzb">
+        SELECT <include refid="columns" />
+        FROM SS_MZTFSQZB 
+        <include refid="where"/>
+        
+        <if test="@sqlt.Ognl@orderIsNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+    <!--     业务sql      -->
+</mapper>
+

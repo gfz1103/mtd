@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 治疗记录表 -->
+<mapper namespace="com.buit.his.treatment.dao.ZlZljlDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        JLXH as jlxh,ZYH as zyh,ZXRQ as zxrq,ZLLB as zllb,ZXGH as zxgh,JXGH as jxgh,JLGH as jlgh,JLSJ as jlsj,QXGH as qxgh,QXSJ as qxsj,QXYY as qxyy,BLFY as blfy,BZXX as bzxx,JDXJ as jdxj,MQZXCS as mqzxcs,SCXJCS as scxjcs,ZT as zt
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO ZL_ZLJL (JLXH,
+                             ZYH,
+                             ZXRQ,
+                             ZLLB,
+                             ZXGH,
+                             JXGH,
+                             JLGH,
+                             JLSJ,
+                             QXGH,
+                             QXSJ,
+                             QXYY,
+                             BLFY,
+                             BZXX,
+                             JDXJ,
+                             MQZXCS,
+                             SCXJCS,
+                             ZT)
+        VALUES (#{jlxh},
+                #{zyh},
+                #{zxrq},
+                #{zllb},
+                #{zxgh},
+                #{jxgh},
+                #{jlgh},
+                #{jlsj},
+                #{qxgh},
+                #{qxsj},
+                #{qxyy},
+                #{blfy},
+                #{bzxx},
+                #{jdxj},
+                #{mqzxcs},
+                #{scxjcs},
+                #{zt})
+    </insert>
+
+    <update id="update">
+        UPDATE ZL_ZLJL
+        SET ZYH    = #{zyh},
+            ZXRQ   = #{zxrq},
+            ZLLB   = #{zllb},
+            ZXGH   = #{zxgh},
+            JXGH   = #{jxgh},
+            JLGH   = #{jlgh},
+            JLSJ   = #{jlsj},
+            QXGH   = #{qxgh},
+            QXSJ   = #{qxsj},
+            QXYY   = #{qxyy},
+            BLFY   = #{blfy},
+            BZXX   = #{bzxx},
+            JDXJ   = #{jdxj},
+            MQZXCS = #{mqzxcs},
+            SCXJCS = #{scxjcs},
+            ZT     = #{zt}
+        WHERE JLXH = #{jlxh}
+    </update>
+
+    <update id="updateByEntity">
+        UPDATE ZL_ZLJL
+        <set>
+            <if test="@sqlt.Ognl@isNotEmpty(zyh)">
+                ZYH = #{zyh},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zxrq)">
+                ZXRQ = #{zxrq},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zllb)">
+                ZLLB = #{zllb},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zxgh)">
+                ZXGH = #{zxgh},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(jxgh)">
+                JXGH = #{jxgh},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(jlgh)">
+                JLGH = #{jlgh},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(jlsj)">
+                JLSJ = #{jlsj},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(qxgh)">
+                QXGH = #{qxgh},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(qxsj)">
+                QXSJ = #{qxsj},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(qxyy)">
+                QXYY = #{qxyy},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(blfy)">
+                BLFY = #{blfy},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(bzxx)">
+                BZXX = #{bzxx},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(jdxj)">
+                JDXJ = #{jdxj},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(mqzxcs)">
+                MQZXCS = #{mqzxcs},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(scxjcs)">
+                SCXJCS = #{scxjcs},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zt)">
+                ZT = #{zt},
+            </if>
+        </set>
+        WHERE
+        JLXH = #{jlxh}
+    </update>
+
+    <delete id="deleteById">
+        DELETE
+        FROM ZL_ZLJL
+        WHERE JLXH = #{jlxh}
+    </delete>
+
+    <delete id="removeByEntity">
+        DELETE FROM ZL_ZLJL
+        <include refid="where"/>
+    </delete>
+
+    <select id="getById" resultType="ZlZljl">
+        SELECT
+        <include refid="columns"/>
+        FROM ZL_ZLJL
+        WHERE
+        JLXH = #{jlxh}
+    </select>
+
+    <sql id="where">
+        <where>
+            <if test="@sqlt.Ognl@isNotEmpty(jlxh)">
+                AND JLXH = #{jlxh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zyh)">
+                AND ZYH = #{zyh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zxrq)">
+                AND ZXRQ = #{zxrq}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zllb)">
+                AND ZLLB = #{zllb}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zxgh)">
+                AND ZXGH = #{zxgh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(jxgh)">
+                AND JXGH = #{jxgh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(jlgh)">
+                AND JLGH = #{jlgh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(jlsj)">
+                AND JLSJ = #{jlsj}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(qxgh)">
+                AND QXGH = #{qxgh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(qxsj)">
+                AND QXSJ = #{qxsj}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(qxyy)">
+                AND QXYY = #{qxyy}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(blfy)">
+                AND BLFY = #{blfy}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(bzxx)">
+                AND BZXX = #{bzxx}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(jdxj)">
+                AND JDXJ = #{jdxj}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(mqzxcs)">
+                AND MQZXCS = #{mqzxcs}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(scxjcs)">
+                AND SCXJCS = #{scxjcs}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zt)">
+                AND ZT = #{zt}
+            </if>
+        </where>
+    </sql>
+
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM ZL_ZLJL
+        <include refid="where"/>
+    </select>
+
+    <select id="findByEntity" resultType="ZlZljl">
+        SELECT
+        <include refid="columns"/>
+        FROM ZL_ZLJL
+        <include refid="where"/>
+
+        <if test="@sqlt.Ognl@orderIsNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+    <!--     业务sql      -->
+    <select id="findZljlReportDetailResp" resultType="com.buit.his.treatment.response.ZljlReportDetailResp">
+        SELECT
+        t.zxrq,
+        GROUP_CONCAT( t.sfxmdm ) zlxm,
+        zljl.BLFY,
+        zljl.BZXX,
+        zljl.JDXJ
+        FROM
+        (
+        SELECT
+        rwfp.ZYH,
+        rwfp.ZLLB,
+        rwfp.ZLSDM,
+        rwfp.SFXMDM sfxmdm,
+        DATE_FORMAT( zrw.ZXSJ, '%Y-%m-%d' ) zxrq
+        FROM
+        zl_zlzrw zrw
+        INNER JOIN zl_rwmb mb ON zrw.RWMB_JLXH = mb.JLXH
+        INNER JOIN zl_rwfp rwfp ON mb.ZLRWFPID = rwfp.ZLRWFPID
+        WHERE
+        zrw.ZXZT = 2
+        AND rwfp.ZYH = #{zyh}
+        AND rwfp.ZLLB = #{zllb}
+        <if test="@sqlt.Ognl@isNotEmpty(zlsdm)">
+            AND rwfp.ZLSDM = #{zlsdm}
+        </if>
+        ORDER BY
+        zrw.ZXSJ
+        ) t
+        INNER JOIN zl_zljl zljl ON (
+        zljl.ZYH = t.ZYH
+        AND t.ZLLB = zljl.ZLLB
+        AND t.ZLSDM = zljl.ZXGH
+        AND zljl.ZXRQ = t.zxrq
+        AND zljl.ZT = 0
+        )
+        WHERE
+        t.zxrq = zljl.ZXRQ
+        AND t.ZLSDM = zljl.ZXGH
+        AND t.ZYH = zljl.ZYH
+        GROUP BY
+        t.ZXRQ
+    </select>
+
+    <select id="findTreatmentRecords" resultType="com.buit.his.treatment.model.ZlZljl">
+        SELECT
+        <include refid="columns"/>
+        FROM
+        zl_zljl zljl
+        WHERE
+        EXISTS (
+        SELECT
+        1
+        FROM
+        zl_zlzrw zrw
+        INNER JOIN zl_rwfp rwfp ON ( zrw.ZLRWFPID = rwfp.ZLRWFPID AND zrw.ZXZT=2 AND rwfp.ZLRWFPID = #{zlrwfpid} )
+        WHERE
+        rwfp.zyh = zljl.ZYH
+        AND rwfp.zllb = zljl.ZLLB
+        AND DATE_FORMAT( zrw.zxsj, '%Y-%m-%d' ) = zljl.ZXRQ
+        )
+        ORDER BY
+        zxrq DESC
+    </select>
+</mapper>
+

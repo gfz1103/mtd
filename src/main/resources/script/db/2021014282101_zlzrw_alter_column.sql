@@ -1,0 +1,3 @@
+
+ALTER TABLE `his`.`zl_zlzrw`
+CHANGE COLUMN `QZSJ` `QXSJ` datetime(0) NULL DEFAULT NULL COMMENT '取消时间' AFTER `JZGH`;

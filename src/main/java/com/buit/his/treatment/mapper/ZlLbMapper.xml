@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 治疗类别表 -->
+<mapper namespace="com.buit.his.treatment.dao.ZlLbDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        JLXH as jlxh,JGID as jgid,ZLKSDM as zlksdm,LBMC as lbmc,PXH as pxh
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO ZL_LB (
+            JLXH ,
+            JGID ,
+            ZLKSDM ,
+            LBMC ,
+            PXH 
+        ) VALUES (
+            #{jlxh} ,
+            #{jgid} ,
+            #{zlksdm} ,
+            #{lbmc} ,
+            #{pxh} 
+        )
+    </insert>
+    
+    <update id="update" >
+    UPDATE ZL_LB
+    <trim prefix="SET" suffixOverrides=",">
+                    <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                        JGID = #{jgid} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zlksdm)">
+                        ZLKSDM = #{zlksdm} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(lbmc)">
+                        LBMC = #{lbmc} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(pxh)">
+                        PXH = #{pxh} 
+                    </if>
+        </trim>
+            WHERE
+        JLXH = #{jlxh} 
+        </update>
+
+    <delete id="deleteById">
+        DELETE FROM ZL_LB WHERE
+        JLXH = #{jlxh} 
+    </delete>
+    
+    <delete id="removeByEntity">
+        DELETE FROM ZL_LB <include refid="where"/>  
+    </delete>
+    
+    <select id="getById" resultType="ZlLb">
+        SELECT <include refid="columns" />
+            FROM ZL_LB 
+            WHERE 
+        JLXH = #{jlxh} 
+    </select>
+    
+    <sql id="where">
+        <where>                          
+                <if test="@sqlt.Ognl@isNotEmpty(jlxh)">
+                     AND JLXH = #{jlxh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                     AND JGID = #{jgid}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zlksdm)">
+                     AND ZLKSDM = #{zlksdm}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(lbmc)">
+                    AND LBMC LIKE CONCAT('%',#{lbmc},'%')
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(pxh)">
+                     AND PXH = #{pxh}
+                </if>
+        </where>
+    </sql>
+        
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM ZL_LB 
+        <include refid="where"/>    
+    </select>
+    
+    <select id="findByEntity" resultType="ZlLb">
+        SELECT <include refid="columns" />
+        FROM ZL_LB 
+        <include refid="where"/>
+        
+        <if test="@sqlt.Ognl@orderIsNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+    <!--     业务sql      -->
+    <!--获取最大排序号-->
+    <select id="queryMaxPxh" resultType="java.lang.Integer">
+        select IFNULL(max(pxh),0) from zl_lb where jgid=#{jgid} and zlksdm=#{zlksdm}
+    </select>
+    <!--验证治疗类别名称修改的唯一性-->
+    <select id="verifyUpdateZllb" resultType="com.buit.his.treatment.model.ZlLb">
+        select *
+        from ZL_LB
+        where jgid = #{jgid}
+          and zlksdm = #{zlksdm}
+          and lbmc = #{lbmc}
+          and jlxh != #{jlxh}
+    </select>
+
+</mapper>
+

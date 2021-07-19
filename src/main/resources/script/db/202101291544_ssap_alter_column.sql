@@ -1,0 +1,11 @@
+ALTER TABLE opt_sssq
+    MODIFY COLUMN SQLX int(0) NULL DEFAULT NULL COMMENT '申请类型 | 1：门诊申请    2：住院申请' AFTER BRKS,
+    MODIFY COLUMN spbz int(0) NULL DEFAULT 0 COMMENT '审批标志 | 0：未审批    1：已审批' AFTER spys,
+    MODIFY COLUMN zfbz int(0) NULL DEFAULT 0 COMMENT '作废标志 | 0：启用    1：已作废' AFTER spbz;
+
+ALTER TABLE cis_hzyz
+    MODIFY COLUMN FHBZ int(0) NOT NULL COMMENT '复核标志 | 0：未复核    1：已复核' AFTER YZZXSJ;
+
+ALTER TABLE ss_ssap
+    MODIFY COLUMN CZSJ datetime(0) NULL DEFAULT NULL COMMENT '操作时间' AFTER XSHSDME,
+    MODIFY COLUMN ZT varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '手术状态 | 0：未安排    1：已安排    2：已完成' AFTER CZSJ;

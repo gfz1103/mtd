@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 门诊治疗申请 - 收费项目明细表 -->
+<mapper namespace="com.buit.his.treatment.dao.ZlSqdsfmxDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        JLXH as jlxh,SQDMX_JLXH as sqdmxJlxh,SFXMDM as sfxmdm,SFXMMC as sfxmmc
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO ZL_SQDSFMX (
+            JLXH ,
+            SQDMX_JLXH ,
+            SFXMDM ,
+            SFXMMC
+        ) VALUES (
+            #{jlxh} ,
+            #{sqdmxJlxh} ,
+            #{sfxmdm} ,
+            #{sfxmmc}
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE ZL_SQDSFMX SET
+            SQDMX_JLXH = #{sqdmxJlxh} ,
+            SFXMDM = #{sfxmdm} ,
+            SFXMMC = #{sfxmmc}
+        WHERE
+            JLXH = #{jlxh}
+    </update>
+
+    <update id="updateByEntity">
+        UPDATE ZL_SQDSFMX
+        <set>
+            <if test="@sqlt.Ognl@isNotEmpty(sqdmxJlxh)">
+                SQDMX_JLXH = #{sqdmxJlxh},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(sfxmdm)">
+                SFXMDM = #{sfxmdm},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(sfxmmc)">
+                SFXMMC = #{sfxmmc},
+            </if>
+        </set>
+        WHERE
+        JLXH = #{jlxh}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM ZL_SQDSFMX WHERE
+        JLXH = #{jlxh}
+    </delete>
+
+    <delete id="removeByEntity">
+        DELETE FROM ZL_SQDSFMX
+        <include refid="where"/>
+    </delete>
+
+    <select id="getById" resultType="ZlSqdsfmx">
+        SELECT
+        <include refid="columns"/>
+        FROM ZL_SQDSFMX
+        WHERE
+        JLXH = #{jlxh}
+    </select>
+
+    <sql id="where">
+        <where>
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(jlxh)"> -->
+            <!--                     AND JLXH = #{jlxh} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(sqdmxJlxh)"> -->
+            <!--                     AND SQDMX_JLXH = #{sqdmxJlxh} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(sfxmdm)"> -->
+            <!--                     AND SFXMDM = #{sfxmdm} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(sfxmmc)"> -->
+            <!--                     AND SFXMMC = #{sfxmmc} -->
+            <!--                </if> -->
+        </where>
+    </sql>
+
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM ZL_SQDSFMX
+        <include refid="where"/>
+    </select>
+
+    <select id="findByEntity" resultType="ZlSqdsfmx">
+        SELECT
+        <include refid="columns"/>
+        FROM ZL_SQDSFMX
+        <include refid="where"/>
+
+        <if test="@sqlt.Ognl@orderIsNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+    <!--     业务sql      -->
+
+    <insert id="batchInsert">
+        INSERT INTO ZL_SQDSFMX (
+        JLXH ,
+        SQDMX_JLXH ,
+        SFXMDM ,
+        SFXMMC
+        ) VALUES
+        <foreach collection="list" separator="," item="r">
+            (
+            #{r.jlxh} ,
+            #{r.sqdmxJlxh} ,
+            #{r.sfxmdm} ,
+            #{r.sfxmmc}
+            )
+        </foreach>
+    </insert>
+
+    <delete id="deleteByJlxh">
+        DELETE
+        FROM
+            zl_sqdsfmx
+        WHERE
+            SQDMX_JLXH IN ( SELECT JLXH FROM zl_sqdmx WHERE ZLSQDH = #{jlxh} );
+    </delete>
+
+    <delete id="deleteBySfxmmxJlxh">
+        DELETE
+        FROM
+            zl_sqdsfmx
+        WHERE
+            SQDMX_JLXH = #{sfxmmxJlxh}
+    </delete>
+</mapper>
+

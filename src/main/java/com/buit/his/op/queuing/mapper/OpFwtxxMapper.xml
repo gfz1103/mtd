@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 服务台信息 -->
+<mapper namespace="com.buit.his.op.queuing.dao.OpFwtxxDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        RID as rid,BBH as bbh,CJSJ as cjsj,GXSJ as gxsj,JGID as jgid,LX as lx,ZSDM as zsdm,ZSMC as zsmc,DZ as dz,PXH as pxh,SFKY as sfky,YQDM as yqdm,PYDM as pydm,WBDM as wbdm, GHKSJH as ghksjh
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO OP_FWTXX (
+            RID ,
+            BBH ,
+            CJSJ ,
+            GXSJ ,
+            JGID ,
+            LX ,
+            ZSDM ,
+            ZSMC ,
+            DZ ,
+            PXH ,
+            SFKY ,
+            YQDM ,
+            PYDM ,
+            WBDM ,
+            GHKSJH
+        ) VALUES (
+            #{rid} ,
+            #{bbh} ,
+            #{cjsj} ,
+            #{gxsj} ,
+            #{jgid} ,
+            #{lx} ,
+            #{zsdm} ,
+            #{zsmc} ,
+            #{dz} ,
+            #{pxh} ,
+            #{sfky} ,
+            #{yqdm} ,
+            #{pydm} ,
+            #{wbdm} ,
+            #{ghksjh}
+        )
+    </insert>
+
+    <update id="update" >
+        UPDATE OP_FWTXX
+        <trim prefix="SET" suffixOverrides=",">
+            GXSJ = #{gxsj} ,
+            BBH = BBH + 1 ,
+            <if test="@sqlt.Ognl@isNotEmpty(sfky)">
+                SFKY = #{sfky} ,
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(dz)">
+                DZ = #{dz} ,
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(pxh)">
+                PXH = #{pxh} ,
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zsmc)">
+                ZSMC = #{zsmc} ,
+                PYDM = #{pydm} ,
+                WBDM = #{wbdm} ,
+            </if><if test="@sqlt.Ognl@isNotEmpty(ghksjh)">
+                GHKSJH = #{ghksjh} ,
+            </if>
+        </trim>
+        WHERE
+            RID = #{rid}
+    </update>
+    <update id="editState">
+        UPDATE OP_FWTXX
+        SET
+            GXSJ = #{gxsj},
+            SFKY = #{sfky}
+        WHERE
+            RID = #{rid}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM OP_FWTXX WHERE
+        RID = #{rid}
+    </delete>
+
+    <delete id="removeByEntity">
+        DELETE FROM OP_FWTXX <include refid="where"/>
+    </delete>
+
+    <select id="getById" resultType="OpFwtxx">
+        SELECT <include refid="columns" />
+            FROM OP_FWTXX
+            WHERE
+        RID = #{rid}
+    </select>
+
+    <sql id="where">
+        <where>
+<!--                <if test="@sqlt.Ognl@isNotEmpty(rid)"> -->
+<!--                     AND RID = #{rid} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(bbh)"> -->
+<!--                     AND BBH = #{bbh} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(cjsj)"> -->
+<!--                     AND CJSJ = #{cjsj} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(gxsj)"> -->
+<!--                     AND GXSJ = #{gxsj} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(jgid)"> -->
+<!--                     AND JGID = #{jgid} -->
+<!--                </if> -->
+                <if test="@sqlt.Ognl@isNotEmpty(lx)">
+                     AND LX = #{lx}
+                </if>
+<!--                <if test="@sqlt.Ognl@isNotEmpty(zsdm)"> -->
+<!--                     AND ZSDM = #{zsdm} -->
+<!--                </if> -->
+                <if test="@sqlt.Ognl@isNotEmpty(zsmc)">
+                     AND ZSMC like CONCAT(CONCAT('%',#{zsmc}),'%')
+                </if>
+<!--                <if test="@sqlt.Ognl@isNotEmpty(dz)"> -->
+<!--                     AND DZ = #{dz} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(pxh)"> -->
+<!--                     AND PXH = #{pxh} -->
+<!--                </if> -->
+                <if test="@sqlt.Ognl@isNotEmpty(sfky)">
+                     AND SFKY = #{sfky}
+                </if>
+<!--                <if test="@sqlt.Ognl@isNotEmpty(yqdm)"> -->
+<!--                     AND YQDM = #{yqdm} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(pydm)"> -->
+<!--                     AND PYDM = #{pydm} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(wbdm)"> -->
+<!--                     AND WBDM = #{wbdm} -->
+<!--                </if> -->
+        </where>
+    </sql>
+
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM OP_FWTXX
+        <include refid="where"/>
+    </select>
+
+    <select id="findByEntity" resultType="OpFwtxx">
+        SELECT <include refid="columns" />
+        FROM OP_FWTXX
+        <include refid="where"/>
+
+        <if test="@sqlt.Ognl@orderIsNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+    <!--     业务sql      -->
+    <select id="queryFwtIdByKsmcOrZsmc" resultType="java.lang.Integer">
+        SELECT DISTINCT
+        fwt.RID
+        FROM op_fwtxx fwt
+        JOIN op_ghks ghks ON fwt.RID = ghks.FWTID
+        WHERE fwt.LX = 1 AND fwt.SFKY = '0' AND ghks.SFQY = '1'
+        AND fwt.JGID = #{jgid}
+        AND ghks.KSMC = #{condition}
+        LIMIT 1
+    </select>
+</mapper>
+

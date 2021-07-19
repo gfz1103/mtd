@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 治疗申请单项目治疗内容表 -->
+<mapper namespace="com.buit.his.treatment.dao.ZlSqdxmzlnrDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        JLXH as jlxh,JGID as jgid,ZLSQDH as zlsqdh,XH as xh,ZLXMMC as zlxmmc,PXH as pxh,ZLPC as zlpc,SJ as sj,YL as yl,ZLFF as zlff,ZLBW as zlbw,ZLCS as zlcs,ZL_SQDMX_JLXH as ZlSqdmxJlxh
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO ZL_SQDXMZLNR (
+            JLXH ,
+            JGID ,
+            ZLSQDH ,
+            XH ,
+            ZLXMMC ,
+            PXH ,
+            ZLPC ,
+            SJ ,
+            YL ,
+            ZLFF ,
+            ZLBW ,
+            ZLCS
+        ) VALUES (
+            #{jlxh} ,
+            #{jgid} ,
+            #{zlsqdh} ,
+            #{xh} ,
+            #{zlxmmc} ,
+            #{pxh} ,
+            #{zlpc} ,
+            #{sj} ,
+            #{yl} ,
+            #{zlff} ,
+            #{zlbw} ,
+            #{zlcs}
+        )
+    </insert>
+    <!--批量插入-->
+    <insert id="insertForeach">
+INSERT INTO ZL_SQDXMZLNR (
+            JLXH ,
+            JGID ,
+            ZLSQDH ,
+            XH ,
+            ZLXMMC ,
+            PXH ,
+            ZLPC ,
+            SJ ,
+            YL ,
+            ZLFF ,
+            ZLBW ,
+            ZLCS,
+            ZL_SQDMX_JLXH
+        ) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+            #{item.jlxh} ,
+            #{item.jgid} ,
+            #{item.zlsqdh} ,
+            #{item.xh} ,
+            #{item.zlxmmc} ,
+            #{item.pxh} ,
+            #{item.zlpc} ,
+            #{item.sj} ,
+            #{item.yl} ,
+            #{item.zlff} ,
+            #{item.zlbw} ,
+            #{item.zlcs},
+            #{item.zlSqdmxJlxh}
+        )
+        </foreach>
+    </insert>
+
+    <update id="update" >
+    UPDATE ZL_SQDXMZLNR
+    <trim prefix="SET" suffixOverrides=",">
+                    <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                        JGID = #{jgid} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zlsqdh)">
+                        ZLSQDH = #{zlsqdh} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(xh)">
+                        XH = #{xh} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zlxmmc)">
+                        ZLXMMC = #{zlxmmc} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(pxh)">
+                        PXH = #{pxh} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zlpc)">
+                        ZLPC = #{zlpc} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(sj)">
+                        SJ = #{sj} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(yl)">
+                        YL = #{yl} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zlff)">
+                        ZLFF = #{zlff} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zlbw)">
+                        ZLBW = #{zlbw} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zlcs)">
+                        ZLCS = #{zlcs} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zlSqdmxJlxh)">
+                        ZL_SQDMX_JLXH = #{zlSqdmxJlxh}
+                    </if>
+        </trim>
+            WHERE
+        JLXH = #{jlxh}
+        </update>
+
+    <delete id="deleteById">
+        DELETE FROM ZL_SQDXMZLNR WHERE
+        JLXH = #{jlxh}
+    </delete>
+
+    <delete id="removeByEntity">
+        DELETE FROM ZL_SQDXMZLNR <include refid="where"/>
+    </delete>
+
+    <select id="getById" resultType="ZlSqdxmzlnr">
+        SELECT <include refid="columns" />
+            FROM ZL_SQDXMZLNR
+            WHERE
+        JLXH = #{jlxh}
+    </select>
+
+    <sql id="where">
+        <where>
+                <if test="@sqlt.Ognl@isNotEmpty(jlxh)">
+                     AND JLXH = #{jlxh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                     AND JGID = #{jgid}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zlsqdh)">
+                     AND ZLSQDH = #{zlsqdh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(xh)">
+                     AND XH = #{xh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zlxmmc)">
+                     AND ZLXMMC = #{zlxmmc}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(pxh)">
+                     AND PXH = #{pxh}
+                </if>
+<!--                <if test="@sqlt.Ognl@isNotEmpty(zlpc)"> -->
+<!--                     AND ZLPC = #{zlpc} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(sj)"> -->
+<!--                     AND SJ = #{sj} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(yl)"> -->
+<!--                     AND YL = #{yl} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(zlff)"> -->
+<!--                     AND ZLFF = #{zlff} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(zlbw)"> -->
+<!--                     AND ZLBW = #{zlbw} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(zlcs)"> -->
+<!--                     AND ZLCS = #{zlcs} -->
+<!--                </if> -->
+            <if test="@sqlt.Ognl@isNotEmpty(zlSqdmxJlxh)">
+                AND   ZL_SQDMX_JLXH = #{zlSqdmxJlxh}
+            </if>
+        </where>
+    </sql>
+
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM ZL_SQDXMZLNR
+        <include refid="where"/>
+    </select>
+
+    <select id="findByEntity" resultType="ZlSqdxmzlnr">
+        SELECT <include refid="columns" />
+        FROM ZL_SQDXMZLNR
+        <include refid="where"/>
+
+        <if test="@sqlt.Ognl@orderIsNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+    <!--     业务sql      -->
+    <delete id="deleteByZlSqdmxJlxh">
+        DELETE
+        FROM
+            ZL_SQDXMZLNR
+        WHERE
+            ZL_SQDMX_JLXH IN (
+            SELECT JLXH FROM zl_sqdmx WHERE ZLSQDH = #{jlxh})
+    </delete>
+</mapper>
+

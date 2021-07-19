@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 手术记账单明细表 -->
+<mapper namespace="com.buit.his.sams.dao.SsSsjzdmxDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        JLXH as jlxh,JGID as jgid,SSKSDM as ssksdm,JZDH as jzdh,XH as xh,SFXMLB as sfxmlb,SFXMDM as sfxmdm,SL as sl,DJ as dj,JE as je,ZT as zt,JZ_JLXH as jzJlxh,ssys as ssys,SQDH as sqdh,YPCD as ypcd, CDMC as cdmc, YFGG as yfgg, YPLX as yplx,JZRDM as jzrdm, JZSJ as jzsj
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO SS_SSJZDMX (
+            JLXH ,
+            JGID ,
+            SSKSDM ,
+            JZDH,
+            XH,
+            SFXMLB,
+            SFXMDM,
+            SL,
+            DJ,
+            JE,
+            ZT,
+            JZ_JLXH,
+            ssys,
+            SQDH,
+            YPCD,
+            CDMC,
+            YFGG,
+            YPLX,
+            JZRDM,
+            JZSJ)
+        VALUES (#{jlxh},
+                #{jgid},
+                #{ssksdm},
+                #{jzdh},
+                #{xh},
+                #{sfxmlb},
+                #{sfxmdm},
+                #{sl},
+                #{dj},
+                #{je},
+                #{zt},
+                #{jzJlxh},
+                #{ssys},
+                #{sqdh},
+                #{ypcd},
+                #{cdmc},
+                #{yfgg},
+                #{yplx},
+                #{jzrdm},
+                #{jzsj})
+    </insert>
+
+    <update id="update" >
+    UPDATE SS_SSJZDMX
+    <trim prefix="SET" suffixOverrides=",">
+        <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+            JGID = #{jgid} ,
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(ssksdm)">
+            SSKSDM = #{ssksdm} ,
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(jzdh)">
+            JZDH = #{jzdh} ,
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(xh)">
+            XH = #{xh} ,
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(sfxmlb)">
+            SFXMLB = #{sfxmlb} ,
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(sfxmdm)">
+            SFXMDM = #{sfxmdm} ,
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(sl)">
+            SL = #{sl} ,
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(dj)">
+            DJ = #{dj} ,
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(je)">
+            JE = #{je} ,
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(zt)">
+            ZT = #{zt} ,
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(ssys)">
+            ssys = #{ssys} ,
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(sqdh)">
+            SQDH = #{sqdh}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(ypcd)">
+            YPCD = #{ypcd}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(cdmc)">
+            CDMC = #{cdmc}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(yfgg)">
+            YFGG = #{yfgg}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(yplx)">
+            YPLX = #{yplx}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(jzrdm)">
+            JZRDM = #{jzrdm}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(jzsj)">
+            JZSJ = #{jzsj}
+        </if>
+    </trim>
+            WHERE
+        JLXH = #{jlxh}
+        </update>
+
+
+    <delete id="deleteById">
+        DELETE FROM SS_SSJZDMX WHERE
+        JLXH = #{jlxh} 
+    </delete>
+
+    <delete id="removeByEntity">
+        DELETE FROM SS_SSJZDMX <include refid="where"/>
+    </delete>
+
+    <select id="getById" resultType="SsSsjzdmx">
+        SELECT <include refid="columns" />
+            FROM SS_SSJZDMX
+            WHERE
+        JLXH = #{jlxh}
+    </select>
+
+    <sql id="where">
+        <where>
+            <if test="@sqlt.Ognl@isNotEmpty(jlxh)">
+                 AND JLXH = #{jlxh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                 AND JGID = #{jgid}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(ssksdm)">
+                 AND SSKSDM = #{ssksdm}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(jzdh)">
+                 AND JZDH = #{jzdh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(xh)">
+                 AND XH = #{xh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(sfxmlb)">
+                 AND SFXMLB = #{sfxmlb}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(sfxmdm)">
+                 AND SFXMDM = #{sfxmdm}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(sl)">
+                 AND SL = #{sl}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(dj)">
+                 AND DJ = #{dj}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(je)">
+                 AND JE = #{je}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zt)">
+                 AND ZT = #{zt}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(jzJlxh)">
+                AND JZ_JLXH = #{jzJlxh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(ssys)">
+                AND ssys = #{ssys}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(sqdh)">
+                AND SQDH = #{sqdh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(ypcd)">
+                AND YPCD = #{ypcd}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(cdmc)">
+                AND CDMC = #{cdmc}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(yfgg)">
+                AND YFGG = #{yfgg}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(yplx)">
+                AND YPLX = #{yplx}
+            </if>
+        </where>
+    </sql>
+
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM SS_SSJZDMX
+        <include refid="where"/>
+    </select>
+
+    <select id="findByEntity" resultType="SsSsjzdmx">
+        SELECT <include refid="columns" />
+        FROM SS_SSJZDMX
+        <include refid="where"/>
+
+        <if test="@sqlt.Ognl@orderIsNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+
+    <!--     业务sql      -->
+    <!--查询预交金合计-->
+    <select id="queryYjje" resultType="java.math.BigDecimal">
+        select IfNULL(sum(jkje), 0)
+        from im_tbkk
+        where zyh = #{zyh}
+    </select>
+    <!--查询合计费用-->
+    <select id="queryHjfy" resultType="java.math.BigDecimal">
+        select IfNULL(sum(zjje), 0)
+        from im_fee_fymx
+        where zyh = #{zyh}
+    </select>
+    <!--    <select id="querySsjzBaseInfoResp" resultType="com.buit.his.sams.response.SsjzBaseInfoResp">-->
+    <!--    select brxm,brxb,brch,brbq,brks,brxz,csny,ybkh as cardNo,zyh,zyhm from im_hzry  where zyhm=#{zyhm}-->
+
+    <!--    </select>-->
+    <!--手术记账病人分页查询-->
+    <select id="querySsjzPage" resultType="com.buit.his.sams.response.QuerySsjzPageResp">
+        SELECT
+            jz.jlxh AS jlxh,
+            jz.jzsj AS jzsj,
+            jz.jzlx AS jzlx,
+            jz.jzdh AS jzdh,
+            jz.SSSQDH AS sqdh,
+            jz.BQDM AS brbq,
+            jz.BRCH AS brch,
+            jz.KSDM AS brks,
+            jz.ZYHM AS zyhm,
+            im.brxm AS brxm,
+            im.BRXB AS brxb,
+            im.csny AS csny,
+            (SELECT SUM(JE) FROM SS_SSJZDMX WHERE JZDH = jz.JZDH) AS jzje,
+            sq.ssys AS ssys,
+            jz.jzrdm AS jzrdm
+        FROM ss_ssjzdzb jz
+            INNER JOIN ss_ssap ssap ON jz.SSSQDH = ssap.SQDH
+            INNER JOIN opt_sssq sq ON jz.SSSQDH = sq.SQDH
+            LEFT join im_hzry im on im.zyhm = jz.zyhm
+        WHERE jz.jzlx =#{jzlx}
+            <if test="jzlx ==1">
+                AND ssap.SSJZZT = 1
+            </if>
+            <if test="jzlx ==2">
+                AND ssap.MZJZZT = 1
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(jzrq)">
+                AND jz.jzsj &gt;= #{startDate}
+                AND jz.jzsj &lt;= #{endDate}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zyhm)">
+                AND jz.ZYHM LIKE CONCAT(CONCAT('%',#{zyhm}),'%')
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(brxm)">
+                AND im.brxm LIKE CONCAT(CONCAT('%',#{brxm}),'%')
+            </if>
+    </select>
+
+    <!--手术室收入统计-->
+    <select id="querySsssrtj" resultType="com.buit.his.sams.response.SsssrtjResp">
+        SELECT
+            jz.JLXH AS jlxh,
+            jz.JZSJ AS jzsj,
+            jz.JZDH AS jzdh,
+            sssq.SQLX AS brlx,
+            sssq.MZHM AS mzhm,
+            sssq.ZYHM AS zyhm,
+            sssq.ZYH AS zyh,
+            sssq.BRKS AS brks,
+            brda.BRXM AS brxm,
+            brda.CSNY AS csny,
+            brda.BRXB AS brxb,
+            jz.JZLX AS jzlx,
+            (select SUM(JE) from SS_SSJZDMX where JZDH = jz.JZDH) AS jzzje,
+            jz.JZRDM AS jzr,
+            brda.BRXZ AS brxz,
+            jz.BRCH AS brch,
+            sssq.SSYS AS ssys,
+            ssap.SSJZZT AS ssjzzt,
+            ssap.MZJZZT AS mzjzzt,
+            jz.BQDM AS brbq
+        FROM SS_SSJZDZB jz
+            INNER JOIN OPT_SSSQ sssq ON sssq.SQDH = jz.SSSQDH
+            INNER JOIN SS_SSAP ssap ON sssq.SQDH = ssap.SQDH
+            INNER JOIN MPI_BRDA brda ON sssq.BRID = brda.BRID
+        <where>
+            <if test="@sqlt.Ognl@isNotEmpty(ssksdm)">
+                AND jz.SSKSDM =#{ssksdm}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(startDate)">
+                AND jz.JZSJ &gt;=#{startDate}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(endDate)">
+                AND jz.JZSJ &lt;=#{endDate}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(jzlx)">
+                AND jz.JZLX = #{jzlx}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zyhm)">
+                AND (
+                (jz.BRLX = 1 AND jz.MZHM LIKE CONCAT(CONCAT('%',#{zyhm}),'%'))
+                OR (jz.BRLX = 2 AND jz.ZYHM LIKE CONCAT(CONCAT('%',#{zyhm}),'%')))
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(brxm)">
+                AND brda.BRXM LIKE CONCAT(CONCAT('%',#{brxm}),'%')
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(brkh)">
+                AND sssq.JZKH LIKE CONCAT(CONCAT('%',#{brkh}),'%')
+            </if>
+        </where>
+    </select>
+
+    <!--手术科室工作量统计-->
+    <select id="querySsksgzltj" resultType="com.buit.his.sams.response.SsksgzltjResp">
+        SELECT
+            brks,
+            count( DISTINCT jlxh ) zrc,
+            SUM( zje ) zje,
+            SUM( fypje ) fypje,
+            SUM( ypje ) ypje,
+            SUM( ypje ) / SUM( zje ) yzb
+        FROM
+            (
+            SELECT
+                sq.ssks AS brks,
+                ap.jlxh AS jlxh,
+                ( SELECT SUM( JE ) FROM ss_ssjzdmx WHERE JZDH = zb.JZDH) AS zje,
+                ( SELECT SUM( JE ) FROM ss_ssjzdmx WHERE JZDH = zb.JZDH AND SFXMLB != 3 ) AS fypje,
+                ( SELECT SUM( JE ) FROM ss_ssjzdmx WHERE JZDH = zb.JZDH AND SFXMLB = 3 ) AS ypje
+            FROM
+                opt_sssq sq
+                INNER JOIN ss_ssap ap ON ( ap.SQDH = sq.SQDH AND ap.ZT = 2 )
+                LEFT JOIN ss_ssjzdzb zb ON zb.SSSQDH = sq.SQDH
+            WHERE
+                zb.jzlx = #{jzlx}
+                AND sq.SHSJ &gt;= #{startDate}
+                AND sq.SHSJ &lt;= #{endDate}
+                AND sq.SSKS = #{ssksdm}
+        ) t
+        GROUP BY brks
+    </select>
+
+    <!--手术医生工作量统计-->
+    <select id="querySsysgzltj" resultType="com.buit.his.sams.response.SsysgzltjResp">
+        SELECT
+            brks,
+            ssys,
+            count( DISTINCT jlxh ) zrc,
+            SUM( zje ) zje,
+            SUM( fypje ) fypje,
+            SUM( ypje ) ypje,
+            SUM( ypje ) / SUM( zje ) yzb
+        FROM
+            (
+            SELECT
+                sq.ssks AS brks,
+                ap.jlxh AS jlxh,
+                sq.ssys AS ssys,
+                ( SELECT SUM( JE ) FROM ss_ssjzdmx WHERE JZDH = zb.JZDH) AS zje,
+                ( SELECT SUM( JE ) FROM ss_ssjzdmx WHERE JZDH = zb.JZDH AND SFXMLB != 3 ) AS fypje,
+                ( SELECT SUM( JE ) FROM ss_ssjzdmx WHERE JZDH = zb.JZDH AND SFXMLB = 3 ) AS ypje
+            FROM
+                opt_sssq sq
+                INNER JOIN ss_ssap ap ON ( ap.SQDH = sq.SQDH AND ap.ZT = 2 )
+                LEFT JOIN ss_ssjzdzb zb ON zb.SSSQDH = sq.SQDH
+            WHERE
+                sq.SHSJ &gt;= #{startDate}
+                AND sq.SHSJ &lt;= #{endDate}
+                AND sq.SSKS = #{ssksdm}
+        ) t
+        GROUP BY brks, ssys
+    </select>
+
+    <!--麻醉医生工作量统计-->
+    <select id="queryMzysgzltj" resultType="com.buit.his.sams.response.MzysgzltjResp">
+        SELECT
+            brks,
+            mzys,
+            count( DISTINCT jlxh ) zrc,
+            SUM( zje ) zje,
+            SUM( fypje ) fypje,
+            SUM( ypje ) ypje,
+            SUM( ypje ) / SUM( zje ) yzb
+        FROM
+            (
+            SELECT
+                sq.ssks AS brks,
+                ap.jlxh AS jlxh,
+                sq.mzys AS mzys,
+                ( SELECT SUM( JE ) FROM ss_ssjzdmx WHERE JZDH = zb.JZDH) AS zje,
+                ( SELECT SUM( JE ) FROM ss_ssjzdmx WHERE JZDH = zb.JZDH AND SFXMLB != 3 ) AS fypje,
+                ( SELECT SUM( JE ) FROM ss_ssjzdmx WHERE JZDH = zb.JZDH AND SFXMLB = 3 ) AS ypje
+            FROM
+                opt_sssq sq
+                INNER JOIN ss_ssap ap ON ( ap.SQDH = sq.SQDH AND ap.ZT = 2 )
+                LEFT JOIN ss_ssjzdzb zb ON zb.SSSQDH = sq.SQDH
+            WHERE
+                sq.SHSJ &gt;= #{startDate}
+                AND sq.SHSJ &lt;= #{endDate}
+                AND sq.SSKS = #{ssksdm}
+        ) t
+        GROUP BY brks, mzys
+    </select>
+
+    <!--手术间工作量统计-->
+    <select id="querySsjgzltj" resultType="com.buit.his.sams.response.SsjgzltjResp">
+        SELECT
+            ssj,
+            count( DISTINCT jlxh ) zrc,
+            SUM( zje ) zje,
+            SUM( fypje ) fypje,
+            SUM( ypje ) ypje,
+            SUM( ypje ) / SUM( zje ) yzb
+        FROM
+            (
+            SELECT
+                ap.ssj AS ssj,
+                ap.jlxh AS jlxh,
+                ( SELECT SUM( JE ) FROM ss_ssjzdmx WHERE JZDH = zb.JZDH) AS zje,
+                ( SELECT SUM( JE ) FROM ss_ssjzdmx WHERE JZDH = zb.JZDH AND SFXMLB != 3 ) AS fypje,
+                ( SELECT SUM( JE ) FROM ss_ssjzdmx WHERE JZDH = zb.JZDH AND SFXMLB = 3 ) AS ypje
+            FROM
+                opt_sssq sq
+                INNER JOIN ss_ssap ap ON ( ap.SQDH = sq.SQDH AND ap.ZT = 2 )
+                LEFT JOIN ss_ssjzdzb zb ON zb.SSSQDH = sq.SQDH
+            WHERE
+                zb.jzlx = #{jzlx}
+                AND sq.SHSJ &gt;= #{startDate}
+                AND sq.SHSJ &lt;= #{endDate}
+                AND sq.SSKS = #{ssksdm}
+        ) t
+        GROUP BY ssj
+    </select>
+
+    <insert id="batchInsert">
+        INSERT INTO SS_SSJZDMX (
+        JLXH ,
+        JGID ,
+        SSKSDM ,
+        JZDH ,
+        XH ,
+        SFXMLB ,
+        SFXMDM ,
+        SL ,
+        DJ ,
+        JE ,
+        ZT ,
+        JZ_JLXH,
+        ssys,
+        SQDH,
+        YPCD,
+        CDMC,
+        YFGG,
+        YPLX,
+        JZRDM,
+        JZSJ) VALUES
+        <foreach collection="list" item="r" separator=",">
+            (
+            #{r.jlxh} ,
+            #{r.jgid} ,
+            #{r.ssksdm} ,
+            #{r.jzdh} ,
+            #{r.xh} ,
+            #{r.sfxmlb} ,
+            #{r.sfxmdm} ,
+            #{r.sl} ,
+            #{r.dj} ,
+            #{r.je} ,
+            #{r.zt} ,
+            #{r.jzJlxh},
+            #{r.ssys},
+            #{r.sqdh},
+            #{r.ypcd},
+            #{r.cdmc},
+            #{r.yfgg},
+            #{r.yplx},
+            #{r.jzrdm},
+            #{r.jzsj})
+        </foreach>
+
+    </insert>
+
+    <select id="queryList" resultType="com.buit.his.sams.response.SsSsjzdmxResp">
+        SELECT b.jzsj,
+               a.ssys         AS ssys,
+               hr.PERSONNAME  AS ssysmc,
+               a.jlxh,
+               a.jgid,
+               b.SSKSDM,
+               b.jlxh         AS JZDH,
+               a.sfxmdm,
+               a.sfxmlb,
+               a.sl,
+               a.dj,
+               a.je,
+               a.zt,
+               d.fymc         AS sfxmmc,
+               d.fydw         AS dw,
+               a.ypcd,
+               a.cdmc,
+               a.yfgg
+        FROM ss_ssjzdmx a
+                 INNER JOIN ss_ssjzdzb b ON a.JZDH = b.JLXH
+                 INNER JOIN fee_ylsfxm d ON (a.sfxmdm = d.fyxh AND a.sfxmlb IN ('1', '2'))
+                 LEFT JOIN hr_personnel hr ON hr.PERSONID = a.ssys
+        WHERE b.JZDH = #{jzdh}
+        UNION ALL
+        SELECT b.jzsj,
+               a.ssys         AS ssys,
+               hr.PERSONNAME  AS ssysmc,
+               a.jlxh,
+               a.jgid,
+               b.ssksdm,
+               b.jlxh AS JZDH,
+               a.sfxmdm,
+               a.sfxmlb,
+               a.sl,
+               a.dj,
+               a.je,
+               a.zt,
+               d.ypmc AS sfxmmc,
+               d.yfdw AS dw,
+               a.ypcd,
+               a.cdmc,
+               a.yfgg
+        FROM ss_ssjzdmx a
+                 INNER JOIN ss_ssjzdzb b ON a.JZDH = b.JLXH
+                 INNER JOIN V_DRUGS_TYPK d ON (a.sfxmdm = d.ypxh AND a.sfxmlb = '3')
+                 LEFT JOIN hr_personnel hr ON hr.PERSONID = a.ssys
+        WHERE b.JZDH = #{jzdh}
+    </select>
+
+    <!--手术麻醉项目统计-->
+    <select id="querySsmzxm" resultType="com.buit.his.sams.response.SsmzxmResp">
+        SELECT
+            mx.JZSJ AS jzrq,
+            sssq.SQLX AS brlx,
+            sssq.zyhm AS zyhm,
+            im.BRXM AS brxm,
+            im.BRXB AS brxb,
+            im.CSNY AS csny,
+            jz.BQDM AS brbq,
+            jz.BRCH AS brch,
+            jz.KSDM AS brks,
+            mx.SFXMLB AS sfxmlb,
+            mx.SFXMDM AS sfxmdm,
+            mx.CDMC AS cd,
+            mx.YFGG AS spe,
+            mx.SL AS sl,
+            mx.DJ AS dj,
+            mx.JE AS je,
+            sssq.SSYS AS ssys
+        FROM
+            opt_sssq sssq
+            INNER JOIN im_hzry im ON sssq.ZYH = im.ZYH
+            INNER JOIN ss_ssap ssap ON sssq.SQDH = ssap.SQDH
+            INNER JOIN ss_ssjzdzb jz ON sssq.SQDH = jz.SSSQDH
+            INNER JOIN ss_ssjzdmx mx on mx.JZDH = jz.JZDH
+        WHERE jz.jzlx=2
+            <if test="@sqlt.Ognl@isNotEmpty(startDate)">
+                AND jz.jzsj &gt;=#{startDate}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(endDate)">
+                AND jz.jzsj &lt;=#{endDate}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(sfxmlb)">
+                AND mx.sfxmlb = #{sfxmlb}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(sfxmdm)">
+                AND mx.sfxmdm = #{sfxmdm}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(ssj)">
+                AND jz.ssksdm = #{ssj}
+            </if>
+    </select>
+</mapper>
+

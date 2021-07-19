@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 手术记账单主表 -->
+<mapper namespace="com.buit.his.sams.dao.SsSsjzdzbDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        JLXH as jlxh,JGID as jgid,SSKSDM as ssksdm,JZLX as jzlx,JZDH as jzdh,BRLX as brlx,MZHM as mzhm,ZYHM as zyhm,KSDM as ksdm,BQDM as bqdm,BRCH as brch,SSSQDH as sssqdh,JZRDM as jzrdm,JZSJ as jzsj
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO SS_SSJZDZB (
+            JLXH ,
+            JGID ,
+            SSKSDM ,
+            JZLX ,
+            JZDH ,
+            BRLX ,
+            MZHM ,
+            ZYHM ,
+            KSDM ,
+            BQDM ,
+            BRCH ,
+            SSSQDH ,
+            JZRDM ,
+            JZSJ 
+        ) VALUES (
+            #{jlxh} ,
+            #{jgid} ,
+            #{ssksdm} ,
+            #{jzlx} ,
+            #{jzdh} ,
+            #{brlx} ,
+            #{mzhm} ,
+            #{zyhm} ,
+            #{ksdm} ,
+            #{bqdm} ,
+            #{brch} ,
+            #{sssqdh} ,
+            #{jzrdm} ,
+            #{jzsj} 
+        )
+    </insert>
+    
+    <update id="update" >
+    UPDATE SS_SSJZDZB
+    <trim prefix="SET" suffixOverrides=",">
+        <!--                    <if test="@sqlt.Ognl@isNotEmpty(jgid)">-->
+        <!--                        JGID = #{jgid} ,-->
+        <!--                    </if>-->
+        <!--                    <if test="@sqlt.Ognl@isNotEmpty(ssksdm)">-->
+        <!--                        SSKSDM = #{ssksdm} ,-->
+        <!--                    </if>-->
+        <!--                    <if test="@sqlt.Ognl@isNotEmpty(jzlx)">-->
+        <!--                        JZLX = #{jzlx} ,-->
+        <!--                    </if>-->
+        <!--                    <if test="@sqlt.Ognl@isNotEmpty(jzdh)">-->
+        <!--                        JZDH = #{jzdh} ,-->
+        <!--                    </if>-->
+        <!--                    <if test="@sqlt.Ognl@isNotEmpty(brlx)">-->
+        <!--                        BRLX = #{brlx} ,-->
+        <!--                    </if>-->
+        <!--                    <if test="@sqlt.Ognl@isNotEmpty(mzhm)">-->
+        <!--                        MZHM = #{mzhm} ,-->
+        <!--                    </if>-->
+        <!--                    <if test="@sqlt.Ognl@isNotEmpty(zyhm)">-->
+        <!--                        ZYHM = #{zyhm} ,-->
+        <!--                    </if>-->
+        <!--                    <if test="@sqlt.Ognl@isNotEmpty(ksdm)">-->
+        <!--                        KSDM = #{ksdm} ,-->
+        <!--                    </if>-->
+        <!--                    <if test="@sqlt.Ognl@isNotEmpty(bqdm)">-->
+        <!--                        BQDM = #{bqdm} ,-->
+        <!--                    </if>-->
+        <!--                    <if test="@sqlt.Ognl@isNotEmpty(brch)">-->
+        <!--                        BRCH = #{brch} ,-->
+        <!--                    </if>-->
+        <!--                    <if test="@sqlt.Ognl@isNotEmpty(sssqdh)">-->
+        <!--                        SSSQDH = #{sssqdh} ,-->
+        <!--                    </if>-->
+        <if test="@sqlt.Ognl@isNotEmpty(jzrdm)">
+            JZRDM = #{jzrdm} ,
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(jzsj)">
+            JZSJ = #{jzsj}
+        </if>
+    </trim>
+            WHERE
+        JLXH = #{jlxh} 
+        </update>
+
+    <delete id="deleteById">
+        DELETE FROM SS_SSJZDZB WHERE
+        JLXH = #{jlxh} 
+    </delete>
+    
+    <delete id="removeByEntity">
+        DELETE FROM SS_SSJZDZB <include refid="where"/>  
+    </delete>
+    
+    <select id="getById" resultType="SsSsjzdzb">
+        SELECT <include refid="columns" />
+            FROM SS_SSJZDZB 
+            WHERE 
+        JLXH = #{jlxh} 
+    </select>
+    
+    <sql id="where">
+        <where>                          
+<!--                <if test="@sqlt.Ognl@isNotEmpty(jlxh)"> -->
+<!--                     AND JLXH = #{jlxh} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(jgid)"> -->
+<!--                     AND JGID = #{jgid} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(ssksdm)"> -->
+<!--                     AND SSKSDM = #{ssksdm} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(jzlx)"> -->
+<!--                     AND JZLX = #{jzlx} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(jzdh)"> -->
+<!--                     AND JZDH = #{jzdh} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(brlx)"> -->
+<!--                     AND BRLX = #{brlx} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(mzhm)"> -->
+<!--                     AND MZHM = #{mzhm} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(zyhm)"> -->
+<!--                     AND ZYHM = #{zyhm} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(ksdm)"> -->
+<!--                     AND KSDM = #{ksdm} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(bqdm)"> -->
+<!--                     AND BQDM = #{bqdm} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(brch)"> -->
+<!--                     AND BRCH = #{brch} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(sssqdh)"> -->
+<!--                     AND SSSQDH = #{sssqdh} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(jzrdm)"> -->
+<!--                     AND JZRDM = #{jzrdm} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(jzsj)"> -->
+<!--                     AND JZSJ = #{jzsj} -->
+<!--                </if> -->
+        </where>
+    </sql>
+        
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM SS_SSJZDZB 
+        <include refid="where"/>    
+    </select>
+    
+    <select id="findByEntity" resultType="SsSsjzdzb">
+        SELECT <include refid="columns" />
+        FROM SS_SSJZDZB 
+        <include refid="where"/>
+        
+        <if test="@sqlt.Ognl@orderIsNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+    <!--     业务sql      -->
+
+    <update id="jzApprove">
+        UPDATE OPT_SSSQ
+        SET SHGH = #{shgh},
+            SHSJ = #{shsj}
+        WHERE SQDH = #{sqdh}
+    </update>
+</mapper>
+

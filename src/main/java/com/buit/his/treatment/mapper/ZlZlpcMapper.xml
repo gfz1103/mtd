@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 治疗师治疗批次表 -->
+<mapper namespace="com.buit.his.treatment.dao.ZlZlpcDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        JLXH as jlxh,ZLSDM as zlsdm,ZLKSDM as zlksdm,ZYH as zyh,ZLRQ as zlrq,KSSJ as kssj,JSSJ as jssj,SJKSSJ as sjkssj,SJJSSJ as sjjssj
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO ZL_ZLPC (JLXH,
+                             ZLSDM,
+                             ZLKSDM,
+                             ZYH,
+                             ZLRQ,
+                             KSSJ,
+                             JSSJ,
+                             SJKSSJ,
+                             SJJSSJ)
+        VALUES (#{jlxh},
+                #{zlsdm},
+                #{zlksdm},
+                #{zyh},
+                #{zlrq},
+                #{kssj},
+                #{jssj},
+                #{sjkssj},
+                #{sjjssj})
+    </insert>
+
+    <update id="update">
+        UPDATE ZL_ZLPC
+        SET ZLSDM  = #{zlsdm},
+            ZLKSDM = #{zlksdm},
+            ZYH    = #{zyh},
+            ZLRQ   = #{zlrq},
+            KSSJ   = #{kssj},
+            JSSJ   = #{jssj},
+            SJKSSJ = #{sjkssj},
+            SJJSSJ = #{sjjssj}
+
+        WHERE JLXH = #{jlxh}
+    </update>
+
+    <update id="updateByEntity">
+        UPDATE ZL_ZLPC
+        <set>
+            <if test="@sqlt.Ognl@isNotEmpty(zlsdm)">
+                ZLSDM = #{zlsdm},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zyh)">
+                ZYH = #{zyh},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zlksdm)">
+                ZLKSDM = #{zlksdm},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zlrq)">
+                ZLRQ = #{zlrq},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(kssj)">
+                KSSJ = #{kssj},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(jssj)">
+                JSSJ = #{jssj},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(sjkssj)">
+                SJKSSJ = #{sjkssj},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(sjjssj)">
+                SJJSSJ = #{sjjssj},
+            </if>
+        </set>
+        WHERE
+        JLXH = #{jlxh}
+    </update>
+
+    <delete id="deleteById">
+        DELETE
+        FROM ZL_ZLPC
+        WHERE JLXH = #{jlxh}
+    </delete>
+
+    <delete id="removeByEntity">
+        DELETE FROM ZL_ZLPC
+        <include refid="where"/>
+    </delete>
+
+    <select id="getById" resultType="ZlZlpc">
+        SELECT
+        <include refid="columns"/>
+        FROM ZL_ZLPC
+        WHERE
+        JLXH = #{jlxh}
+    </select>
+
+    <sql id="where">
+        <where>
+            <if test="@sqlt.Ognl@isNotEmpty(jlxh)">
+                AND JLXH = #{jlxh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zlsdm)">
+                AND ZLSDM = #{zlsdm}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zlksdm)">
+                AND ZLKSDM = #{zlksdm}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zyh)">
+                AND ZYH = #{zyh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zlrq)">
+                AND ZLRQ = #{zlrq}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(kssj)">
+                AND KSSJ = #{kssj}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(jssj)">
+                AND JSSJ = #{jssj}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(sjkssj)">
+                AND SJKSSJ = #{sjkssj}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(sjjssj)">
+                AND SJJSSJ = #{sjjssj}
+            </if>
+        </where>
+    </sql>
+
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM ZL_ZLPC
+        <include refid="where"/>
+    </select>
+
+    <select id="findByEntity" resultType="ZlZlpc">
+        SELECT
+        <include refid="columns"/>
+        FROM ZL_ZLPC
+        <include refid="where"/>
+
+        <if test="@sqlt.Ognl@orderIsNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+    <!--     业务sql      -->
+
+    <select id="findByZljl" resultType="com.buit.his.treatment.model.ZlZlpc">
+        SELECT
+        <include refid="columns"/>
+        FROM
+        zl_zlpc
+        WHERE
+        jlxh in (
+        SELECT
+        DISTINCT(pc.JLXH)
+        FROM
+        zl_zlpc pc
+        INNER JOIN zl_zlzrw zrw ON zrw.ZLPC_JLXH = pc.JLXH
+        INNER JOIN zl_rwfp rwfp ON rwfp.zlrwfpid = zrw.zlrwfpid
+        WHERE
+        zrw.ZXZT = 2
+        AND pc.ZYH = #{zyh}
+        AND pc.ZLSDM = #{zxgh}
+        AND pc.ZLRQ = #{zxrq}
+        AND rwfp.ZLLB = #{zllb}
+        )
+    </select>
+
+    <delete id="batchRemove">
+        DELETE FROM zl_zlpc pc
+        WHERE NOT EXISTS(select 1 from zl_zlzrw where ZLPC_JLXH = pc.jlxh AND ZXZT=2)
+        AND JLXH IN
+        <foreach collection="zlpcIds" item="r" separator="," open="(" close=")">
+            #{r}
+        </foreach>
+    </delete>
+
+    <delete id="removeIfNotAppointed">
+        DELETE FROM zl_zlpc pc
+        WHERE NOT EXISTS(select 1 from zl_zlzrw where ZLPC_JLXH = pc.jlxh)
+        AND JLXH = #{jlxh}
+    </delete>
+</mapper>
+

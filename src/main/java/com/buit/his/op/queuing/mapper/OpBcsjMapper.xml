@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 班次上下班时间字典 -->
+<mapper namespace="com.buit.his.op.queuing.dao.OpBcsjDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        TID as tid,SJBB as sjbb,CJSJ as cjsj,XGSJ as xgsj,JGID as jgid,SDDM as sddm,SDMC as sdmc,SBSJ as sbsj,XBSJ as xbsj,PJSC as pjsc
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO OP_BCSJ (
+            TID ,
+            SJBB ,
+            CJSJ ,
+            XGSJ ,
+            JGID ,
+            SDDM ,
+            SDMC ,
+            SBSJ ,
+            XBSJ ,
+            PJSC 
+        ) VALUES (
+            #{tid} ,
+            #{sjbb} ,
+            #{cjsj} ,
+            #{xgsj} ,
+            #{jgid} ,
+            #{sddm} ,
+            #{sdmc} ,
+            #{sbsj} ,
+            #{xbsj} ,
+            #{pjsc} 
+        )
+    </insert>
+    
+    <update id="update" >
+        UPDATE OP_BCSJ SET
+            SBSJ = #{sbsj} ,
+            XBSJ = #{xbsj} ,
+            PJSC = #{pjsc}
+        WHERE
+            TID = #{tid}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM OP_BCSJ WHERE
+        TID = #{tid} 
+    </delete>
+    
+    <delete id="removeByEntity">
+        DELETE FROM OP_BCSJ <include refid="where"/>  
+    </delete>
+    
+    <select id="getById" resultType="OpBcsj">
+        SELECT <include refid="columns" />
+            FROM OP_BCSJ 
+            WHERE 
+        TID = #{tid} 
+    </select>
+    
+    <sql id="where">
+        <where>                          
+<!--                <if test="@sqlt.Ognl@isNotEmpty(tid)"> -->
+<!--                     AND TID = #{tid} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(sjbb)"> -->
+<!--                     AND SJBB = #{sjbb} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(cjsj)"> -->
+<!--                     AND CJSJ = #{cjsj} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(xgsj)"> -->
+<!--                     AND XGSJ = #{xgsj} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(jgid)"> -->
+<!--                     AND JGID = #{jgid} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(sddm)"> -->
+<!--                     AND SDDM = #{sddm} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(sdmc)"> -->
+<!--                     AND SDMC = #{sdmc} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(sbsj)"> -->
+<!--                     AND SBSJ = #{sbsj} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(xbsj)"> -->
+<!--                     AND XBSJ = #{xbsj} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(pjsc)"> -->
+<!--                     AND PJSC = #{pjsc} -->
+<!--                </if> -->
+        </where>
+    </sql>
+        
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM OP_BCSJ 
+        <include refid="where"/>    
+    </select>
+    
+    <select id="findByEntity" resultType="OpBcsj">
+        SELECT <include refid="columns" />
+        FROM OP_BCSJ 
+        <include refid="where"/>
+        
+        <if test="@sqlt.Ognl@orderIsNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+    <!--     业务sql      -->
+    <select id="queryRepeatNum" resultType="java.lang.Long">
+        SELECT
+        count(*)
+        FROM
+        OP_BCSJ
+        WHERE
+        TID != #{tid}
+        and (
+                 #{sbsj} > STR_TO_DATE( SBSJ, '%H:%i' ) AND STR_TO_DATE( XBSJ, '%H:%i' ) > #{sbsj}
+              or #{xbsj} > STR_TO_DATE( SBSJ, '%H:%i' ) AND STR_TO_DATE( XBSJ, '%H:%i' ) > #{xbsj}
+            )
+
+    </select>
+    
+    <select id="getBySddm" resultType="OpBcsj">
+    	SELECT <include refid="columns" />
+            FROM OP_BCSJ 
+            WHERE 
+        SDDM = #{sddm} 
+    </select>
+</mapper>
+

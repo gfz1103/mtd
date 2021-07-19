@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 治疗申请单预约执行表 -->
+<mapper namespace="com.buit.his.treatment.dao.ZlSqdyyzxDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        JLXH as jlxh,JGID as jgid,ZLSQDH as zlsqdh,XH as xh,ZLXMMC as zlxmmc,YYSJ as yysj,YYXH as yyxh,BCZLSL as bczlsl,YYCZGH as yyczgh,YYCZSJ as yyczsj,ZT as zt,ZXSJ as zxsj,ZXYGH as zxygh,ZLZJ as zlzj,BZ as bz,ZXJLSJ as zxjlsj,ZXJLGH as zxjlgh,ZL_SQDMX_JLXH as zlSqdmxJlxh
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO ZL_SQDYYZX (
+            JLXH ,
+            JGID ,
+            ZLSQDH ,
+            XH ,
+            ZLXMMC ,
+            YYSJ ,
+            YYXH ,
+            BCZLSL ,
+            YYCZGH ,
+            YYCZSJ ,
+            ZT ,
+            ZXSJ ,
+            ZXYGH ,
+            ZLZJ ,
+            BZ ,
+            ZXJLSJ ,
+            ZXJLGH ,
+            ZL_SQDMX_JLXH
+        ) VALUES (
+            #{jlxh} ,
+            #{jgid} ,
+            #{zlsqdh} ,
+            #{xh} ,
+            #{zlxmmc} ,
+            #{yysj} ,
+            #{yyxh} ,
+            #{bczlsl} ,
+            #{yyczgh} ,
+            #{yyczsj} ,
+            #{zt} ,
+            #{zxsj} ,
+            #{zxygh} ,
+            #{zlzj} ,
+            #{bz} ,
+            #{zxjlsj} ,
+            #{zxjlgh} ,
+            #{zlSqdmxJlxh}
+        )
+    </insert>
+
+    <update id="update" >
+    UPDATE ZL_SQDYYZX
+    <trim prefix="SET" suffixOverrides=",">
+                    <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                        JGID = #{jgid} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zlsqdh)">
+                        ZLSQDH = #{zlsqdh} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(xh)">
+                        XH = #{xh} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zlxmmc)">
+                        ZLXMMC = #{zlxmmc} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(yysj)">
+                        YYSJ = #{yysj} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(yyxh)">
+                        YYXH = #{yyxh} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(bczlsl)">
+                        BCZLSL = #{bczlsl} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(yyczgh)">
+                        YYCZGH = #{yyczgh} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(yyczsj)">
+                        YYCZSJ = #{yyczsj} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zt)">
+                        ZT = #{zt} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zxsj)">
+                        ZXSJ = #{zxsj} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zxygh)">
+                        ZXYGH = #{zxygh} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zlzj)">
+                        ZLZJ = #{zlzj} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(bz)">
+                        BZ = #{bz} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zxjlsj)">
+                        ZXJLSJ = #{zxjlsj} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zxjlgh)">
+                        ZXJLGH = #{zxjlgh} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zlSqdmxJlxh)">
+                        ZL_SQDMX_JLXH = #{zlSqdmxJlxh}
+                    </if>
+        </trim>
+            WHERE
+        JLXH = #{jlxh}
+        </update>
+
+
+    <delete id="deleteById">
+        DELETE FROM ZL_SQDYYZX WHERE
+        JLXH = #{jlxh}
+    </delete>
+
+    <delete id="removeByEntity">
+        DELETE FROM ZL_SQDYYZX <include refid="where"/>
+    </delete>
+
+
+    <select id="getById" resultType="ZlSqdyyzx">
+        SELECT <include refid="columns" />
+            FROM ZL_SQDYYZX
+            WHERE
+        JLXH = #{jlxh}
+    </select>
+
+    <sql id="where">
+        <where>
+                <if test="@sqlt.Ognl@isNotEmpty(jlxh)">
+                     AND JLXH = #{jlxh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                     AND JGID = #{jgid}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zlsqdh)">
+                     AND ZLSQDH = #{zlsqdh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(xh)">
+                     AND XH = #{xh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zlxmmc)">
+                     AND ZLXMMC = #{zlxmmc}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(yysj)">
+                     AND YYSJ = #{yysj}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(yyxh)">
+                     AND YYXH = #{yyxh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(bczlsl)">
+                     AND BCZLSL = #{bczlsl}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(yyczgh)">
+                     AND YYCZGH = #{yyczgh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(yyczsj)">
+                     AND YYCZSJ = #{yyczsj}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zt)">
+                     AND ZT = #{zt}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zxsj)">
+                     AND ZXSJ = #{zxsj}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zxygh)">
+                     AND ZXYGH = #{zxygh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zlzj)">
+                     AND ZLZJ = #{zlzj}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(bz)">
+                     AND BZ = #{bz}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zxjlsj)">
+                     AND ZXJLSJ = #{zxjlsj}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zxjlgh)">
+                     AND ZXJLGH = #{zxjlgh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zlSqdmxJlxh)">
+                    AND   ZL_SQDMX_JLXH = #{zlSqdmxJlxh}
+                </if>
+        </where>
+    </sql>
+
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM ZL_SQDYYZX
+        <include refid="where"/>
+    </select>
+
+    <select id="findByEntity" resultType="ZlSqdyyzx">
+        SELECT <include refid="columns" />
+        FROM ZL_SQDYYZX
+        <include refid="where"/>
+
+        <if test="@sqlt.Ognl@orderIsNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+    <!--     业务sql      -->
+    <!--病人治疗执行分页查询-->
+    <select id="queryZlyyzxPage" resultType="com.buit.his.treatment.response.PatientZlyyQueryResp">
+        SELECT
+            sqdmx.jlxh as jlxh,
+            zlsqdzb.zlsqdh AS zlsqdh,
+            zlsqdzb.brlx AS brlx,
+            zlsqdzb.mzhm AS mzhm,
+            zlsqdzb.zyhm AS zyhm,
+            brda.brxm AS brxm,
+            brda.brxb AS brxb,
+            xm.zlxmmc AS zlxmmc,
+            brda.csny AS csny,
+            zlsqdzb.ksdm AS ksdm,
+            zlsqdzb.sqysgh AS sqysgh,
+            zlsqdzb.sqsj AS sqsj,
+            sqdmx.zt AS zt,
+            xm.lbmc AS lbmc,
+            zlsqdzb.zlksdm AS zlksdm,
+            sqdmx.lccs as lccs,
+            zlsqdzb.bqdm as bqdm,
+            sqdmx.WCGH as wcgh,
+            sqdmx.WCRSJ as wcrsj,
+            sqdmx.QXWCGH as qxwcgh,
+            sqdmx.QXWCSJ as qxwcsj,
+            zlsqdzb.brch as brch
+        FROM
+            zl_sqdzb zlsqdzb,
+            zl_sqdmx sqdmx,
+            zl_xm xm,
+            mpi_card card,
+            MPI_BRDA brda
+        WHERE
+            zlsqdzb.zlsqdh = sqdmx.zlsqdh
+            AND sqdmx.zlxm_jlxh = xm.jlxh
+            AND zlsqdzb.kh = card.cardno
+            AND card.brid = brda.brid
+            AND zlsqdzb.zt &gt;1
+            AND sqdmx.zt &gt;1
+            and zlsqdzb.zlksdm = #{zlksdm}
+        <if test="@sqlt.Ognl@isNotEmpty(brlx) and brlx!=0">
+            AND zlsqdzb.brlx = #{brlx}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(hm)">
+            AND (zlsqdzb.zyhm = #{hm} or zlsqdzb.mzhm=#{hm})
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(brxm)">
+            AND brda.brxm  LIKE CONCAT(CONCAT('%',UPPER(#{brxm})),'%')
+        </if>
+        <if test="zt!=-1">
+            AND sqdmx.zt =#{zt}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(bqdm)">
+            AND zlsqdzb.bqdm=#{bqdm}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(ksdm)">
+            AND zlsqdzb.ksdm=#{ksdm}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(startDate)">
+            AND date_format(zlsqdzb.SQSJ,'%Y-%m-%d')  &gt;= #{startDate}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(endDate)">
+            AND date_format(zlsqdzb.SQSJ,'%Y-%m-%d') &lt;= #{endDate}
+        </if>
+
+    </select>
+    <!--取消执行-->
+    <delete id="cancelZx">
+    update ZL_SQDYYZX  set  ZXSJ = #{zxsj} ,ZXYGH = #{zxygh},ZXJLSJ = #{zxjlsj},ZXJLGH = #{zxjlgh},ZT=#{zt}  where  jlxh=#{jlxh}
+    </delete>
+
+    <select id="countByZlsqdhAndZt" resultType="java.lang.Long">
+        select count(1) from zl_sqdyyzx
+        where zlsqdh=#{jlxh} and zt=#{zt}
+    </select>
+
+    <select id="queryZlXm" resultType="com.buit.his.treatment.model.ZlSqdyyzx">
+        SELECT <include refid="columns" />
+        FROM ZL_SQDYYZX
+        where ZYH = #{zyh} AND DATE_FORMAT(ZXSJ,'%Y-%m-%d') = DATE_FORMAT(#{zxrq},'%Y-%m-%d')
+         and ZLLB = #{zllb}
+    </select>
+
+    <update id="updateZxzt">
+        update ZL_SQDYYZX
+        set ZT = #{zt}
+        where jlxh=#{jlxh}
+    </update>
+</mapper>
+

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 治疗记录/小结/总结表 -->
+<mapper namespace="com.buit.his.treatment.dao.ZlJlxjzjDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        JLXH as jlxh,JGID as jgid,ZLSQDH as zlsqdh,ZLSQDXH as zlsqdxh,ZLXMMC as zlxmmc,JLSJ as jlsj,JLLX as jllx,YYSJ as yysj,YYXH as yyxh,BCZLSL as bczlsl,YYCZGH as yyczgh,YYCZSJ as yyczsj,ZT as zt,ZXSJ as zxsj,ZXYSGH as zxysgh,ZLZJ as zlzj,BZ as bz,ZXJLSJ as zxjlsj,ZXJLGH as zxjlgh,yyzx_jlxh as yyzxJlxh,ZLSQDMX_JLXH as zlsqdmxJlxh,
+        ZYH AS zyh,ZLLB AS zllb,YWBLFY as  ywblfy,BLFY as blfy,JXZLSGH as jxzlsgh,ZXSJDKS as zxsjdks,ZXSJDJS as zxsjdjs
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO ZL_JLXJZJ (
+            JLXH ,
+            JGID ,
+            ZLSQDH ,
+            ZLSQDXH ,
+            ZLXMMC ,
+            JLSJ ,
+            JLLX ,
+            YYSJ ,
+            YYXH ,
+            BCZLSL ,
+            YYCZGH ,
+            YYCZSJ ,
+            ZT ,
+            ZXSJ ,
+            ZXYSGH ,
+            ZLZJ ,
+            BZ ,
+            ZXJLSJ ,
+            ZXJLGH ,
+            yyzx_jlxh,
+            ZLSQDMX_JLXH
+        ) VALUES (
+            #{jlxh} ,
+            #{jgid} ,
+            #{zlsqdh} ,
+            #{zlsqdxh} ,
+            #{zlxmmc} ,
+            #{jlsj} ,
+            #{jllx} ,
+            #{yysj} ,
+            #{yyxh} ,
+            #{bczlsl} ,
+            #{yyczgh} ,
+            #{yyczsj} ,
+            #{zt} ,
+            #{zxsj} ,
+            #{zxysgh} ,
+            #{zlzj} ,
+            #{bz} ,
+            #{zxjlsj} ,
+            #{zxjlgh} ,
+            #{yyzxJlxh},
+            #{zlsqdmxJlxh}
+        )
+    </insert>
+
+    <update id="update" >
+    UPDATE ZL_JLXJZJ
+    <trim prefix="SET" suffixOverrides=",">
+                    <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                        JGID = #{jgid} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zlsqdh)">
+                        ZLSQDH = #{zlsqdh} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zlsqdxh)">
+                        ZLSQDXH = #{zlsqdxh} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zlxmmc)">
+                        ZLXMMC = #{zlxmmc} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(jlsj)">
+                        JLSJ = #{jlsj} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(jllx)">
+                        JLLX = #{jllx} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(yysj)">
+                        YYSJ = #{yysj} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(yyxh)">
+                        YYXH = #{yyxh} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(bczlsl)">
+                        BCZLSL = #{bczlsl} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(yyczgh)">
+                        YYCZGH = #{yyczgh} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(yyczsj)">
+                        YYCZSJ = #{yyczsj} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zt)">
+                        ZT = #{zt} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zxsj)">
+                        ZXSJ = #{zxsj} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zxysgh)">
+                        ZXYSGH = #{zxysgh} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zlzj)">
+                        ZLZJ = #{zlzj} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(bz)">
+                        BZ = #{bz} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zxjlsj)">
+                        ZXJLSJ = #{zxjlsj} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zxjlgh)">
+                        ZXJLGH = #{zxjlgh} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(yyzxJlxh)">
+                        YYZX_JLXH = #{yyzxJlxh},
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zlsqdmxJlxh)">
+                        ZLSQDMX_JLXH = #{zlsqdmxJlxh},
+                    </if>
+        </trim>
+            WHERE
+        JLXH = #{jlxh}
+        </update>
+
+    <delete id="deleteById">
+        DELETE FROM ZL_JLXJZJ WHERE
+        JLXH = #{jlxh}
+    </delete>
+
+    <delete id="removeByEntity">
+        DELETE FROM ZL_JLXJZJ <include refid="where"/>
+    </delete>
+
+    <select id="getById" resultType="ZlJlxjzj">
+        SELECT <include refid="columns" />
+            FROM ZL_JLXJZJ
+            WHERE
+        JLXH = #{jlxh}
+    </select>
+
+    <sql id="where">
+        <where>
+                <if test="@sqlt.Ognl@isNotEmpty(jlxh)">
+                     AND JLXH = #{jlxh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                     AND JGID = #{jgid}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zlsqdh)">
+                     AND ZLSQDH = #{zlsqdh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zlsqdxh)">
+                     AND ZLSQDXH = #{zlsqdxh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zlxmmc)">
+                     AND ZLXMMC = #{zlxmmc}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(jlsj)">
+                     AND JLSJ = #{jlsj}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(jllx)">
+                     AND JLLX = #{jllx}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(yysj)">
+                     AND YYSJ = #{yysj}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(yyxh)">
+                     AND YYXH = #{yyxh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(bczlsl)">
+                     AND BCZLSL = #{bczlsl}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(yyczgh)">
+                     AND YYCZGH = #{yyczgh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(yyczsj)">
+                     AND YYCZSJ = #{yyczsj}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zt)">
+                     AND ZT = #{zt}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zxsj)">
+                     AND ZXSJ = #{zxsj}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zxysgh)">
+                     AND ZXYSGH = #{zxysgh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zlzj)">
+                     AND ZLZJ = #{zlzj}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(bz)">
+                     AND BZ = #{bz}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zxjlsj)">
+                     AND ZXJLSJ = #{zxjlsj}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zxjlgh)">
+                     AND ZXJLGH = #{zxjlgh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(yyzxJlxh)">
+                    AND YYZX_JLXH = #{yyzxJlxh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zlsqdmxJlxh)">
+                    AND ZLSQDMX_JLXH = #{zlsqdmxJlxh}
+                </if>
+        </where>
+    </sql>
+
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM ZL_JLXJZJ
+        <include refid="where"/>
+    </select>
+
+    <select id="findByEntity" resultType="ZlJlxjzj">
+        SELECT <include refid="columns" />
+        FROM ZL_JLXJZJ
+        <include refid="where"/>
+
+        <if test="@sqlt.Ognl@orderIsNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+    <!--     业务sql      -->
+    <select id="queryOneZxjl" resultType="com.buit.his.treatment.response.ZlJlxjzjResp">
+        SELECT <include refid="columns" />
+        FROM zl_jlxjzj
+        WHERE JGID = #{jgid} AND ZYH = #{zyh} AND ZLLB = #{zllb} AND ZT = 2
+        ORDER BY ZXJLSJ DESC LIMIT 1
+    </select>
+
+    <select id="queryZxjl" resultType="com.buit.his.treatment.response.ZlJlxjzjResp">
+        SELECT <include refid="columns" />
+        FROM zl_jlxjzj
+        WHERE JGID = #{jgid} AND ZYH = #{zyh} AND ZLLB = #{zllb}
+        ORDER BY ZXJLSJ
+    </select>
+
+    <update id="cancelZx">
+        UPDATE ZL_JLXJZJ
+        SET ZT = #{zt},
+            QXZXSJ = #{qxzxsj},
+            QXRGH = #{qxrgh}
+        WHERE JLXH = #{jlxh}
+    </update>
+</mapper>
+

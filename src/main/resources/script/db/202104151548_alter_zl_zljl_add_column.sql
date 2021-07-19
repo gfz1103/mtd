@@ -1,0 +1,3 @@
+ALTER TABLE `his`.`zl_zljl`
+    ADD COLUMN `ZLLB` int(0) NOT NULL COMMENT '诊疗类别' AFTER `ZXRQ`,
+    MODIFY COLUMN `SCXJCS` int(0) NOT NULL COMMENT '上次小结次数' AFTER `MQZXCS`;

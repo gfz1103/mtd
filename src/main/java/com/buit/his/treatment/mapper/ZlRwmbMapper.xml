@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 治疗任务模板 -->
+<mapper namespace="com.buit.his.treatment.dao.ZlRwmbDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        JLXH as jlxh,ZLRWFPID as zlrwfpid,ZXSJ as zxsj,ZXGH as zxgh,ZYH as zyh,YYZT as yyzt,KSSJ as kssj,JSSJ as jssj,LSYZ as lsyz,DW as dw,PC as pc,KZSJ as kzsj,BZXX as bzxx,SCZXRQ as sczxrq,ZFPB as zfpb,ZXZT as zxzt
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO ZL_RWMB (JLXH,
+                             ZLRWFPID,
+                             ZXSJ,
+                             ZXGH,
+                             ZYH,
+                             YYZT,
+                             KSSJ,
+                             JSSJ,
+                             LSYZ,
+                             DW,
+                             PC,
+                             KZSJ,
+                             BZXX,
+                             SCZXRQ,
+                             ZFPB,
+                             ZXZT)
+        VALUES (#{jlxh},
+                #{zlrwfpid},
+                #{zxsj},
+                #{zxgh},
+                #{zyh},
+                #{yyzt},
+                #{kssj},
+                #{jssj},
+                #{lsyz},
+                #{dw},
+                #{pc},
+                #{kzsj},
+                #{bzxx},
+                #{sczxrq},
+                #{zfpb},
+                #{zxzt})
+    </insert>
+
+    <update id="update">
+        UPDATE ZL_RWMB
+        SET ZLRWFPID = #{zlrwfpid},
+            ZXSJ     = #{zxsj},
+            ZXGH     = #{zxgh},
+            ZYH      = #{zyh},
+            YYZT     = #{yyzt},
+            KSSJ     = #{kssj},
+            JSSJ     = #{jssj},
+            LSYZ     = #{lsyz},
+            DW       = #{dw},
+            PC       = #{pc},
+            KZSJ     = #{kzsj},
+            BZXX     = #{bzxx},
+            SCZXRQ   = #{sczxrq},
+            ZFPB     = #{zfpb},
+            ZXZT     = #{zxzt}
+        WHERE JLXH = #{jlxh}
+    </update>
+
+    <update id="updateByEntity">
+        UPDATE ZL_RWMB
+        <set>
+            <if test="@sqlt.Ognl@isNotEmpty(zlrwfpid)">
+                ZLRWFPID = #{zlrwfpid},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zxsj)">
+                ZXSJ = #{zxsj},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zxgh)">
+                ZXGH = #{zxgh},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zyh)">
+                ZYH = #{zyh},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(yyzt)">
+                YYZT = #{yyzt},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(kssj)">
+                KSSJ = #{kssj},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(jssj)">
+                JSSJ = #{jssj},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(lsyz)">
+                LSYZ = #{lsyz},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(dw)">
+                DW = #{dw},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(pc)">
+                PC = #{pc},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(kzsj)">
+                KZSJ = #{kzsj},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(bzxx)">
+                BZXX = #{bzxx},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(sczxrq)">
+                SCZXRQ = #{sczxrq},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zfpb)">
+                ZFPB = #{zfpb},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zxzt)">
+                ZXZT = #{zxzt},
+            </if>
+        </set>
+        WHERE
+        JLXH = #{jlxh}
+    </update>
+
+    <delete id="deleteById">
+        DELETE
+        FROM ZL_RWMB
+        WHERE JLXH = #{jlxh}
+    </delete>
+
+    <delete id="removeByEntity">
+        DELETE FROM ZL_RWMB
+        <include refid="where"/>
+    </delete>
+
+    <select id="getById" resultType="ZlRwmb">
+        SELECT
+        <include refid="columns"/>
+        FROM ZL_RWMB
+        WHERE
+        JLXH = #{jlxh}
+    </select>
+
+    <sql id="where">
+        <where>
+            <if test="@sqlt.Ognl@isNotEmpty(jlxh)">
+                AND JLXH = #{jlxh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zlrwfpid)">
+                AND ZLRWFPID = #{zlrwfpid}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zxsj)">
+                AND ZXSJ = #{zxsj}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zxgh)">
+                AND ZXGH = #{zxgh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zyh)">
+                AND ZYH = #{zyh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(yyzt)">
+                AND YYZT = #{yyzt}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(kssj)">
+                AND KSSJ = #{kssj}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(jssj)">
+                AND JSSJ = #{jssj}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(lsyz)">
+                AND LSYZ = #{lsyz}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(dw)">
+                AND DW = #{dw}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(pc)">
+                AND PC = #{pc}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(kzsj)">
+                AND KZSJ = #{kzsj}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(bzxx)">
+                AND BZXX = #{bzxx}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(sczxrq)">
+                AND SCZXRQ = #{sczxrq}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zfpb)">
+                AND ZFPB = #{zfpb}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zxzt)">
+                AND ZXZT = #{zxzt}
+            </if>
+        </where>
+    </sql>
+
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM ZL_RWMB
+        <include refid="where"/>
+    </select>
+
+    <select id="findByEntity" resultType="ZlRwmb">
+        SELECT
+        <include refid="columns"/>
+        FROM ZL_RWMB
+        <include refid="where"/>
+
+        <if test="@sqlt.Ognl@orderIsNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+    <!--     业务sql      -->
+    <select id="queryAppointmentPatientPage" resultType="com.buit.his.treatment.response.AppointmentPatientResp">
+        SELECT
+        zyh,
+        zyhm,
+        brbq,
+        brks,
+        brch,
+        brxm,
+        brxb,
+        CSNY AS csrq
+        FROM
+        im_hzry hzry
+        WHERE
+        zyh IN (
+        SELECT
+        DISTINCT( rwfp.zyh )
+        FROM
+        zl_rwmb rwmb INNER JOIN zl_rwfp rwfp on rwmb.ZLRWFPID = rwfp.ZLRWFPID
+        where rwmb.zfpb = 0 and rwfp.jgid = #{jgid} and exists(select 1 from cis_hzyz yz where yz.jlxh = rwfp.yz_jlxh)
+        <if test="@sqlt.Ognl@isNotEmpty(zllb)">
+            AND rwfp.zllb = #{zllb}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(yyzt)">
+            AND rwmb.yyzt = #{yyzt}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(zlsdm)">
+            AND rwfp.zlsdm = #{zlsdm}
+        </if>
+        )
+        <if test="@sqlt.Ognl@isNotEmpty(brbq)">
+            AND brbq = #{brbq}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(brch)">
+            AND brch = #{brch}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(brxm)">
+            AND brxm LIKE concat('%',#{brxm},'%')
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(zyhm)">
+            AND zyhm LIKE concat('%',#{zyhm},'%')
+        </if>
+        ORDER BY brch
+    </select>
+
+    <select id="findList" resultType="com.buit.his.treatment.response.ZlRwmbResp">
+        SELECT rwmb.JLXH as jlxh,
+        rwmb.ZLRWFPID as zlrwfpid,
+        rwmb.ZXSJ as zxsj,
+        rwmb.ZXGH as zxgh,
+        rwmb.ZYH as zyh,
+        rwmb.YYZT as yyzt,
+        rwmb.KSSJ as kssj,
+        rwmb.JSSJ as jssj,
+        rwmb.LSYZ as lsyz,
+        rwfp.SFXMDM as sfxmdm,
+        rwfp.SFXMMC as sfxmmc,
+        rwfp.SL as sl,
+        rwfp.JE as je,
+        rwmb.DW as dw,
+        rwmb.PC as pc,
+        rwmb.KZSJ as kzsj,
+        rwmb.BZXX as bzxx,
+        rwmb.sczxrq as sczxrq,
+        rwmb.ZXZT as zxzt,
+        rwfp.ZLKSDM as zlksdm,
+        yz.tzsj
+        FROM zl_rwmb rwmb
+        INNER JOIN zl_rwfp rwfp ON rwmb.ZLRWFPID = rwfp.ZLRWFPID
+        INNER JOIN cis_hzyz yz on rwfp.yz_jlxh = yz.jlxh
+        where rwmb.zfpb = 0
+        and rwmb.zyh = #{zyh}
+        <if test="@sqlt.Ognl@isNotEmpty(zlksdm)">
+            AND rwfp.zlksdm = #{zlksdm}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(zllb)">
+            AND rwfp.zllb = #{zllb}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(zxgh)">
+            AND rwmb.zxgh = #{zxgh}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(yyzt)">
+            AND rwmb.yyzt = #{yyzt}
+        </if>
+        order by rwmb.zxsj
+    </select>
+
+    <select id="findListByIds" resultType="com.buit.his.treatment.response.ZlRwmbResp">
+        SELECT rwmb.JLXH as jlxh,
+        rwmb.ZLRWFPID as zlrwfpid,
+        rwmb.ZXSJ as zxsj,
+        rwmb.ZXGH as zxgh,
+        rwmb.ZYH as zyh,
+        rwmb.YYZT as yyzt,
+        rwmb.KSSJ as kssj,
+        rwmb.JSSJ as jssj,
+        rwmb.LSYZ as lsyz,
+        rwfp.SFXMDM as sfxmdm,
+        rwfp.SFXMMC as sfxmmc,
+        rwfp.SL as sl,
+        rwfp.JE as je,
+        rwmb.DW as dw,
+        rwmb.PC as pc,
+        rwmb.KZSJ as kzsj,
+        rwmb.BZXX as bzxx,
+        rwmb.sczxrq as sczxrq,
+        rwmb.ZXZT as zxzt,
+        rwfp.ZLKSDM as zlksdm
+        FROM zl_rwmb rwmb
+        INNER JOIN zl_rwfp rwfp ON rwmb.ZLRWFPID = rwfp.ZLRWFPID
+        WHERE rwmb.JLXH IN
+        <foreach collection="list" item="r" separator="," open="(" close=")">
+            #{r}
+        </foreach>
+    </select>
+
+    <insert id="batchInsert">
+        INSERT INTO ZL_RWMB (JLXH,
+        ZLRWFPID,
+        ZXSJ,
+        ZXGH,
+        YYZT,
+        ZYH,
+        KSSJ,
+        JSSJ,
+        LSYZ,
+        DW,
+        PC,
+        KZSJ,
+        BZXX,
+        SCZXRQ,
+        ZFPB,
+        ZXZT)
+        VALUES
+        <foreach collection="list" item="r" separator=",">
+            (#{r.jlxh},
+            #{r.zlrwfpid},
+            #{r.zxsj},
+            #{r.zxgh},
+            #{r.yyzt},
+            #{r.zyh},
+            #{r.kssj},
+            #{r.jssj},
+            #{r.lsyz},
+            #{r.dw},
+            #{r.pc},
+            #{r.kzsj},
+            #{r.bzxx},
+            #{r.sczxrq},
+            #{r.zfpb},
+            #{r.zxzt})
+        </foreach>
+    </insert>
+    <update id="batchAppoint">
+        UPDATE ZL_RWMB SET KSSJ=#{kssj},JSSJ=#{jssj},YYZT=2
+        where JLXH in
+        <foreach collection="list" item="r" separator="," open="(" close=")">
+            #{r.jlxh}
+        </foreach>
+    </update>
+    <update id="batchExecute">
+        UPDATE ZL_RWMB SET ZXZT=1
+        where JLXH in
+        <foreach collection="list" item="r" separator="," open="(" close=")">
+            #{r.jlxh}
+        </foreach>
+    </update>
+
+    <select id="queryAppointmentReportPage" resultType="com.buit.his.treatment.response.AppointmentReportResp">
+        SELECT
+        mb.KSSJ as kssj,
+        mb.JSSJ as jssj,
+        hz.ZYHM as zyhm,
+        hz.BRXM as brxm,
+        hz.BRXB as brxb,
+        hz.CSNY AS csrq,
+        hz.BRBQ as brbq,
+        hz.BRCH as brch,
+        hz.BRKS as brks,
+        rw.ZLLB as zllb,
+        rw.ZLZID as zlzid,
+        rw.ZLSDM as zlsdm,
+        rw.sfxmmc as sfxmmc,
+        mb.YYZT as yyzt
+        FROM
+        zl_rwmb mb
+        INNER JOIN im_hzry hz ON mb.ZYH = hz.ZYH
+        INNER JOIN zl_rwfp rw ON mb.ZLRWFPID = rw.ZLRWFPID
+        LEFT JOIN zl_zlzcyb zls ON rw.ZLKSDM = zls.ZLSDM
+        WHERE
+        hz.JGID = #{jgid}
+        <if test="@sqlt.Ognl@isNotEmpty(zllb)">
+            AND rw.ZLLB = #{zllb}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(brbq)">
+            AND hz.BRBQ = #{brbq}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(zyhm)">
+            AND hz.ZYHM LIKE CONCAT( '%', #{zyhm}, '%' )
+        </if>
+        <if test='@sqlt.Ognl@isNotEmpty(cypb) and cypb=="1"'>
+            AND hz.CYPB &lt; 8
+        </if>
+        <if test='@sqlt.Ognl@isNotEmpty(cypb) and cypb=="2"'>
+            AND hz.CYPB >= 8
+        </if>
+        ORDER BY hz.ZYH desc, mb.ZXSJ
+    </select>
+
+    <select id="findListByRwfpIds" resultType="ZlRwmb">
+        SELECT
+        <include refid="columns"/>
+        FROM zl_rwmb
+        WHERE ZLRWFPID IN
+        <foreach collection="rwfpIds" separator="," item="r" open="(" close=")">
+            #{r}
+        </foreach>
+    </select>
+
+    <delete id="batchRemove">
+        DELETE FROM zl_rwmb
+        WHERE ZXZT = 0 AND JLXH IN
+        <foreach collection="rwmbIds" item="r" separator="," open="(" close=")">
+            #{r}
+        </foreach>
+    </delete>
+
+    <update id="batchFinish">
+        update zl_rwmb set ZXZT= 2
+        where (ZXZT =0 or ZXZT =1 ) and JLXH in
+        <foreach collection="rwmbIds" item="r" separator="," open="(" close=")">
+            #{r}
+        </foreach>
+    </update>
+
+    <update id="cancelExecute">
+        update zl_rwmb z1 set z1.ZXZT= CASE WHEN
+        EXISTS(SELECT 1 FROM ZL_ZLZRW WHERE ZXZT = 2 AND RWMB_JLXH = Z1.JLXH ) THEN 1 ELSE 0 END
+        WHERE z1.JLXH IN
+        <foreach collection="rwmbIds" item="r" separator="," open="(" close=")">
+            #{r}
+        </foreach>
+    </update>
+
+    <update id="cancelAppoint">
+        update zl_rwmb set ZFPB =1 where JLXH IN
+        <foreach collection="oldRwmbList" item="r" separator="," open="(" close=")">
+            #{r.jlxh}
+        </foreach>
+    </update>
+
+    <select id="findListByRwfpAndZxsj" resultType="ZlRwmb">
+        SELECT
+        <include refid="columns"/>
+        FROM zl_rwmb
+        WHERE ZFPB = 0 AND ZLRWFPID = #{zlrwfpid} AND ZXSJ IN
+        <foreach collection="zxsjList" separator="," item="r" open="(" close=")">
+            #{r}
+        </foreach>
+    </select>
+</mapper>
+

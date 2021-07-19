@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 公用_使用频次 -->
+<mapper namespace="com.buit.his.treatment.dao.DicSypcDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        PCBM as pcbm,PCMC as pcmc,MRCS as mrcs,ZXZQ as zxzq,RLZ as rlz,ZXSJ as zxsj,RZXZQ as rzxzq,BZXX as bzxx,PLSX as plsx
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO DIC_SYPC (PCBM,
+                              PCMC,
+                              MRCS,
+                              ZXZQ,
+                              RLZ,
+                              ZXSJ,
+                              RZXZQ,
+                              BZXX,
+                              PLSX)
+        VALUES (#{pcbm},
+                #{pcmc},
+                #{mrcs},
+                #{zxzq},
+                #{rlz},
+                #{zxsj},
+                #{rzxzq},
+                #{bzxx},
+                #{plsx})
+    </insert>
+
+    <update id="update">
+        UPDATE DIC_SYPC
+        SET PCMC  = #{pcmc},
+            MRCS  = #{mrcs},
+            ZXZQ  = #{zxzq},
+            RLZ   = #{rlz},
+            ZXSJ  = #{zxsj},
+            RZXZQ = #{rzxzq},
+            BZXX  = #{bzxx},
+            PLSX  = #{plsx}
+        WHERE PCBM = #{pcbm}
+    </update>
+
+    <delete id="deleteById">
+        DELETE
+        FROM DIC_SYPC
+        WHERE PCBM = #{pcbm}
+    </delete>
+
+    <delete id="removeByEntity">
+        DELETE FROM DIC_SYPC
+        <include refid="where"/>
+    </delete>
+
+    <select id="getById" resultType="com.buit.his.treatment.model.DicSypc">
+        SELECT
+        <include refid="columns"/>
+        FROM DIC_SYPC
+        WHERE
+        PCBM = #{pcbm}
+    </select>
+
+    <sql id="where">
+        <where>
+            <if test="@sqlt.Ognl@isNotEmpty(pcbm)">
+                AND PCBM = #{pcbm}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(pcmc)">
+                AND PCMC = #{pcmc}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(mrcs)">
+                AND MRCS = #{mrcs}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zxzq)">
+                AND ZXZQ = #{zxzq}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(rlz)">
+                AND RLZ = #{rlz}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zxsj)">
+                AND ZXSJ = #{zxsj}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(rzxzq)">
+                AND RZXZQ = #{rzxzq}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(bzxx)">
+                AND BZXX = #{bzxx}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(plsx)">
+                AND PLSX = #{plsx}
+            </if>
+        </where>
+    </sql>
+
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM DIC_SYPC
+        <include refid="where"/>
+    </select>
+
+    <select id="findByEntity" resultType="com.buit.his.treatment.model.DicSypc">
+        SELECT
+        <include refid="columns"/>
+        FROM DIC_SYPC
+        <include refid="where"/>
+
+        <if test="@sqlt.Ognl@orderIsNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+    <!--     业务sql      -->
+
+    <select id="findListByIds" resultType="com.buit.his.treatment.model.DicSypc">
+        SELECT
+        <include refid="columns"/>
+        FROM DIC_SYPC
+        WHERE PCBM IN
+        <foreach collection="sypcList" item="r" open="(" close=")" separator=",">
+            #{r}
+        </foreach>
+    </select>
+</mapper>
+

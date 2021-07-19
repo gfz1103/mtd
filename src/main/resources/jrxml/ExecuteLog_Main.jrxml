@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+			  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			  xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+			  name="ExecuteLog_Main" language="groovy" pageWidth="595" pageHeight="842"
+			  whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20"
+			  bottomMargin="20" isTitleNewPage="true" uuid="b98bfef8-e403-4453-922b-37b6064e2e29">
+	<property name="ireport.zoom" value="1.9487171000000016"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression>
+			<![CDATA["E:\\workplace\\his\\mtdms-service\\src\\main\\resources\\jrxml\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="hzry" class="java.lang.Object" isForPrompting="false"/>
+	<parameter name="sfxmList" class="java.util.List" isForPrompting="false"/>
+	<parameter name="ryzd" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="title" class="java.lang.String"/>
+	<field name="list" class="java.util.List"/>
+	<field name="jdxj" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="165" y="0" width="189" height="20" uuid="e9e661b1-8af8-4595-ae67-f058527874ce"/>
+				<textFieldExpression><![CDATA[$P{title}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="26" height="20" uuid="25aa59b0-328f-4ff3-9694-18bf7d1f00a8"/>
+				<textElement>
+					<font fontName="宋体" size="10" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[姓名]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="26" y="0" width="47" height="20" uuid="731188b9-def7-4394-91b9-56d2afefa6eb"/>
+				<textElement>
+					<font fontName="宋体" size="10" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{hzry}["brxm"]]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="73" y="0" width="47" height="20" uuid="9fd08c74-67f9-4571-94a0-9152ad5c574e"/>
+				<textElement>
+					<font fontName="宋体" size="10"/>
+				</textElement>
+				<text><![CDATA[出生日期]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="0" width="45" height="20" uuid="7bd14ca6-c508-42bf-b134-dc9f2c3e3df7"/>
+				<textElement>
+					<font fontName="宋体" size="10" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{hzry}["csrq"]]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="165" y="0" width="23" height="20" uuid="978211b6-2ef1-4be2-834d-657046da8394"/>
+				<textElement>
+					<font fontName="宋体" size="10"/>
+				</textElement>
+				<text><![CDATA[性别]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="188" y="0" width="42" height="20" uuid="81655440-712a-4d16-82ad-6e08c08f8321"/>
+				<textElement>
+					<font fontName="宋体" size="10" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{hzry}["brxb"]]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="230" y="0" width="22" height="20" uuid="d2450906-a5b9-4a92-babe-d246729d91c4"/>
+				<textElement>
+					<font fontName="宋体" size="10"/>
+				</textElement>
+				<text><![CDATA[年龄]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="252" y="0" width="38" height="20" uuid="0fbece3e-6834-4599-9f8e-861128bdd027"/>
+				<textElement>
+					<font fontName="宋体" size="10" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{hzry}["age"]]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="0" width="22" height="20" uuid="0583dd1d-1887-4fbf-afd4-b489745e3597"/>
+				<textElement>
+					<font fontName="宋体" size="10"/>
+				</textElement>
+				<text><![CDATA[科室]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="0" width="22" height="20" uuid="7f7e59f3-b4ff-4812-a590-02cde77ba814"/>
+				<textElement>
+					<font fontName="宋体" size="10"/>
+				</textElement>
+				<text><![CDATA[病区]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="421" y="0" width="24" height="20" uuid="7cad9fbf-2828-4e55-8a93-a14d0f95401a"/>
+				<textElement>
+					<font fontName="宋体" size="10"/>
+				</textElement>
+				<text><![CDATA[床号]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="445" y="0" width="40" height="20" uuid="3b485c89-ab0e-4c3b-9a46-b413fc7c74c5"/>
+				<textElement>
+					<font fontName="宋体" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{hzry}["brch"]]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="485" y="0" width="22" height="20" uuid="5b5433c3-e592-4f03-9729-d2385030d58f"/>
+				<textElement>
+					<font fontName="宋体" size="10"/>
+				</textElement>
+				<text><![CDATA[住院号码]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="507" y="0" width="48" height="20" uuid="7e4b7770-57a8-4161-b5c3-e421d4739f89"/>
+				<textElement>
+					<font fontName="宋体" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{hzry}["zyhm"]]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="312" y="0" width="42" height="20" uuid="f62bb908-379a-41d5-acf0-10021223af19"/>
+				<textElement>
+					<font fontName="宋体" size="10" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{hzry}["brks"]]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="376" y="0" width="45" height="20" uuid="fb31468d-70c8-4281-9d69-13cef7dc71ff"/>
+				<textElement>
+					<font fontName="宋体" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{hzry}["brbq"]]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="60" splitType="Stretch">
+			<subreport isUsingCache="false">
+				<reportElement stretchType="RelativeToBandHeight" isPrintRepeatedValues="false" mode="Opaque" x="0"
+							   y="0" width="200" height="60" uuid="fb2a2256-20f9-4838-b418-d9d1c8eec34b"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ryzd">
+					<subreportParameterExpression><![CDATA[$P{ryzd}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression>
+					<![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{sfxmList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "ExecuteLog_Sub_Items.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="65" splitType="Stretch">
+			<subreport isUsingCache="false">
+				<reportElement stretchType="RelativeToBandHeight" isPrintRepeatedValues="false" mode="Opaque" x="0"
+							   y="0" width="200" height="65" uuid="a87d4b40-7468-454f-976a-b248652bc4f7"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="jdxj">
+					<subreportParameterExpression><![CDATA[$F{jdxj}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression>
+					<![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{list})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "ExecuteLog_Sub_Logs.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="20" uuid="eb4b9ca0-149d-42ed-9780-834171a29a72"/>
+				<textElement>
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[注意事项：1、循序渐进    2、局部感觉障碍或循环不良  3、骨折早期或未愈合  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="555" height="20" uuid="eef345b5-7fc9-4a29-bb81-192ea301e3fd"/>
+				<textElement>
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[          4、血压、心率变化  5、避免损伤和意外]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

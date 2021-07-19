@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 治疗任务子任务表 -->
+<mapper namespace="com.buit.his.treatment.dao.ZlZlzrwDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        JLXH as jlxh,ZLRWFPID as zlrwfpid,RWMB_JLXH as rwmbJlxh,ZLPC_JLXH as zlpcJlxh,ZXZT as zxzt,ZXSJ as zxsj,ZXGH as zxgh,JZSJ as jzsj,JZGH as jzgh,QXSJ as qxsj,QXGH as qxgh,BJZCS as bjzcs
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO ZL_ZLZRW (JLXH,
+                              ZLRWFPID,
+                              RWMB_JLXH,
+                              ZLPC_JLXH,
+                              ZXZT,
+                              ZXSJ,
+                              ZXGH,
+                              JZSJ,
+                              JZGH,
+                              QXSJ,
+                              QXGH,
+                              BJZCS)
+        VALUES (#{jlxh},
+                #{zlrwfpid},
+                #{rwmbJlxh},
+                #{zlpcJlxh},
+                #{zxzt},
+                #{zxsj},
+                #{zxgh},
+                #{jzsj},
+                #{jzgh},
+                #{qxsj},
+                #{qxgh},
+                #{bjzcs})
+    </insert>
+
+    <insert id="create">
+        INSERT INTO ZL_ZLZRW (JLXH,
+                              ZLRWFPID,
+                              RWMB_JLXH,
+                              ZLPC_JLXH,
+                              ZXZT,
+                              ZXSJ,
+                              ZXGH,
+                              JZSJ,
+                              JZGH,
+                              QXSJ,
+                              QXGH,
+                              BJZCS)
+        SELECT #{jlxh},
+                #{zlrwfpid},
+                #{rwmbJlxh},
+                #{zlpcJlxh},
+                #{zxzt},
+                #{zxsj},
+                #{zxgh},
+                #{jzsj},
+                #{jzgh},
+                #{qxsj},
+                #{qxgh},
+                #{bjzcs}
+        FROM DUAL WHERE NOT EXISTS(SELECT 1 FROM ZL_ZLZRW WHERE zlrwfpid = #{zlrwfpid} AND ZXSJ = #{zxsj})
+    </insert>
+
+    <update id="update">
+        UPDATE ZL_ZLZRW
+        SET ZLRWFPID  = #{zlrwfpid},
+            RWMB_JLXH = #{rwmbJlxh},
+            ZLPC_JLXH = #{zlpcJlxh},
+            ZXZT      = #{zxzt},
+            ZXSJ      = #{zxsj},
+            ZXGH      = #{zxgh},
+            JZSJ      = #{jzsj},
+            JZGH      = #{jzgh},
+            QXSJ      = #{qxsj},
+            QXGH      = #{qxgh},
+            BJZXS     = #{bjzcs}
+        WHERE JLXH = #{jlxh}
+    </update>
+
+    <delete id="deleteById">
+        DELETE
+        FROM ZL_ZLZRW
+        WHERE JLXH = #{jlxh}
+    </delete>
+
+    <delete id="removeByEntity">
+        DELETE FROM ZL_ZLZRW
+        <include refid="where"/>
+    </delete>
+
+    <delete id="batchRwmove">
+        DELETE FROM ZL_ZLZRW
+        WHERE JLXH IN
+        <foreach collection="zrwIds" item="r" separator="," open="(" close=")">
+            #{r}
+        </foreach>
+    </delete>
+
+    <delete id="batchRemove">
+        DELETE FROM ZL_ZLZRW
+        WHERE ZXZT = 0 AND JLXH IN
+        <foreach collection="list" item="r" separator="," open="(" close=")">
+            #{r.jlxh}
+        </foreach>
+    </delete>
+
+    <select id="getById" resultType="ZlZlzrw">
+        SELECT
+        <include refid="columns"/>
+        FROM ZL_ZLZRW
+        WHERE
+        JLXH = #{jlxh}
+    </select>
+
+    <sql id="where">
+        <where>
+            <if test="@sqlt.Ognl@isNotEmpty(jlxh)">
+                AND JLXH = #{jlxh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zlrwfpid)">
+                AND ZLRWFPID = #{zlrwfpid}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(rwmbJlxh)">
+                AND RWMB_JLXH = #{rwmbJlxh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zlpcJlxh)">
+                AND ZLPC_JLXH = #{zlpcJlxh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zxzt)">
+                AND ZXZT = #{zxzt}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zxsj)">
+                AND ZXSJ = #{zxsj}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zxgh)">
+                AND ZXGH = #{zxgh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(jzsj)">
+                AND JZSJ = #{jzsj}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(jzgh)">
+                AND JZGH = #{jzgh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(qxsj)">
+                AND QXSJ = #{qxsj}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(qxgh)">
+                AND QXGH = #{qxgh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(bjzcs)">
+                AND BJZCS = #{bjzcs}
+            </if>
+        </where>
+    </sql>
+
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM ZL_ZLZRW
+        <include refid="where"/>
+    </select>
+
+    <select id="findByEntity" resultType="ZlZlzrw">
+        SELECT
+        <include refid="columns"/>
+        FROM ZL_ZLZRW
+        <include refid="where"/>
+
+        <if test="@sqlt.Ognl@orderIsNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+
+    <!--     业务sql      -->
+    <select id="queryExecutePatientPage" resultType="com.buit.his.treatment.response.ExecutePatientResp">
+        select * from (SELECT
+        zyh,
+        zyhm,
+        brbq,
+        brks,
+        brch,
+        brxm,
+        brxb,
+        CSNY AS csrq,
+        EXISTS(select 1 from zl_zljl where zt=0 and zyh = hzry.zyh and zxrq &lt; #{zxrq}) as isNew,
+        (select (MQZXCS-SCXJCS)%10 = 0 from zl_zljl where zt = 0 and zyh = hzry.zyh and zxrq &lt; #{zxrq} order by
+        zxrq
+        desc limit 1) as isNeedSummary
+        FROM
+        im_hzry hzry
+        WHERE
+        zyh IN (
+        SELECT
+        DISTINCT( rwfp.zyh )
+        FROM
+        zl_zlzrw zrw
+        INNER JOIN zl_rwmb mb on zrw.rwmb_jlxh = mb.jlxh
+        INNER JOIN zl_rwfp rwfp ON zrw.ZLRWFPID = rwfp.ZLRWFPID
+        where rwfp.jgid = #{jgid}
+        AND zrw.zxsj &gt;= CONCAT(#{zxrq},' 00:00:00')
+        AND zrw.zxsj &lt;= CONCAT(#{zxrq},' 23:59:59')
+        AND rwfp.zllb = #{zllb}
+        AND rwfp.zlksdm = #{zlksdm}
+        <if test="@sqlt.Ognl@isNotEmpty(zlsdm)">
+            AND rwfp.zlsdm = #{zlsdm}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(zxzt)">
+            AND zrw.zxzt = #{zxzt}
+        </if>
+        )
+        <if test="@sqlt.Ognl@isNotEmpty(brbq)">
+            AND brbq = #{brbq}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(brch)">
+            AND brch = #{brch}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(brxm)">
+            AND brxm LIKE concat('%',#{brxm},'%')
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(zyhm)">
+            AND zyhm LIKE concat('%',#{zyhm},'%')
+        </if>) t
+        <where>
+            <if test="hzqk == 1">
+                t.isNew = 1
+            </if>
+            <if test="hzqk == 2">
+                t.isNeedSummary = 1
+            </if>
+
+        </where>
+        order by t.brch
+
+    </select>
+
+    <select id="findList" resultType="com.buit.his.treatment.response.ZlZlzrwResp">
+        SELECT zrw.JLXH AS jlxh,
+        zrw.ZXZT AS zxzt,
+        rwmb.LSYZ AS lsyz,
+        rwfp.ZYH AS zyh,
+        rwfp.ZLRWFPID AS zlrwfpId,
+        rwfp.SFXMDM AS sfxmdm,
+        rwfp.SFXMMC AS sfxmmc,
+        rwfp.SL AS sl,
+        rwfp.JE AS je,
+        zrw.BJZCS AS bjzcs,
+        zrw.BJZCS * rwfp.JE AS bjzfy,
+        rwmb.DW AS dw,
+        rwmb.PC AS pc,
+        rwmb.KZSJ AS kzsj,
+        zrw.ZXSJ AS zxsj,
+        rwfp.ZLSDM AS yygh,
+        zrw.JZGH AS zxgh,
+        rwmb.BZXX AS bzxx,
+        yz.tzsj
+        FROM zl_zlzrw zrw
+        INNER JOIN zl_rwmb rwmb ON zrw.RWMB_JLXH = rwmb.JLXH
+        INNER JOIN zl_rwfp rwfp ON rwmb.ZLRWFPID = rwfp.ZLRWFPID
+        INNER join cis_hzyz yz ON rwfp.yz_jlxh = yz.jlxh
+        WHERE
+        zrw.zxzt = #{zxzt}
+        and rwfp.zllb = #{zllb}
+        and rwfp.zlksdm = #{zlksdm}
+        AND zrw.zxsj &gt;= CONCAT(#{zxrq},' 00:00:00')
+        AND zrw.zxsj &lt;= CONCAT(#{zxrq},' 23:59:59')
+        and rwfp.zyh in
+        <foreach collection="zyhList" item="r" separator="," open="(" close=")">
+            #{r}
+        </foreach>
+        <if test="@sqlt.Ognl@isNotEmpty(zlsdm)">
+            AND rwfp.zlsdm = #{zlsdm}
+        </if>
+        order by rwfp.ZYH, rwmb.KZSJ desc, rwmb.zxsj
+    </select>
+
+    <select id="findListByIds" resultType="ZlZlzrw">
+        SELECT
+        zrw.JLXH as jlxh,
+        zrw.ZLRWFPID as zlrwfpid,
+        zrw.RWMB_JLXH as rwmbJlxh,
+        zrw.ZLPC_JLXH as zlpcJlxh,
+        zrw.ZXZT as zxzt,
+        zrw.ZXSJ as zxsj,
+        zrw.ZXGH as zxgh,
+        zrw.JZSJ as jzsj,
+        zrw.JZGH as jzgh,
+        zrw.QXSJ as qxsj,
+        zrw.QXGH as qxgh,
+        zrw.BJZCS as bjzcs
+        FROM
+        zl_zlzrw zrw, his.zl_rwfp rwfp
+        WHERE
+        zrw.ZLRWFPID = rwfp.ZLRWFPID
+        <if test="@sqlt.Ognl@isNotEmpty(zxzt)">
+            AND zrw.ZXZT = #{zxzt}
+        </if>
+        AND zrw.jlxh IN
+        <foreach collection="list" item="r" separator="," open="(" close=")">
+            #{r}
+        </foreach>
+    </select>
+
+    <select id="findListByJlxh" resultType="ZlZlzrw">
+        SELECT
+        zrw.JLXH as jlxh,
+        zrw.ZLRWFPID as zlrwfpid,
+        zrw.RWMB_JLXH as rwmbJlxh,
+        zrw.ZLPC_JLXH as zlpcJlxh,
+        zrw.ZXZT as zxzt,
+        zrw.ZXSJ as zxsj,
+        zrw.ZXGH as zxgh,
+        zrw.JZSJ as jzsj,
+        zrw.JZGH as jzgh,
+        zrw.QXSJ as qxsj,
+        zrw.QXGH as qxgh,
+        zrw.BJZCS as bjzcs
+        FROM
+        zl_zlzrw zrw, his.zl_rwfp rwfp
+        WHERE
+        zrw.ZLRWFPID = rwfp.ZLRWFPID
+        AND zrw.jlxh IN
+        <foreach collection="list" item="r" separator="," open="(" close=")">
+            #{r}
+        </foreach>
+    </select>
+
+    <!--<select id="findNotExecuteListByZyh" resultType="ZlZlzrw">
+        SELECT zrw.JLXH      AS jlxh,
+               zrw.RWMB_JLXH AS rwmbJlxh,
+               zrw.ZLPC_JLXH AS zlpcJlxh,
+               zrw.ZXZT      AS zxzt,
+               zrw.ZXSJ      AS zxsj,
+               zrw.ZXGH      AS zxgh,
+               zrw.JZSJ      AS jzsj,
+               zrw.JZGH      AS jzgh,
+               zrw.QXSJ      AS qxsj,
+               zrw.QXGH      AS qxgh,
+               zrw.BJZCS     AS bjzcs,
+               rwfp.JE * zrw.BJZCS AS bjzfy
+        FROM zl_zlzrw zrw
+                 INNER JOIN his.zl_rwfp rwfp ON zrw.ZLRWFPID = rwfp.ZLRWFPID
+                 LEFT JOIN zl_zlpc pc ON zrw.ZLPC_JLXH = pc.JLXH
+        WHERE zrw.ZXZT = 0
+          AND rwfp.ZLLB = #{zllb}
+          AND rwfp.ZLKSDM = #{zlksdm}
+          AND pc.ZLSDM = #{zlsdm}
+          AND pc.ZLRQ = #{zxrq}
+          AND pc.ZYH = #{zyh}
+    </select>-->
+
+    <update id="execute">
+        UPDATE zl_zlzrw SET FYSJ = #{fysj}, ZXZT=2, JZSJ=#{jzsj}, JZGH = #{jzgh} WHERE JLXH = #{jlxh};
+    </update>
+
+    <select id="getExecutedByZlpc" resultType="ZlZlzrw">
+        SELECT
+        <include refid="columns"/>
+        FROM zl_zlzrw
+        WHERE ZXZT = 2
+        AND ZlPC_JLXH IN
+        <foreach collection="zlpcIds" item="r" separator="," open="(" close=")">
+            #{r}
+        </foreach>
+    </select>
+
+    <update id="cancel">
+        UPDATE zl_zlzrw
+        SET ZXZT = 0,
+        QXGH = #{qxgh},
+        QXSJ = CURRENT_TIMESTAMP
+        WHERE
+        JLXH IN
+        <foreach collection="list" item="r" separator="," open="(" close=")">
+            #{r.jlxh}
+        </foreach>
+    </update>
+
+    <select id="queryWorkloadReportDetailPage" resultType="com.buit.his.treatment.response.WorkloadDetailResp">
+        SELECT
+        t.ZLRQ as zxrq,
+        hzry.BRXM as brxm,
+        hzry.BRXB as brxb,
+        hzry.CSNY as csny,
+        hzry.BRBQ as brbq,
+        hzry.BRCH as brch,
+        hzry.BRKS as brks,
+        rw.SFXMDM as sfxmdm,
+        rw.SFXMMC as sfxmmc,
+        t.sl as sl,
+        t.je as je,
+        t.zxgh as zxgh
+        FROM
+        (
+        SELECT
+        pc.ZLRQ,
+        rwfp.ZLRWFPID,
+        zrw.JZGH zxgh,
+        SUM( rwfp.SL ) sl,
+        SUM( rwfp.JE ) je
+        FROM
+        zl_zlzrw zrw
+        INNER JOIN zl_rwfp rwfp ON ( zrw.ZLRWFPID = rwfp.ZLRWFPID )
+        INNER JOIN zl_zlpc pc ON ( zrw.ZLPC_JLXH = pc.JLXH )
+        WHERE
+        rwfp.JGID = #{jgid}
+        AND rwfp.ZLLB = #{zllb}
+        AND pc.ZLRQ &gt;= #{ksrq}
+        AND pc.ZLRQ &lt;= #{jsrq}
+        <if test="@sqlt.Ognl@isNotEmpty(sfxmdm)">
+            AND rwfp.SFXMDM = #{sfxmdm}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(zxgh)">
+            AND zrw.JZGH = #{zxgh}
+        </if>
+        GROUP BY
+        pc.ZLRQ,
+        rwfp.ZLRWFPID,
+        zrw.JZGH
+        ) t,
+        zl_rwfp rw,
+        im_hzry hzry
+        WHERE rw.ZLRWFPID = t.ZLRWFPID AND hzry.ZYH = rw.ZYH
+        order by t.zlrq,hzry.brxm
+    </select>
+
+    <select id="queryDeptWorkloadReportPage" resultType="com.buit.his.treatment.response.DeptWorkloadReportResp">
+        SELECT
+        rwfp.ZLLB as zllb,
+        rwfp.SFXMDM as sfxmdm,
+        rwfp.SFXMMC as sfxmmc,
+        SUM( rwfp.SL * (zrw.bjzcs + 1)) as sl,
+        SUM( rwfp.JE * (zrw.bjzcs + 1)) as je
+        FROM
+        zl_zlzrw zrw
+        INNER JOIN zl_rwfp rwfp ON zrw.ZLRWFPID = rwfp.ZLRWFPID
+        WHERE
+        zrw.ZXZT = 2
+        AND rwfp.JGID = #{jgid}
+        <if test="@sqlt.Ognl@isNotEmpty(zlksdm)">
+            AND rwfp.ZLKSDM = #{zlksdm}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(zllb)">
+            AND rwfp.ZLLB = #{zllb}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(sfxmdm)">
+            AND rwfp.SFXMDM = #{sfxmdm}
+        </if>
+        AND zrw.ZXSJ &gt;= #{ksrq}
+        AND zrw.ZXSJ &lt;= #{jsrq}
+        GROUP BY
+        rwfp.ZLLB,
+        rwfp.SFXMDM,
+        rwfp.SFXMMC
+    </select>
+    <select id="queryDoctorWorkloadReportPage" resultType="com.buit.his.treatment.response.DoctorWorkloadReportResp">
+        SELECT
+        zrw.JZGH as zxgh,
+        rwfp.ZLLB as zllb,
+        rwfp.SFXMDM as sfxmdm,
+        rwfp.SFXMMC as sfxmmc,
+        SUM( rwfp.SL * (zrw.bjzcs + 1)) as sl,
+        SUM( rwfp.JE * (zrw.bjzcs + 1)) as je
+        FROM
+        zl_zlzrw zrw
+        INNER JOIN zl_rwfp rwfp ON zrw.ZLRWFPID = rwfp.ZLRWFPID
+        WHERE
+        zrw.ZXZT = 2
+        AND rwfp.JGID = #{jgid}
+        <if test="@sqlt.Ognl@isNotEmpty(zlksdm)">
+            AND rwfp.ZLKSDM = #{zlksdm}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(zllb)">
+            AND rwfp.ZLLB = #{zllb}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(zxgh)">
+            AND zrw.JZGH = #{zxgh}
+        </if>
+        <if test='@sqlt.Ognl@isNotEmpty(sfxmdm)'>
+            AND rwfp.SFXMDM IN
+            <foreach collection="sfxmdm" item="r" separator="," open="(" close=")">
+                #{r}
+            </foreach>
+        </if>
+        AND zrw.ZXSJ &gt;= #{ksrq}
+        AND zrw.ZXSJ &lt;= #{jsrq}
+        GROUP BY
+        zrw.JZGH,
+        rwfp.ZLLB,
+        rwfp.SFXMDM,
+        rwfp.SFXMMC
+        ORDER BY
+        zrw.JZGH,rwfp.SFXMDM
+    </select>
+
+    <select id="findListByRwmbIds" resultType="ZlZlzrw">
+        SELECT
+        <include refid="columns"/>
+        FROM zl_zlzrw
+        WHERE RWMB_JLXH IN
+        <foreach collection="rwmbIds" item="r" separator="," open="(" close=")">
+            #{r}
+        </foreach>
+    </select>
+
+    <update id="reRwfp">
+        UPDATE zl_zlzrw SET ZXGH = #{zxgh}, ZLPC_JLXH=#{zlpcJlxh}, RWMB_JLXH=#{rwmbJlxh} WHERE JLXH = #{jlxh}
+    </update>
+
+    <select id="getLastTask" resultType="ZlZlzrw">
+        SELECT
+        <include refid="columns"/>
+        FROM zl_zlzrw
+        WHERE RWMB_JLXH = #{rwmbId} ORDER BY ZXSJ DESC limit 1
+    </select>
+
+    <select id="findListByZlpcIds" resultType="ZlZlzrw">
+        SELECT
+        <include refid="columns"/>
+        FROM zl_zlzrw
+        WHERE ZLPC_JLXH in
+        <foreach collection="zlpcIds" item="r" separator="," open="(" close=")">
+            #{r}
+        </foreach>
+    </select>
+
+    <select id="findListOutRange" resultType="ZlZlzrw">
+        SELECT
+        <include refid="columns"/>
+        FROM zl_zlzrw
+        WHERE ZLRWFPID =#{zlrwfpId} AND ZXSJ &gt;= #{tomorrow}
+    </select>
+
+    <update id="updateBjzcs">
+        UPDATE zl_zlzrw SET bjzcs = 0 WHERE jlxh = #{jlxh}
+    </update>
+
+    <select id="findListByRwfpIdAndZxsj" resultType="ZlZlzrw">
+        SELECT
+        <include refid="columns"/>
+        FROM zl_zlzrw
+        WHERE ZLRWFPID =#{zlrwfpid} AND DATE_FORMAT(ZXSJ,'%H:%i:%s') = STR_TO_DATE(#{zxsj},'%H:%i:%s')
+    </select>
+
+    <select id="dischargeCheckList" resultType="com.buit.his.treatment.response.ZlrwCheckFailedResp">
+        SELECT
+        rw.jlxh,
+        yz.zyh,
+        fp.zlrwfpid,
+        fp.zlksdm,
+        ks.OFFICENAME AS zlksmc,
+        yz.lsyz,
+        yz.kssj,
+        yz.tzsj,
+        yz.sypc,
+        fp.sfxmdm,
+        fp.sfxmmc,
+        rw.zxsj,
+        rw.zxgh,
+        hr.PERSONNAME AS zxghName
+        FROM
+        cis_hzyz yz
+        INNER JOIN zl_rwfp fp ON yz.jlxh = fp.YZ_JLXH
+        INNER JOIN hr_personnel hr ON hr.PERSONID = fp.zlsdm
+        INNER JOIN dic_kszd ks ON fp.zlksdm = ks.id
+        INNER JOIN zl_zlzrw rw ON rw.zlrwfpid = fp.zlrwfpid
+        AND rw.zxzt = 0
+        WHERE yz.zyh = #{zyh}
+    </select>
+</mapper>
+

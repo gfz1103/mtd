@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 治疗项目联动收费项目表 -->
+<mapper namespace="com.buit.his.treatment.dao.ZlXmldsfxmDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        JLXH as jlxh,JGID as jgid,ZLKSDM as zlksdm,SFXMDM as sfxmdm,SFXMMC as sfxmmc,PXH as pxh,SL as sl,JE as je,ZLXM_JLXH as zlxmJlxh,ZLXMMC as zlxmmc
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO ZL_XMLDSFXM (JLXH,
+                                 JGID,
+                                 ZLKSDM,
+                                 SFXMDM,
+                                 SFXMMC,
+                                 PXH,
+                                 SL,
+                                 JE,
+                                 ZLXM_JLXH,
+                                 ZLXMMC)
+        VALUES (#{jlxh},
+                #{jgid},
+                #{zlksdm},
+                #{sfxmdm},
+                #{sfxmmc},
+                #{pxh},
+                #{sl},
+                #{je},
+                #{zlxmJlxh},
+                #{zlxmmc})
+    </insert>
+
+    <update id="update" >
+    UPDATE ZL_XMLDSFXM
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                JGID = #{jgid} ,
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zlksdm)">
+                ZLKSDM = #{zlksdm} ,
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(sfxmdm)">
+                SFXMDM = #{sfxmdm} ,
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(sfxmmc)">
+                SFXMMC = #{sfxmmc} ,
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(pxh)">
+                PXH = #{pxh} ,
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(sl)">
+                SL = #{sl},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(je)">
+                JE = #{je},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zlxmJlxh)">
+                ZLXM_JLXH = #{zlxmJlxh},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zlxmmc)">
+                ZLXMMC = #{zlxmmc} ,
+            </if>
+        </trim>
+            WHERE
+        JLXH = #{jlxh}
+        </update>
+
+    <delete id="deleteById">
+        DELETE FROM ZL_XMLDSFXM WHERE
+        JLXH = #{jlxh}
+    </delete>
+
+    <delete id="removeByEntity">
+        DELETE FROM ZL_XMLDSFXM <include refid="where"/>
+    </delete>
+
+    <select id="getById" resultType="ZlXmldsfxm">
+        SELECT <include refid="columns" />
+            FROM ZL_XMLDSFXM
+            WHERE
+        JLXH = #{jlxh}
+    </select>
+
+    <sql id="where">
+        <where>
+                <if test="@sqlt.Ognl@isNotEmpty(jlxh)">
+                     AND JLXH = #{jlxh}
+                </if>
+            <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                AND JGID = #{jgid}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zlksdm)">
+                AND ZLKSDM = #{zlksdm}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(sfxmdm)">
+                AND SFXMDM = #{sfxmdm}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(sfxmmc)">
+                AND SFXMMC LIKE CONCAT(CONCAT('%',#{sfxmmc}),'%')
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zlxmJlxh)">
+                AND ZLXM_JLXH = #{zlxmJlxh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zlxmmc)">
+                AND ZLXMMC LIKE CONCAT(CONCAT('%',#{zlxmmc}),'%')
+            </if>
+        </where>
+    </sql>
+
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM ZL_XMLDSFXM
+        <include refid="where"/>
+    </select>
+
+    <select id="findByEntity" resultType="ZlXmldsfxm">
+        SELECT <include refid="columns" />
+        FROM ZL_XMLDSFXM
+        <include refid="where"/>
+
+        <if test="@sqlt.Ognl@orderisNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+    <!--     业务sql      -->
+    <!--查询最大的排序号 -->
+    <select id="queryMaxPxh" resultType="java.lang.Integer">
+        select IFNULL(max(pxh),0) from  ZL_XMLDSFXM where jgid=#{jgid} and zlksdm=#{zlksdm} and zlxmmc=#{zlxmmc} and jlxh!=#{jlxh}
+    </select>
+
+    <select id="findList" resultType="com.buit.his.treatment.response.ZlXmldsfxmQueryListResp">
+        SELECT
+            a.JLXH,
+            a.JGID,
+            a.ZLKSDM,
+            a.SFXMDM,
+            a.SFXMMC,
+            a.PXH,
+            a.SL,
+            c.FYDJ dj,
+            b.FYDW dw,
+            a.JE,
+            a.ZLXM_JLXH,
+            a.ZLXMMC
+        FROM zl_xmldsfxm a
+             inner join fee_ylsfxmdj c on a.SFXMDM = c.fyxh and a.jgid = c.jgid
+             INNER JOIN fee_ylsfxm b ON a.SFXMDM = b.FYXH
+        WHERE a.jgid = #{jgid}
+          AND a.ZLXM_JLXH = #{zlxmJlxh}
+    </select>
+    <select id="findListByZyhAndZlsdm" resultType="com.buit.his.treatment.response.ExecuteLogItemResp">
+        SELECT DISTINCT
+        ( rwfp.SFXMDM ) AS SFXMDM,
+        rwfp.SFXMMC
+        FROM
+        zl_zlzrw zrw
+        INNER JOIN zl_rwmb mb ON zrw.RWMB_JLXH = mb.JLXH
+        INNER JOIN zl_rwfp rwfp ON mb.ZLRWFPID = rwfp.ZLRWFPID
+        WHERE
+        zrw.zxzt = 2
+        AND rwfp.ZYH = #{zyh}
+        AND rwfp.ZLLB = #{zllb}
+        <if test="@sqlt.Ognl@isNotEmpty(zxgh)">
+            AND rwfp.zlsdm = #{zxgh}
+        </if>
+        ORDER BY
+        zrw.ZXSJ
+    </select>
+
+    <select id="getfyxmDatas" resultType="com.buit.system.response.GyYlxmDicResp">
+        SELECT
+        ylsfxm.FYXH AS fyxh,
+        ylsfxm.FYMC AS fymc,
+        ylsfxm.FYDJ AS fydj,
+        ylsfxm.FYDW AS fydw,
+        ylsfxm.BZJG AS bzjg,
+        ylsfxm.XMLX AS xmlx,
+        ylsfxm.FYGB AS fygb,
+        ylsfxm.FYKS AS fyks
+        FROM zl_xmldsfxm zlsfxm
+        LEFT JOIN fee_ylsfxm ylsfxm ON zlsfxm.SFXMDM = ylsfxm.FYXH
+        WHERE zlsfxm.ZLXM_JLXH = #{zlxmjlxh} AND zlsfxm.JGID = #{jgid}
+    </select>
+
+    <select id="findListByZllb" resultType="com.buit.his.treatment.model.ZlXmldsfxm">
+        SELECT
+        sfxm.JLXH AS jlxh,
+        sfxm.JGID AS jgid,
+        sfxm.ZLKSDM AS zlksdm,
+        sfxm.SFXMDM AS sfxmdm,
+        sfxm.SFXMMC AS sfxmmc,
+        sfxm.PXH AS pxh,
+        sfxm.SL AS sl,
+        sfxm.JE AS je,
+        sfxm.ZLXM_JLXH AS zlxmJlxh,
+        sfxm.ZLXMMC AS zlxmmc
+        FROM
+        zl_xm zlxm
+        LEFT JOIN zl_xmldsfxm sfxm ON zlxm.jlxh = sfxm.ZLXM_JLXH
+        WHERE
+        zlxm.ZT = 1
+        AND sfxm.JGID = #{jgid}
+        AND zlxm.ZLKSDM = #{zlksdm}
+        <if test="@sqlt.Ognl@isNotEmpty(zllb)">
+            AND zlxm.ZLLB = #{zllb}
+        </if>
+    </select>
+</mapper>
+

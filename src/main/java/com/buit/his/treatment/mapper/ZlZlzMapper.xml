@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 治疗小组表 -->
+<mapper namespace="com.buit.his.treatment.dao.ZlZlzDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        ZLZID as zlzid,JGID as jgid,ZLZMC as zlzmc,ZLLB as zllb,ZT as zt
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO ZL_ZLZ (
+            ZLZID ,
+            JGID ,
+            ZLZMC ,
+            ZLLB ,
+            ZT
+        ) VALUES (
+            #{zlzid} ,
+            #{jgid} ,
+            #{zlzmc} ,
+            #{zllb} ,
+            #{zt}
+        )
+    </insert>
+
+    <update id="update" >
+        UPDATE ZL_ZLZ SET
+            JGID = #{jgid} ,
+            ZLZMC = #{zlzmc} ,
+            ZLLB = #{zllb} ,
+            ZT = #{zt}
+        WHERE
+            ZLZID = #{zlzid}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM ZL_ZLZ WHERE
+        ZLZID = #{zlzid}
+    </delete>
+
+    <delete id="removeByEntity">
+        DELETE FROM ZL_ZLZ <include refid="where"/>
+    </delete>
+
+    <select id="getById" resultType="ZlZlz">
+        SELECT <include refid="columns" />
+            FROM ZL_ZLZ
+            WHERE
+        ZLZID = #{zlzid}
+    </select>
+
+    <sql id="where">
+        <where>
+            <if test="@sqlt.Ognl@isNotEmpty(zt)">
+                AND ZT = #{zt}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                 AND JGID = #{jgid}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zllb)">
+                AND ZLLB = #{zllb}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zlzmc)">
+                AND ZLZMC LIKE CONCAT('%',#{zlzmc},'%')
+            </if>
+        </where>
+    </sql>
+
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM ZL_ZLZ
+        <include refid="where"/>
+    </select>
+
+    <select id="findByEntity" resultType="ZlZlz">
+        SELECT <include refid="columns" />
+        FROM ZL_ZLZ
+        <include refid="where"/>
+
+        <if test="@sqlt.Ognl@orderIsNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+    <!--     业务sql      -->
+    <select id="queryByzmcAndzllbForAdd" resultType="java.lang.Integer">
+        select count(*)
+        from zl_zlz
+        where jgid = #{jgid} and zllb = #{zllb} and zlzmc = #{zlzmc}
+    </select>
+
+    <select id="queryByzmcAndzllbForUpd" resultType="java.lang.Integer">
+        select count(*)
+        from zl_zlz
+        where jgid = #{jgid} and zllb = #{zllb} and zlzmc = #{zlzmc} and zlzid != #{zlzid}
+    </select>
+    <select id="getByKsdm" resultType="com.buit.his.treatment.response.ZlZlzResp">
+        select *
+        from ZL_ZLZ zz left join zl_lb zl on zz.ZLLB = zl.JLXH
+        <where>
+            <if test="@sqlt.Ognl@isNotEmpty(zt)">
+                AND zz.ZT = #{zt}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                AND zz.JGID = #{jgid}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zllb)">
+                AND zz.ZLLB = #{zllb}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zlzmc)">
+                AND zz.ZLZMC LIKE CONCAT('%',#{zlzmc},'%')
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zlksdm)">
+                AND zl.zlksdm = #{zlksdm}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateZtByZlzid">
+        UPDATE ZL_ZLZ
+        SET
+            ZT = #{zt}
+        WHERE
+            ZLZID = #{zlzid}
+    </update>
+</mapper>
+

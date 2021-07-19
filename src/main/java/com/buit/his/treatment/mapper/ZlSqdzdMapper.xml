@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 治疗申请单诊断表 -->
+<mapper namespace="com.buit.his.treatment.dao.ZlSqdzdDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        JLXH as jlxh,JGID as jgid,ZLSQDH as zlsqdh,XH as xh,ZDMC as zdmc,ICD as icd
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO ZL_SQDZD (
+            JLXH ,
+            JGID ,
+            ZLSQDH ,
+            XH ,
+            ZDMC ,
+            ICD 
+        ) VALUES (
+            #{jlxh} ,
+            #{jgid} ,
+            #{zlsqdh} ,
+            #{xh} ,
+            #{zdmc} ,
+            #{icd} 
+        )
+    </insert>
+    
+    <update id="update" >
+    UPDATE ZL_SQDZD
+    <trim prefix="SET" suffixOverrides=",">
+                    <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                        JGID = #{jgid} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zlsqdh)">
+                        ZLSQDH = #{zlsqdh} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(xh)">
+                        XH = #{xh} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zdmc)">
+                        ZDMC = #{zdmc} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(icd)">
+                        ICD = #{icd} 
+                    </if>
+        </trim>
+            WHERE
+        JLXH = #{jlxh} 
+        </update>
+
+    <delete id="deleteById">
+        DELETE FROM ZL_SQDZD WHERE
+        JLXH = #{jlxh} 
+    </delete>
+    
+    <delete id="removeByEntity">
+        DELETE FROM ZL_SQDZD <include refid="where"/>  
+    </delete>
+    
+    <select id="getById" resultType="ZlSqdzd">
+        SELECT <include refid="columns" />
+            FROM ZL_SQDZD 
+            WHERE 
+        JLXH = #{jlxh} 
+    </select>
+    
+    <sql id="where">
+        <where>                          
+                <if test="@sqlt.Ognl@isNotEmpty(jlxh)">
+                     AND JLXH = #{jlxh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                     AND JGID = #{jgid}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zlsqdh)">
+                     AND ZLSQDH = #{zlsqdh}
+                </if>
+<!--                <if test="@sqlt.Ognl@isNotEmpty(xh)"> -->
+<!--                     AND XH = #{xh} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(zdmc)"> -->
+<!--                     AND ZDMC = #{zdmc} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(icd)"> -->
+<!--                     AND ICD = #{icd} -->
+<!--                </if> -->
+        </where>
+    </sql>
+        
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM ZL_SQDZD 
+        <include refid="where"/>    
+    </select>
+    
+    <select id="findByEntity" resultType="ZlSqdzd">
+        SELECT <include refid="columns" />
+        FROM ZL_SQDZD 
+        <include refid="where"/>
+        
+        <if test="@sqlt.Ognl@orderIsNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+    <!--     业务sql      -->
+</mapper>
+

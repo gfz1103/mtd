@@ -1,0 +1,1283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--  -->
+<mapper namespace="com.buit.his.mtdms.dao.OpYjzxDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        ZXXH as zxxh,JGID as jgid,KSDM as ksdm,BRLX as brlx,BRID as brid,ZYHM as zyhm,BQDM as bqdm,JZKH as jzkh,BRCH as brch,SQKSDM as sqksdm,SQYSDM as sqysdm,SQSJ as sqsj,JHZXSJ as jhzxsj,FYXH as fyxh,XMDM as xmdm,XMMC as xmmc,SL as sl,DW as dw,ZXZT as zxzt,ZXYSDM as zxysdm,ZXSJ as zxsj,QXYSDM as qxysdm,QXZXSJ as qxzxsj,ZFYSDM as zfysdm,ZFSJ as zfsj,YYRQ as yyrq,YYXH as yyxh,YYZT as yyzt,ZTBZ as ztbz,ZLXMID as zlxmid 
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO OP_YJZX (
+            ZXXH ,
+            JGID ,
+            KSDM ,
+            BRLX ,
+            BRID ,
+            ZYHM ,
+            BQDM ,
+            JZKH,
+            BRCH ,
+            SQKSDM,
+            SQYSDM ,
+            SQSJ ,
+            JHZXSJ ,
+            FYXH,
+            XMDM ,
+            XMMC,
+            SL ,
+            DW ,
+            ZXZT ,
+            ZXYSDM ,
+            ZXSJ ,
+            QXYSDM ,
+            QXZXSJ ,
+            ZFYSDM ,
+            ZFSJ ,
+            YYRQ,
+            YYXH,
+            YYZT,
+            ZTBZ,
+            ZLXMID  
+        ) VALUES (
+            #{zxxh} ,
+            #{jgid} ,
+            #{ksdm} ,
+            #{brlx} ,
+            #{brid} ,
+            #{zyhm} ,
+            #{bqdm} ,
+            #{jzkh},
+            #{brch} ,
+            #{sqksdm},
+            #{sqysdm} ,
+            #{sqsj} ,
+            #{jhzxsj} ,
+            #{fyxh},
+            #{xmdm} ,
+            #{xmmc} ,
+            #{sl} ,
+            #{dw} ,
+            #{zxzt} ,
+            #{zxysdm} ,
+            #{zxsj} ,
+            #{qxysdm} ,
+            #{qxzxsj} ,
+            #{zfysdm} ,
+            #{zfsj} ,
+            #{yyrq} ,
+            #{yyxh} ,
+            #{yyzt} ,
+            #{ztbz} ,
+            #{zlxmId}
+        )
+    </insert>
+
+    <update id="update"><!--
+        UPDATE OP_YJZX SET
+            JGID = #{jgid} ,
+            KSDM = #{ksdm} ,
+            BRLX = #{brlx} ,
+            BRID = #{brid} ,
+            ZYHM = #{zyhm} ,
+            BQDM = #{bqdm} ,
+            JZKH = #{jzkh},
+            BRCH = #{brch} ,
+            SQKSDM = #{sqksdm},
+            SQYSDM = #{sqysdm} ,
+            SQSJ = #{sqsj} ,
+            JHZXSJ = #{jhzxsj} ,
+            FYXH = #{fyxh} ,
+            XMDM = #{xmdm} ,
+            XMMC = #{xmmc} ,
+            SL = #{sl} ,
+            DW = #{dw} ,
+            ZXZT = #{zxzt} ,
+            ZXYSDM = #{zxysdm} ,
+            ZXSJ = #{zxsj} ,
+            QXYSDM = #{qxysdm} ,
+            QXZXSJ = #{qxzxsj} ,
+            ZFYSDM = #{zfysdm} ,
+            ZFSJ = #{zfsj} ,
+            YYRQ = #{yyrq} ,
+            YYXH = #{yyxh} ,
+            YYZT = #{yyzt} ,
+            ZTBZ = #{ztbz}
+        WHERE 
+            ZXXH = #{zxxh} 
+            -->
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM OP_YJZX WHERE
+        ZXXH = #{zxxh} 
+    </delete>
+
+    <delete id="removeByEntity">
+        DELETE FROM OP_YJZX
+        <include refid="where"/>
+    </delete>
+
+    <select id="getById" resultType="OpYjzx">
+        SELECT
+        <include refid="columns"/>
+        FROM OP_YJZX
+        WHERE
+        ZXXH = #{zxxh}
+    </select>
+
+    <sql id="where">
+        <where>
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(zxxh)"> -->
+            <!--                     AND ZXXH = #{zxxh} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(jgid)"> -->
+            <!--                     AND JGID = #{jgid} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(ksdm)"> -->
+            <!--                     AND KSDM = #{ksdm} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(brlx)"> -->
+            <!--                     AND BRLX = #{brlx} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(brid)"> -->
+            <!--                     AND BRID = #{brid} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(zyhm)"> -->
+            <!--                     AND ZYHM = #{zyhm} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(bqdm)"> -->
+            <!--                     AND BQDM = #{bqdm} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(jzkh)"> -->
+            <!--                     AND JZKH = #{jzkh} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(brch)"> -->
+            <!--                     AND BRCH = #{brch} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(sqksdm)"> -->
+            <!--                     AND SQKSDM = #{sqksdm} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(sqysdm)"> -->
+            <!--                     AND SQYSDM = #{sqysdm} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(sqsj)"> -->
+            <!--                     AND SQSJ = #{sqsj} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(jhzxsj)"> -->
+            <!--                     AND JHZXSJ = #{jhzxsj} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(fyxh)"> -->
+            <!--                     AND FYXH = #{fyxh} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(xmdm)"> -->
+            <!--                     AND XMDM = #{xmdm} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(xmmc)"> -->
+            <!--                     AND XMMC = #{xmmc} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(sl)"> -->
+            <!--                     AND SL = #{sl} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(dw)"> -->
+            <!--                     AND DW = #{dw} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(zxzt)"> -->
+            <!--                     AND ZXZT = #{zxzt} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(zxysdm)"> -->
+            <!--                     AND ZXYSDM = #{zxysdm} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(zxsj)"> -->
+            <!--                     AND ZXSJ = #{zxsj} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(qxysdm)"> -->
+            <!--                     AND QXYSDM = #{qxysdm} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(qxzxsj)"> -->
+            <!--                     AND QXZXSJ = #{qxzxsj} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(zfysdm)"> -->
+            <!--                     AND ZFYSDM = #{zfysdm} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(zfsj)"> -->
+            <!--                     AND ZFSJ = #{zfsj} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(yyrq)"> -->
+            <!--                     AND YYRQ = #{yyrq} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(yyxh)"> -->
+            <!--                     AND YYXH = #{yyxh} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(yyzt)"> -->
+            <!--                     AND YYZT = #{yyzt} -->
+            <!--                </if> -->
+            <!--                <if test="@sqlt.Ognl@isNotEmpty(ztbz)"> -->
+            <!--                     AND ZTBZ = #{ztbz} -->
+            <!--                </if> -->
+        </where>
+    </sql>
+
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM OP_YJZX
+        <include refid="where"/>
+    </select>
+
+    <select id="findByEntity" resultType="OpYjzx">
+        SELECT
+        <include refid="columns"/>
+        FROM OP_YJZX
+        <include refid="where"/>
+
+        <if test="@sqlt.Ognl@orderIsNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+    <!--     业务sql      -->
+    <select id="doQueryMzyjqfList" resultType="QueryYjqfListResp">
+        SELECT
+        t.brlx,
+        t.ztbz,
+        t.sbxh,
+        t.ztyzsbxh,
+        brda.BRXM AS brxm,
+        brda.BRXB AS brxb,
+        brda.csny AS csny,
+        t.xmmc,
+        t.sqysdm,
+        t.sqsj,
+        t.yyrq,
+        t.yyxh,
+        t.yyzt,
+        t.zxzt,
+        brda.BRID AS brid,
+        t.fyxh,
+        t.jzkh,
+        t.sqksdm,
+        t.ksdm,
+        -- t.zlxmId,
+        t.yjBrid
+        FROM
+        (
+        SELECT
+        '1' AS brlx,
+        yj02.ZTBZ AS ztbz,
+        yj02.SBXH AS sbxh,
+        yj02.ZTYZSBXH AS ztyzsbxh,
+        zt.FYMC AS xmmc,
+        yj01.YSDM AS sqysdm,
+        yj01.KDRQ AS sqsj,
+        jcsq01.YYRQ AS yyrq,
+        if( jcsq01.YYZT = '0', NULL, jcsq01.HYID ) AS yyxh,
+        jcsq01.YYZT AS yyzt,
+        '0' AS zxzt,
+        null AS fyxh,
+        yj01.JZKH AS jzkh,
+        yj01.KSDM AS sqksdm,
+        yj01.ZXKS AS ksdm,
+        -- zt.YLXH AS zlxmId,
+        yj01.BRID AS yjBrid
+        FROM
+        op_yjcf01 yj01
+        INNER JOIN op_yjcf02 yj02 ON yj01.YJXH = yj02.YJXH
+        INNER JOIN op_yj02_zt zt ON yj02.ZTYZSBXH = zt.SBXH
+        INNER JOIN cis_jcsq01 jcsq01 ON yj01.SQID = jcsq01.JCXH
+        <if test="@sqlt.Ognl@isNotEmpty(yyzt)">
+            AND jcsq01.YYZT in
+            <foreach item="item" index="index" collection="yyzt.split(',')" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <where>
+            AND yj01.XMLX = 5
+            AND yj01.FPHM IS NOT NULL
+            AND yj01.MZXH IS NOT NULL
+            AND yj01.ZFPB = 0
+            AND yj01.ZXKS = #{ksdm}
+            <!--  AND (yj02.ZXZT is null or yj02.ZXZT in-->
+            AND ifnull(yj02.ZXZT,0) in
+            <foreach item="item" index="index" collection="zxzt.split(',')" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+            AND ifnull(yj02.ZXCS,0) <![CDATA[<]]> yj02.YLSL
+            AND (yj02.ZXZT != '2' AND yj02.ZXZT != '3')
+        </where>
+        UNION ALL
+        SELECT
+        '1' AS brlx,
+        yj02.ZTBZ AS ztbz,
+        yj02.SBXH AS sbxh,
+        yj02.ZTYZSBXH AS ztyzsbxh,
+        ylsf.FYMC AS xmmc,
+        yj01.YSDM AS sqysdm,
+        yj01.KDRQ AS sqsj,
+        null AS yyrq,
+        null AS yyxh,
+        null AS yyzt,
+        '0' AS zxzt,
+        ylsf.FYXH AS fyxh,
+        yj01.JZKH AS jzkh,
+        yj01.KSDM AS sqksdm,
+        yj01.ZXKS AS ksdm,
+        -- null AS zlxmId,
+        yj01.BRID AS yjBrid
+        FROM
+        op_yjcf01 yj01
+        INNER JOIN op_yjcf02 yj02 ON yj01.YJXH = yj02.YJXH
+        INNER JOIN FEE_YLSFXM ylsf ON yj02.YLXH = ylsf.FYXH
+        <where>
+            AND yj01.XMLX = 11
+            AND yj01.FPHM IS NOT NULL
+            AND yj01.MZXH IS NOT NULL
+            AND yj01.ZFPB = 0
+            AND yj01.ZXKS = #{ksdm}
+            <!--  AND (yj02.ZXZT is null or yj02.ZXZT in-->
+            AND ifnull(yj02.ZXZT,0) in
+            <foreach item="item" index="index" collection="zxzt.split(',')" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+            AND ifnull(yj02.ZXCS,0) <![CDATA[<]]> yj02.YLSL
+            AND (yj02.ZXZT != '2' AND yj02.ZXZT != '3')
+        </where>
+        ) t
+        LEFT JOIN mpi_brda brda ON t.yjBrid = brda.BRID
+        <where>
+            <if test="@sqlt.Ognl@isNotEmpty(jzkh)">
+                AND brda.JZKH = #{jzkh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(brxm)">
+                AND brda.BRXM LIKE CONCAT(CONCAT('%',#{brxm}),'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="doQueryZyyjqfList" resultType="QueryYjqfListResp">
+        SELECT
+        '2' AS brlx,
+        aa.ztbz AS ztbz,
+        aa.jlxh AS sbxh,
+        aa.ztyzjlxh AS ztyzsbxh,
+        imhzry.ZYHM AS zyhm,
+        imhzry.BRXM AS brxm,
+        imhzry.BRXB AS brxb,
+        imhzry.CSNY AS csny,
+        imhzry.BRBQ AS bqdm,
+        aa.zxks AS ksdm,
+        imhzry.BRCH AS brch,
+        aa.yzmc AS xmmc,
+        aa.ysgh AS sqysdm,
+        aa.kssj AS sqsj,
+        aa.yyrq AS yyrq,
+        aa.hyid AS yyxh,
+        aa.yyzt AS yyzt,
+        <!--  '' AS zxysdm,-->
+        <!-- '' AS zxsj,-->
+        <!--  aa.zxzt AS zxzt,-->
+        '0' AS zxzt,
+        imhzry.BRID AS brid,
+        aa.fyxh AS fyxh,
+        aa.sqksdm AS sqksdm,
+        imhzry.YBKH AS jzkh
+        -- aa.zlxmId AS zlxmId
+        FROM
+        (
+        SELECT
+        '1' as ztbz,
+        yj.zyh as zyh,
+        hzyz.jlxh as jlxh,
+        hzyz.ztyzjlxh as ztyzjlxh,
+        GROUP_CONCAT(DISTINCT zt.YZMC ) AS yzmc,
+        yj.ZXKS as zxks,
+        hzyz.YSGH as ysgh,
+        hzyz.KSSJ as kssj,
+        jcsq01.YYRQ as yyrq,
+        if(jcsq01.HYID=0,null,jcsq01.HYID) AS hyid,
+        jcsq01.YYZT AS yyzt,
+        yj.ZXZT as zxzt,
+        yj.FYXH as fyxh,
+        yj.FYKS as sqksdm,
+        yj.ZXKS as ksdm
+        -- jcsq02.fyxh as zlxmId
+        FROM
+        im_fee_fymx_yj yj
+        inner join cis_hzyz hzyz on yj.yzxh = hzyz.jlxh
+        inner join cis_hzyz_zt zt on hzyz.ZTYZJLXH = zt.jlxh
+        INNER JOIN cis_jcsq01 jcsq01 ON hzyz.SQID = jcsq01.JCXH
+        AND hzyz.YZLX = 0
+        <if test="@sqlt.Ognl@isNotEmpty(yyzt)">
+            AND jcsq01.YYZT in
+            <foreach item="item" index="index" collection="yyzt.split(',')" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        INNER JOIN cis_jcsq02 jcsq02 ON jcsq01.JCXH = jcsq02.JCXH
+        WHERE
+        hzyz.ZTBZ = 1
+        AND hzyz.ZXKS = #{ksdm}
+        <!--  AND (yj.ZXZT is null or yj.ZXZT in-->
+        AND (ifnull(yj.ZXZT,0) in
+        <foreach item="item" index="index" collection="zxzt.split(',')" open="(" separator="," close=")">
+            #{item}
+        </foreach>)
+        AND (yj.ZXZT != '2' AND yj.ZXZT != '3')
+        AND ifnull(yj.ZXCS,0) <![CDATA[<]]> yj.FYSL
+        GROUP BY
+        yj.zyh,
+        hzyz.jlxh,
+        hzyz.ztyzjlxh,
+        yj.ZXKS,
+        hzyz.YSGH,
+        hzyz.KSSJ,
+        jcsq01.YYRQ,
+        jcsq01.JCXH,
+        jcsq01.YYZT,
+        yj.ZXZT,
+        yj.FYXH,
+        yj.FYKS
+        -- jcsq02.fyxh
+        union all
+        SELECT
+        '0' as ztbz,
+        yj.zyh as zyh,
+        hzyz.jlxh as jlxh,
+        hzyz.ztyzjlxh as ztyzjlxh,
+        yj.fymc AS yzmc,
+        yj.ZXKS as zxks,
+        hzyz.YSGH as ysgh,
+        hzyz.KSSJ as kssj,
+        null as yyrq,
+        null AS hyid,
+        null AS yyzt,
+        <!--  yj.ZXZT as zxzt,-->
+        '0' as zxzt,
+        yj.FYXH as fyxh,
+        yj.FYKS as sqksdm,
+        hzyz.ZXKS as ksdm
+        -- null as zlxmId
+        FROM
+        im_fee_fymx_yj yj,
+        cis_hzyz hzyz
+        WHERE
+        yj.yzxh = hzyz.jlxh
+        AND hzyz.YZLX = 0
+        and (hzyz.ZTBZ = 0 or hzyz.ZTBZ is null)
+        AND hzyz.ZXKS = #{ksdm}
+        <!--  AND (yj.ZXZT is null or yj.ZXZT in-->
+        AND (ifnull(yj.ZXZT,0) in
+        <foreach item="item" index="index" collection="zxzt.split(',')" open="(" separator="," close=")">
+            #{item}
+        </foreach>)
+        AND (yj.ZXZT != '2' AND yj.ZXZT != '3')
+        AND ifnull(yj.ZXCS,0) <![CDATA[<=]]> yj.FYSL
+        ) aa
+        LEFT JOIN im_hzry imhzry ON aa.ZYH = imhzry.ZYH
+        <where>
+            <if test="@sqlt.Ognl@isNotEmpty(jzkh)">
+                AND imhzry.YBKH = #{jzkh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zyhm)">
+                AND imhzry.ZYHM = #{zyhm}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(brxm)">
+                AND imhzry.BRXM LIKE CONCAT(CONCAT('%',#{brxm}),'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="doQueryMzZyyjqfList" resultType="QueryYjqfListResp">
+        SELECT
+        yjzx.BRLX AS brlx,
+        yjzx.ZYHM AS zyhm,
+        brda.BRXM AS brxm,
+        brda.BRXB AS brxb,
+        brda.CSNY AS csny,
+        yjzx.BQDM AS bqdm,
+        yjzx.KSDM AS ksdm,
+        yjzx.BRCH AS brch,
+        yjzx.FYXH AS fyxh,
+        yjzx.XMDM AS xmdm,
+        yjzx.XMMC AS xmmc,
+        yjzx.SQYSDM AS sqysdm,
+        yjzx.SQSJ AS sqsj,
+        yjzx.YYRQ AS yyrq,
+        yjzx.YYXH AS yyxh,
+        yjzx.ZXYSDM AS zxysdm,
+        yjzx.ZXSJ AS zxsj,
+        yjzx.ZXZT AS zxzt,
+        yjzx.ZXXH AS zxxh,
+        yjzx.BRID AS brid,
+        yjzx.JZKH AS jzkh,
+        yjzx.SQKSDM AS sqksdm,
+        yjzx.YYZT AS yyzt,
+        yjzx.ZTBZ as ztbz
+        FROM
+        op_yjzx yjzx
+        INNER JOIN mpi_brda brda ON yjzx.BRID = brda.BRID
+        <where>
+            AND yjzx.KSDM = #{ksdm}
+            <if test="@sqlt.Ognl@isNotEmpty(brlx)">
+                AND yjzx.BRLX in
+                <foreach item="item" index="index" collection="brlx.split(',')" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(jzkh)">
+                AND yjzx.JZKH = #{jzkh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zyhm)">
+                AND yjzx.ZYHM = #{zyhm}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(brxm)">
+                AND brda.BRXM LIKE CONCAT(CONCAT('%',#{brxm}),'%')
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(yyzt)">
+                AND yjzx.YYZT in
+                <foreach item="item" index="index" collection="yyzt.split(',')" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zxzt)">
+                AND yjzx.ZXZT in
+                <foreach item="item" index="index" collection="zxzt.split(',')" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+    <select id="doQueryMzXmDetails" resultType="QueryYjzxsfxmResp">
+        SELECT
+        yj02.SBXH AS sfxmdm,
+        ylsf.FYMC AS sfxmmc,
+        yj02.YLSL AS ylsl,
+        yj02.YLDJ AS yldj,
+        yj02.HJJE AS ylje,
+        yj02.ZTBZ AS ztbz
+        FROM
+        op_yjcf02 yj02
+        INNER JOIN FEE_YLSFXM ylsf ON yj02.YLXH = ylsf.FYXH
+        WHERE
+        <choose>
+            <when test="@sqlt.Ognl@isNotEmpty(ztbz) and ztbz == 0 ">
+                yj02.SBXH = #{sbxh}
+            </when>
+            <otherwise>
+                yj02.ZTYZSBXH = #{sbxh}
+            </otherwise>
+        </choose>
+    </select>
+    <select id="doQueryZyXmDetails" resultType="QueryYjzxsfxmResp">
+        SELECT
+        yj.yzxh AS sfxmdm,
+        yj.fymc AS sfxmmc,
+        yj.FYSL AS ylsl,
+        yj.FYDJ AS yldj,
+        yj.ZJJE AS ylje,
+        hzyz.ZTBZ AS ztbz
+        FROM
+        im_fee_fymx_yj yj
+        INNER JOIN cis_hzyz hzyz ON yj.yzxh = hzyz.jlxh
+        WHERE
+        <choose>
+            <when test="@sqlt.Ognl@isNotEmpty(ztbz) and ztbz == 0 ">
+                hzyz.JLXH = #{sbxh}
+            </when>
+            <otherwise>
+                hzyz.ZTYZJLXH = #{sbxh}
+            </otherwise>
+        </choose>
+    </select>
+
+    <update id="doUpdateZxztByZxxh">
+        UPDATE op_yjzx
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="@sqlt.Ognl@isNotEmpty(qxysdm)">
+                QXYSDM = #{qxysdm},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(qxzxsj)">
+                QXZXSJ = #{qxzxsj},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zfysdm)">
+                ZFYSDM = #{zfysdm},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zfsj)">
+                ZFSJ = #{zfsj},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zxzt)">
+                ZXZT = #{zxzt},
+            </if>
+        </trim>
+        WHERE ZXXH = #{zxxh}
+    </update>
+
+    <select id="doQueryYjzxqrList" resultType="QueryYjzxqrListResp">
+        SELECT
+        yjzx.ZXSJ AS zxsj,
+        yjzx.ZXYSDM AS zxysdm,
+        yjzx.BRLX AS brlx,
+        yjzx.ZYHM AS zyhm,
+        yjzx.JZKH AS jzkh,
+        yjzx.BRID AS brid,
+        brda.BRXM AS brxm,
+        brda.BRXB AS brxb,
+        brda.CSNY AS csny,
+        yjzx.XMDM AS xm,
+        yjzx.XMMC AS xmmc,
+        yjzx.SQKSDM AS sqksdm,
+        yjzx.SQYSDM AS sqysdm,
+        yjzx.DW AS dw,
+        yjzx.ZXZT AS zxzt,
+        yjzx.QXZXSJ AS qxzxsj,
+        yjzx.QXYSDM AS qxysdm,
+        yjzx.ZFSJ AS zfsj,
+        yjzx.ZFYSDM AS zfysdm,
+        yjzx.ZXXH AS zxxh,
+        yjzx.JZKH AS jzkh,
+        yjzx.SQSJ AS sqsj,
+        yjzx.FYXH AS fyxh,
+        yjzx.ZLXMID AS zlxmid,
+        oysf.YLSL AS sl,
+        oysf.YLJE AS ylje
+        FROM
+        op_yjzx yjzx
+        left join op_yjzxsfxm oysf on yjzx.ZXXH = oysf.ZXXH
+        LEFT JOIN mpi_brda brda ON yjzx.BRID = brda.BRID
+        <where>
+            AND yjzx.KSDM = #{ksdm}
+            <if test="@sqlt.Ognl@isNotEmpty(zxsj)">
+                AND yjzx.ZXSJ BETWEEN #{beginOfDay} AND #{endOfDay}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(brlx)">
+                AND yjzx.BRLX in
+                <foreach item="item" index="index" collection="brlx.split(',')" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(fyxh)">
+                AND yjzx.FYXH = #{fyxh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zlxmId)">
+                AND yjzx.ZLXMID = #{zlxmId}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zxysdm)">
+                AND yjzx.ZXYSDM = #{zxysdm}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(brxm)">
+                AND brda.BRXM LIKE CONCAT('%', #{brxm}, '%')
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zyhm)">
+                AND yjzx.ZYHM = #{zyhm}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zxzt)">
+                AND yjzx.ZXZT in
+                <foreach item="item" index="index" collection="zxzt.split(',')" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+        ORDER BY yjzx.ZXSJ
+    </select>
+
+    <select id="doQueryJcxmList" resultType="OpyjzxDictResp">
+	    SELECT
+			t.zlxmId,
+			t.fyxh,
+			t.xmmc 
+		FROM
+			(
+			SELECT
+				ZLXMID AS zlxmId,
+				null AS fyxh,
+				XMMC AS xmmc,
+				PYDM AS pydm  
+			FROM
+				dic_zlxm 
+			WHERE
+				ZXKS = #{zxks}
+			UNION ALL
+			SELECT 
+				null AS zlxmId,
+				FYXH AS fyxh,
+				FYMC AS xmmc,
+				PYDM AS pydm  
+			FROM
+				fee_ylsfxm 
+			WHERE
+				ZXKS = #{zxks}
+			) t
+    </select>
+
+    <select id="doQueryYsdmList" resultType="QueryYsdmListResp">
+		SELECT
+			qxkz.YGDM AS ygdm,
+			person.PERSONNAME AS personName 
+		FROM
+			SYS_YWQXKZ qxkz
+			INNER JOIN hr_personnel person ON qxkz.YGDM = person.PERSONID 
+		WHERE
+			qxkz.ywlb = 10 
+			AND qxkz.ksdm = #{ksdm}
+    </select>
+
+    <select id="doQueryTotalAmount" resultType="java.math.BigDecimal">
+        SELECT
+        SUM(IF(yjzx.BRLX = 1, sfxm.YLJE ,sfxm.YLDJ)) as tottalAmount
+        FROM
+        op_yjzx yjzx
+        INNER JOIN op_yjzxsfxm sfxm ON yjzx.ZXXH = sfxm.ZXXH
+        inner join mpi_brda mb on yjzx.BRID = mb.BRID
+        <where>
+            AND yjzx.KSDM = #{ksdm}
+            <if test="@sqlt.Ognl@isNotEmpty(zxsj)">
+                AND yjzx.ZXSJ BETWEEN #{beginOfDay} AND #{endOfDay}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(brlx)">
+                AND yjzx.BRLX in
+                <foreach item="item" index="index" collection="brlx.split(',')" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(fyxh)">
+                AND yjzx.FYXH = #{fyxh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zlxmId)">
+                AND yjzx.ZLXMID = #{zlxmId}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zxysdm)">
+                AND yjzx.ZXYSDM = #{zxysdm}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(brxm)">
+                AND mb.BRXM LIKE CONCAT('%', #{brxm}, '%')
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zyhm)">
+                AND yjzx.ZYHM = #{zyhm}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zxzt)">
+                AND yjzx.ZXZT in
+                <foreach item="item" index="index" collection="zxzt.split(',')" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </select>
+	<sql id="sql_jc_yjqf_list">
+		SELECT
+			t.brlx,
+			t.ztbz,
+			t.sbxh,
+			null AS ZYHM,
+			brda.BRXM AS brxm,
+			brda.BRXB AS brxb,
+			brda.csny AS csny,
+			null AS bqdm,
+			t.ksdm,
+			null AS brch,
+			t.fyxh,
+			null AS xmdm,
+			t.xmmc,
+			t.sqysdm,
+			t.sqsj,
+			t.yyrq,
+			t.yyxh,
+			null AS zxysdm,
+			null AS zxsj,
+			t.zxzt,
+			null AS zfsj,
+			null AS zxxh,
+            null AS qxzxsj,
+			brda.BRID AS brid,
+			t.jzkh,
+			t.sqksdm,
+			t.yyzt,
+			t.ztyzsbxh
+		FROM (
+			SELECT
+				'1' AS brlx,
+				yj02.ZTBZ AS ztbz,
+				yj02.SBXH AS sbxh,
+				yj02.ZTYZSBXH AS ztyzsbxh,
+				zt.FYMC AS xmmc,
+				yj01.YSDM AS sqysdm,
+				yj01.KDRQ AS sqsj,
+				jcsq01.YYRQ AS yyrq,
+				if( jcsq01.YYZT = '0', NULL, jcsq01.HYID ) AS yyxh,
+				jcsq01.YYZT AS yyzt,
+				'0' AS zxzt,
+				null AS fyxh,
+				yj01.JZKH AS jzkh,
+				yj01.KSDM AS sqksdm,
+				yj01.ZXKS AS ksdm,
+				yj01.BRID AS yjBrid
+			FROM op_yjcf01 yj01
+			INNER JOIN op_yjcf02 yj02 ON yj01.YJXH = yj02.YJXH
+			INNER JOIN op_yj02_zt zt ON yj02.ZTYZSBXH = zt.SBXH
+			INNER JOIN cis_jcsq01 jcsq01 ON yj01.SQID = jcsq01.JCXH
+			<where>
+                <if test="@sqlt.Ognl@isNotEmpty(yyzt)">
+                    AND jcsq01.YYZT in
+                    <foreach item="item" index="index" collection="yyzt.split(',')" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(sqsjks)">
+                    AND yj01.KDRQ >= #{sqsjks}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(sqsjjs)">
+                    AND yj01.KDRQ &lt;= #{sqsjjs}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(yysjks)">
+                    AND jcsq01.YYRQ >= #{yysjks}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(yysjjs)">
+                    AND jcsq01.YYRQ &lt;= #{yysjjs}
+                </if>
+				AND yj01.XMLX = 5
+				AND yj01.FPHM IS NOT NULL
+				AND yj01.MZXH IS NOT NULL
+				AND yj01.ZFPB = 0
+				AND yj01.ZXKS = #{ksdm}
+                <if test="yjzxzt != null and 0 == yjzxzt">
+                    AND (ifnull(yj02.ZXZT,0) = '0' OR ifnull(yj02.ZXZT,0) = '1')
+                </if>
+                <if test="yjzxzt == null or 0 != yjzxzt">
+                    <if test="@sqlt.Ognl@isNotEmpty(zxzt)">
+                        AND ifnull(yj02.ZXZT,0) in
+                        <foreach item="item" index="index" collection="zxzt.split(',')" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+                    </if>
+                    AND (ifnull(yj02.ZXZT,0) != '2' AND ifnull(yj02.ZXZT,0) != '3')
+                </if>
+                AND ifnull(yj02.ZXCS,0) <![CDATA[<]]> yj02.YLSL
+			</where>
+            <if test="@sqlt.Ognl@isEmpty(yysjks) and @sqlt.Ognl@isEmpty(yysjjs)">
+            UNION ALL
+                SELECT
+                '1' AS brlx,
+                yj02.ZTBZ AS ztbz,
+                yj02.SBXH AS sbxh,
+                yj02.ZTYZSBXH AS ztyzsbxh,
+                ylsf.FYMC AS xmmc,
+                yj01.YSDM AS sqysdm,
+                yj01.KDRQ AS sqsj,
+                null AS yyrq,
+                null AS yyxh,
+                null AS yyzt,
+                '0' AS zxzt,
+                ylsf.FYXH AS fyxh,
+                yj01.JZKH AS jzkh,
+                yj01.KSDM AS sqksdm,
+                yj01.ZXKS AS ksdm,
+                yj01.BRID AS yjBrid
+                FROM op_yjcf01 yj01
+                INNER JOIN op_yjcf02 yj02 ON yj01.YJXH = yj02.YJXH
+                INNER JOIN FEE_YLSFXM ylsf ON yj02.YLXH = ylsf.FYXH
+                <where>
+                    <if test="@sqlt.Ognl@isNotEmpty(sqsjks)">
+                        AND yj01.KDRQ >= #{sqsjks}
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(sqsjjs)">
+                        AND yj01.KDRQ &lt;= #{sqsjjs}
+                    </if>
+                    AND yj01.XMLX = 11
+                    AND yj01.FPHM IS NOT NULL
+                    AND yj01.MZXH IS NOT NULL
+                    AND yj01.ZFPB = 0
+                    AND yj01.ZXKS = #{ksdm}
+                    <if test="yjzxzt != null and 0 == yjzxzt">
+                        AND (ifnull(yj02.ZXZT,0) = '0' OR ifnull(yj02.ZXZT,0) = '1')
+                    </if>
+                    <if test="yjzxzt == null or 0 != yjzxzt">
+                        <if test="@sqlt.Ognl@isNotEmpty(zxzt)">
+                            AND ifnull(yj02.ZXZT,0) in
+                            <foreach item="item" index="index" collection="zxzt.split(',')" open="(" separator="," close=")">
+                                #{item}
+                            </foreach>
+                        </if>
+                        AND (ifnull(yj02.ZXZT,0) != '2' AND ifnull(yj02.ZXZT,0) != '3')
+                    </if>
+                    AND ifnull(yj02.ZXCS,0) <![CDATA[<]]> yj02.YLSL
+                </where>
+            </if>
+		) t
+		LEFT JOIN mpi_brda brda ON t.yjBrid = brda.BRID
+		<where>
+			<if test="@sqlt.Ognl@isNotEmpty(jzkh)">
+				AND brda.JZKH = #{jzkh}
+			</if>
+			<if test="@sqlt.Ognl@isNotEmpty(brxm)">
+				AND brda.BRXM LIKE CONCAT(CONCAT('%',#{brxm}),'%')
+			</if>
+		</where>
+	</sql>
+	<sql id="sql_zy_yjqf_list">
+		SELECT
+			'2' AS brlx,
+			aa.ztbz AS ztbz,
+			aa.jlxh AS sbxh,
+			imhzry.ZYHM AS zyhm,
+			imhzry.BRXM AS brxm,
+			imhzry.BRXB AS brxb,
+			imhzry.CSNY AS csny,
+			imhzry.BRBQ AS bqdm,
+			aa.zxks AS ksdm,
+			imhzry.BRCH AS brch,
+			aa.fyxh AS fyxh,
+			null AS xmdm,
+			aa.yzmc AS xmmc,
+			aa.ysgh AS sqysdm,
+			aa.kssj AS sqsj,
+			aa.yyrq AS yyrq,
+			aa.hyid AS yyxh,
+			null AS zxysdm,
+			null AS zxsj,
+			'0' AS zxzt,
+            null AS zfsj,
+			null AS zxxh,
+            null AS qxzxsj,
+			imhzry.BRID AS brid,
+			imhzry.YBKH AS jzkh,
+			aa.sqksdm AS sqksdm,
+			aa.yyzt AS yyzt,
+			aa.ztyzjlxh AS ztyzsbxh
+		FROM (
+			SELECT
+				'1' as ztbz,
+				yj.zyh as zyh,
+				hzyz.jlxh as jlxh,
+				hzyz.ztyzjlxh as ztyzjlxh,
+				GROUP_CONCAT(DISTINCT zt.YZMC ) AS yzmc,
+				yj.ZXKS as zxks,
+				hzyz.YSGH as ysgh,
+				hzyz.KSSJ as kssj,
+				jcsq01.YYRQ as yyrq,
+				if(jcsq01.HYID=0,null,jcsq01.HYID) AS hyid,
+				jcsq01.YYZT AS yyzt,
+				yj.ZXZT as zxzt,
+				yj.FYXH as fyxh,
+				yj.FYKS as sqksdm,
+				yj.ZXKS as ksdm
+			FROM im_fee_fymx_yj yj
+			inner join cis_hzyz hzyz on yj.yzxh = hzyz.jlxh
+			inner join cis_hzyz_zt zt on hzyz.ZTYZJLXH = zt.jlxh
+			INNER JOIN cis_jcsq01 jcsq01 ON hzyz.SQID = jcsq01.JCXH AND hzyz.YZLX = 0
+			INNER JOIN cis_jcsq02 jcsq02 ON jcsq01.JCXH = jcsq02.JCXH
+			<where>
+                <if test="@sqlt.Ognl@isNotEmpty(yyzt)">
+                    AND jcsq01.YYZT in
+                    <foreach item="item" index="index" collection="yyzt.split(',')" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(yysjks)">
+                    AND jcsq01.YYRQ >= #{yysjks}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(yysjjs)">
+                    AND jcsq01.YYRQ &lt;= #{yysjjs}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(sqsjks)">
+                    AND hzyz.KSSJ >= #{sqsjks}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(sqsjjs)">
+                    AND hzyz.KSSJ &lt;= #{sqsjjs}
+                </if>
+				AND hzyz.ZTBZ = 1
+				AND hzyz.ZXKS = #{ksdm}
+                <if test="yjzxzt != null and 0 == yjzxzt">
+                    AND (ifnull(yj.ZXZT,0) = '0' OR ifnull(yj.ZXZT,0) = '1')
+                </if>
+                <if test="yjzxzt == null or 0 != yjzxzt">
+                    <if test="@sqlt.Ognl@isNotEmpty(zxzt)">
+                        AND ifnull(yj.ZXZT,0) in
+                        <foreach item="item" index="index" collection="zxzt.split(',')" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+                    </if>
+                    AND (ifnull(yj.ZXZT,0) != '2' AND ifnull(yj.ZXZT,0) != '3')
+                </if>
+				AND ifnull(yj.ZXCS,0) <![CDATA[<]]> yj.FYSL
+            </where>
+			GROUP BY
+				yj.zyh,
+				hzyz.jlxh,
+				hzyz.ztyzjlxh,
+				yj.ZXKS,
+				hzyz.YSGH,
+				hzyz.KSSJ,
+				jcsq01.YYRQ,
+				jcsq01.JCXH,
+				jcsq01.YYZT,
+				yj.ZXZT,
+				yj.FYXH,
+				yj.FYKS
+            <if test="@sqlt.Ognl@isEmpty(yysjks) or @sqlt.Ognl@isEmpty(yysjjs)">
+            UNION ALL
+                SELECT
+                '0' as ztbz,
+                yj.zyh as zyh,
+                hzyz.jlxh as jlxh,
+                hzyz.ztyzjlxh as ztyzjlxh,
+                yj.fymc AS yzmc,
+                yj.ZXKS as zxks,
+                hzyz.YSGH as ysgh,
+                hzyz.KSSJ as kssj,
+                null as yyrq,
+                null AS hyid,
+                null AS yyzt,
+                '0' as zxzt,
+                yj.FYXH as fyxh,
+                yj.FYKS as sqksdm,
+                hzyz.ZXKS as ksdm
+                FROM im_fee_fymx_yj yj, cis_hzyz hzyz
+                WHERE
+                yj.yzxh = hzyz.jlxh
+                AND (hzyz.YZLX = 0 or hzyz.YZLX = 6 OR hzyz.YZLX IS NULL)
+                and (hzyz.ZTBZ = 0 or hzyz.ZTBZ is null)
+                AND hzyz.ZXKS = #{ksdm}
+                <if test="@sqlt.Ognl@isNotEmpty(sqsjks)">
+                    AND hzyz.KSSJ >= #{sqsjks}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(sqsjjs)">
+                    AND hzyz.KSSJ &lt;= #{sqsjjs}
+                </if>
+                <if test="yjzxzt != null and 0 == yjzxzt">
+                    AND (ifnull(yj.ZXZT,0) = '0' OR ifnull(yj.ZXZT,0) = '1')
+                </if>
+                <if test="yjzxzt == null or 0 != yjzxzt">
+                    <if test="@sqlt.Ognl@isNotEmpty(zxzt)">
+                        AND ifnull(yj.ZXZT,0) in
+                        <foreach item="item" index="index" collection="zxzt.split(',')" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+                    </if>
+                    AND (ifnull(yj.ZXZT,0) != '2' AND ifnull(yj.ZXZT,0) != '3')
+                </if>
+                AND ifnull(yj.ZXCS,0) <![CDATA[<=]]> yj.FYSL
+            </if>
+            ) aa
+            LEFT JOIN im_hzry imhzry ON aa.ZYH = imhzry.ZYH
+            <where>
+                <if test="@sqlt.Ognl@isNotEmpty(jzkh)">
+                    AND imhzry.YBKH = #{jzkh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zyhm)">
+                    AND imhzry.ZYHM = #{zyhm}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(brxm)">
+                    AND imhzry.BRXM LIKE CONCAT(CONCAT('%',#{brxm}),'%')
+                </if>
+            </where>
+	</sql>
+    <select id="yjqfList" resultType="com.buit.his.mtdms.response.QueryYjqfListResp">
+	SELECT DISTINCT
+        tt.brlx,
+        tt.ztbz,
+        IF(tt.ztbz is null OR tt.ztbz = 0, tt.sbxh, null) as sbxh,
+        tt.zyhm,
+        tt.brxm,
+        tt.brxb,
+        tt.csny,
+        tt.bqdm,
+        tt.ksdm,
+        tt.brch,
+        tt.fyxh,
+        tt.xmdm,
+        tt.xmmc,
+        tt.sqysdm,
+        tt.sqsj,
+        tt.yyrq,
+        tt.yyxh,
+        tt.zxysdm,
+        tt.zxsj,
+        tt.zxzt,
+        tt.zfsj,
+        tt.zxxh,
+        tt.brid,
+        tt.jzkh,
+        tt.sqksdm,
+        tt.yyzt,
+        tt.ztyzsbxh,
+        tt.qxzxsj
+	FROM (
+		SELECT
+			yjzx.BRLX AS brlx,
+			yjzx.ZTBZ as ztbz,
+			null AS sbxh,
+			yjzx.ZYHM AS zyhm,
+			brda.BRXM AS brxm,
+			brda.BRXB AS brxb,
+			brda.CSNY AS csny,
+			yjzx.BQDM AS bqdm,
+			yjzx.KSDM AS ksdm,
+			yjzx.BRCH AS brch,
+			yjzx.FYXH AS fyxh,
+			yjzx.XMDM AS xmdm,
+			yjzx.XMMC AS xmmc,
+			yjzx.SQYSDM AS sqysdm,
+			yjzx.SQSJ AS sqsj,
+			yjzx.YYRQ AS yyrq,
+			yjzx.YYXH AS yyxh,
+			yjzx.ZXYSDM AS zxysdm,
+			yjzx.ZXSJ AS zxsj,
+			yjzx.ZXZT AS zxzt,
+			yjzx.ZFSJ AS zfsj,
+			yjzx.ZXXH AS zxxh,
+			yjzx.QXZXSJ AS qxzxsj,
+			yjzx.BRID AS brid,
+			yjzx.JZKH AS jzkh,
+			yjzx.SQKSDM AS sqksdm,
+			yjzx.YYZT AS yyzt,
+			null AS ztyzsbxh
+		FROM op_yjzx yjzx
+		INNER JOIN mpi_brda brda ON yjzx.BRID = brda.BRID
+		<where>
+			AND yjzx.KSDM = #{ksdm}
+			<if test="@sqlt.Ognl@isNotEmpty(brlx)">
+				AND yjzx.BRLX in
+				<foreach item="item" index="index" collection="brlx.split(',')" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<if test="@sqlt.Ognl@isNotEmpty(jzkh)">
+				AND yjzx.JZKH = #{jzkh}
+			</if>
+			<if test="@sqlt.Ognl@isNotEmpty(zyhm)">
+				AND yjzx.ZYHM = #{zyhm}
+			</if>
+			<if test="@sqlt.Ognl@isNotEmpty(brxm)">
+				AND brda.BRXM LIKE CONCAT(CONCAT('%',#{brxm}),'%')
+			</if>
+			<if test="@sqlt.Ognl@isNotEmpty(yyzt)">
+				AND yjzx.YYZT in
+				<foreach item="item" index="index" collection="yyzt.split(',')" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+            <if test="@sqlt.Ognl@isNotEmpty(sqsjks)">
+                AND yjzx.SQSJ >= #{sqsjks}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(sqsjjs)">
+                AND yjzx.SQSJ &lt;= #{sqsjjs}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(yysjks)">
+                AND yjzx.YYRQ >= #{yysjks}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(yysjjs)">
+                AND yjzx.YYRQ &lt;= #{yysjjs}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zxsjks)">
+                AND yjzx.ZXSJ >= #{zxsjks}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zxsjjs)">
+                AND yjzx.ZXSJ &lt;= #{zxsjjs}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zfsjks)">
+                AND yjzx.ZFSJ >= #{zfsjks}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zfsjjs)">
+                AND yjzx.ZFSJ &lt;= #{zfsjjs}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(qxzxsjks)">
+                AND yjzx.QXZXSJ >= #{qxzxsjks}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(qxzxsjjs)">
+                AND yjzx.QXZXSJ &lt;= #{qxzxsjjs}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zxzt)">
+                AND yjzx.ZXZT in
+                <foreach item="item" index="index" collection="zxzt.split(',')" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+		</where>
+        <if test="brlx.contains(@java.lang.String@valueOf('1'))
+            and @sqlt.Ognl@isEmpty(zxsjks) and @sqlt.Ognl@isEmpty(zxsjjs)
+            and @sqlt.Ognl@isEmpty(zfsjks) and @sqlt.Ognl@isEmpty(zfsjjs)
+            and @sqlt.Ognl@isEmpty(qxzxsjks) and @sqlt.Ognl@isEmpty(qxzxsjjs)">
+            UNION ALL
+            <include refid="sql_jc_yjqf_list" />
+        </if>
+        <if test="(brlx.contains(@java.lang.String@valueOf('2')) or @sqlt.Ognl@isNotEmpty(zyhm))
+            and @sqlt.Ognl@isEmpty(zxsjks) and @sqlt.Ognl@isEmpty(zxsjjs)
+            and @sqlt.Ognl@isEmpty(zfsjks) and @sqlt.Ognl@isEmpty(zfsjjs)
+            and @sqlt.Ognl@isEmpty(qxzxsjks) and @sqlt.Ognl@isEmpty(qxzxsjjs)">
+            UNION ALL
+            <include refid="sql_zy_yjqf_list" />
+        </if>
+	) tt
+    ORDER BY
+        tt.zxzt ASC,
+        tt.zxsj DESC,
+        tt.sqsj DESC,
+        tt.yyrq DESC,
+        tt.zfsj DESC,
+        tt.qxzxsj DESC
+    </select>
+
+    <select id="selectCf02Xhlist" resultType="java.lang.Integer">
+        select
+            SBXH
+         from
+         his.op_yjcf02
+        where YJXH=#{xh}
+
+    </select>
+    <select id="selectyzlist" resultType="java.lang.Integer">
+        select
+            JLXH
+         from
+         his.cis_hzyz
+        where ZTYZJLXH=#{xh} and jlxh=#{request_no}
+
+    </select>
+
+    <select id="selectyzsqdlist" resultType="java.lang.Integer">
+        select
+        JLXH
+        from
+        his.cis_hzyz
+        where ZTYZJLXH=#{xh}
+    </select>
+
+    <select id="selectOpJcList" resultType="java.lang.Integer">
+        SELECT
+            b.SBXH
+        FROM
+            op_yjcf01 a, op_yjcf02 b ,op_yj02_zt c
+        where a.YJXH = b.YJXH and b.ZTYZSBXH = c.SBXH AND a.XMLX = 5 AND a.sqid=#{xh} AND c.YLXH = #{ylxh}
+
+    </select>
+    <select id="selectImJcList" resultType="java.lang.Integer">
+        select
+            b.JLXH
+        from
+            cis_hzyz_zt a inner join cis_hzyz b on a.JLXH=b.ZTYZJLXH
+        where a.sqid=#{xh} and a.ypxh=#{ypxh} and a.yzlx = 0
+    </select>
+    <select id="selectSqdLx" resultType="java.lang.Integer">
+        select
+            SQLX
+        from
+            cis_jcsq01
+        where JCXH=#{xh}
+    </select>
+    <update id="updateJxsqStatus" >
+        update cis_jcsq01 set JCZT=#{status} where JCXH=#{xh}
+    </update>
+
+    <select id="queryFymxByYzxh" resultType="java.math.BigDecimal">
+        SELECT sum(ZJJE) FROM IM_FEE_FYMX
+        where YZXH = #{yzxh}
+    </select>
+
+    <select id="queryFymxCountByYzxh" resultType="java.lang.Long">
+        SELECT count(1) FROM IM_FEE_FYMX
+        where YZXH = #{yzxh} and ZJJE > 0
+    </select>
+    <select id="getZlxmId" resultType="java.lang.Integer">
+        select YLXH
+        from op_yj02_zt where SBXH = #{xmdm}
+    </select>
+</mapper>
+

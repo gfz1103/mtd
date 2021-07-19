@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 住院退费申请主表 -->
+<mapper namespace="com.buit.his.sams.dao.SsZytfsqzbDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        JLXH as jlxh,JGID as jgid,SSKSDM as ssksdm,TFSQDH as tfsqdh,TFSJ as tfsj,TFRDM as tfrdm,ZYHM as zyhm,KSDM as ksdm,BQDM as bqdm,BRCH as brch,JZDH as jzdh,ZT as zt,qrr as arr,qrsj as qrsj
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO SS_ZYTFSQZB (
+            JLXH ,
+            JGID ,
+            SSKSDM ,
+            TFSQDH ,
+            TFSJ ,
+            TFRDM ,
+            ZYHM ,
+            KSDM ,
+            BQDM ,
+            BRCH ,
+            JZDH ,
+            ZT 
+        ) VALUES (
+            #{jlxh} ,
+            #{jgid} ,
+            #{ssksdm} ,
+            #{tfsqdh} ,
+            #{tfsj} ,
+            #{tfrdm} ,
+            #{zyhm} ,
+            #{ksdm} ,
+            #{bqdm} ,
+            #{brch} ,
+            #{jzdh} ,
+            #{zt} 
+        )
+    </insert>
+    
+    <update id="update" >
+    UPDATE SS_ZYTFSQZB
+    <trim prefix="SET" suffixOverrides=",">
+                    <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                        JGID = #{jgid} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(ssksdm)">
+                        SSKSDM = #{ssksdm} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(tfsqdh)">
+                        TFSQDH = #{tfsqdh} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(tfsj)">
+                        TFSJ = #{tfsj} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(tfrdm)">
+                        TFRDM = #{tfrdm} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zyhm)">
+                        ZYHM = #{zyhm} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(ksdm)">
+                        KSDM = #{ksdm} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(bqdm)">
+                        BQDM = #{bqdm} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(brch)">
+                        BRCH = #{brch} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(jzdh)">
+                        JZDH = #{jzdh} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zt)">
+                        ZT = #{zt} 
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(qrr)">
+                        qrr = #{qrr}
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(qrsj)">
+                        qrsj = #{qrsj}
+                    </if>
+        </trim>
+            WHERE
+        JLXH = #{jlxh} 
+        </update>
+
+
+    <delete id="deleteById">
+        DELETE FROM SS_ZYTFSQZB WHERE
+        JLXH = #{jlxh} 
+    </delete>
+    
+    <delete id="removeByEntity">
+        DELETE FROM SS_ZYTFSQZB <include refid="where"/>  
+    </delete>
+    
+    <select id="getById" resultType="SsZytfsqzb">
+        SELECT <include refid="columns" />
+            FROM SS_ZYTFSQZB 
+            WHERE 
+        JLXH = #{jlxh} 
+    </select>
+    
+    <sql id="where">
+        <where>                          
+                <if test="@sqlt.Ognl@isNotEmpty(jlxh)">
+                     AND JLXH = #{jlxh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                     AND JGID = #{jgid}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(ssksdm)">
+                     AND SSKSDM = #{ssksdm}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(tfsqdh)">
+                     AND TFSQDH = #{tfsqdh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(tfsj)">
+                     AND TFSJ = #{tfsj}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(tfrdm)">
+                     AND TFRDM = #{tfrdm}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zyhm)">
+                     AND ZYHM = #{zyhm}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(ksdm)">
+                     AND KSDM = #{ksdm}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(bqdm)">
+                     AND BQDM = #{bqdm}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(brch)">
+                     AND BRCH = #{brch}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(jzdh)">
+                     AND JZDH = #{jzdh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zt)">
+                     AND ZT = #{zt}
+                </if>
+        </where>
+    </sql>
+        
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM SS_ZYTFSQZB 
+        <include refid="where"/>    
+    </select>
+    
+    <select id="findByEntity" resultType="SsZytfsqzb">
+        SELECT <include refid="columns" />
+        FROM SS_ZYTFSQZB 
+        <include refid="where"/>
+        
+        <if test="@sqlt.Ognl@orderIsNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+    <!--     业务sql      -->
+    <!--门诊、住院退费申请(分页查询记账病人)-->
+    <select id="queryPage" resultType="com.buit.his.sams.response.SsZytfQueryPageResp">
+        SELECT
+            jz.jlxh AS jlxh,
+            jz.jzsj AS jzsj,
+            jz.jzlx AS jzlx,
+            jz.jzdh AS jzdh,
+            jz.BQDM AS brbq,
+            jz.BRCH AS brch,
+            jz.KSDM AS brks,
+            jz.ZYHM AS zyhm,
+            brda.brxm AS brxm,
+            brda.BRXB AS brxb,
+            brda.csny AS csny,
+            (SELECT SUM(JE) FROM SS_SSJZDMX WHERE JZDH = jz.JZDH AND ZT = 0) AS jzje,
+            (SELECT SUM(JE) FROM SS_SSJZDMX WHERE JZDH = jz.JZDH AND ZT = 1) AS ytfje,
+            sq.ssys AS ssys,
+            jz.jzrdm AS jzrdm
+        FROM
+            ss_ssjzdzb jz
+            INNER JOIN ss_ssap ssap ON jz.SSSQDH = ssap.SQDH
+            INNER JOIN opt_sssq sq ON jz.SSSQDH = sq.SQDH
+            LEFT join im_hzry im on im.zyhm = jz.zyhm
+            LEFT JOIN mpi_brda brda ON im.brid = brda.BRID
+        WHERE jz.jzlx =#{jzlx}
+            <if test="jzlx ==1">
+                AND ssap.SSJZZT = 1
+            </if>
+            <if test="jzlx ==2">
+                AND ssap.MZJZZT = 1
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(jzrq)">
+                AND jz.jzsj &gt;= #{startDate}
+                AND jz.jzsj &lt;= #{endDate}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zyhm)">
+                AND jz.ZYHM LIKE CONCAT(CONCAT('%',#{zyhm}),'%')
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(brxm)">
+                AND brda.brxm LIKE CONCAT(CONCAT('%',#{brxm}),'%')
+            </if>
+    </select>
+    <!--住院确认退费分页查询-->
+    <select id="queryRefundSurePage" resultType="com.buit.his.sams.response.RefundSureQueryPageResp">
+        SELECT
+            tf.jlxh,
+            tf.TFSJ AS sqsj,
+            tf.BQDM AS brbq,
+            tf.BRCH AS brch,
+            tf.KSDM AS brks,
+            tf.zyhm AS zyhm,
+        hz.BRXM AS brxm,
+        hz.BRXB AS brxb,
+        hz.CSNY AS csny,
+        b.tfje AS tzje,
+        tf.jzdh AS jzdh,
+        tf.TFRDM AS tfsqr,
+        tf.zt AS zt,
+        tf.qrsj AS qrsj,
+        tf.qrr AS qrr
+        FROM ss_zytfsqzb tf
+        INNER join ss_ssjzdzb jz on tf.JZDH = jz.JZDH
+        LEFT JOIN im_hzry hz ON hz.zyhm = tf.zyhm
+        left JOIN ( SELECT TFSQDH, sum( TFJE ) AS tfje FROM ss_zytfsqmx GROUP BY tfsqdh ) b ON tf.jlxh = b.TFSQDH
+        where 1=1
+        <if test="@sqlt.Ognl@isNotEmpty(jzlx)">
+            AND jz.JZLX =#{jzlx}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(zyhm)">
+            AND tf.ZYHM LIKE CONCAT(CONCAT('%',#{zyhm}),'%')
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(brxm)">
+            AND hz.brxm LIKE CONCAT(CONCAT('%',#{brxm}),'%')
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(ssksdm)">
+            AND tf.ssksdm = #{ssksdm}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(zt)">
+            AND tf.zt= #{zt}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(startDate)">
+            AND date_format(tf.tfsj, '%Y-%m-%d') &gt;=#{startDate}
+        </if>
+        <if test="@sqlt.Ognl@isNotEmpty(endDate)">
+            AND date_format(tf.tfsj, '%Y-%m-%d') &lt;=#{endDate}
+        </if>
+
+    </select>
+    <!--住院退费确认-->
+    <update id="refundSure">
+        update ss_zytfsqzb
+        set zt=#{zt},
+            qrsj=#{qrsj},
+            qrr=#{qrr}
+        where jlxh = #{tfsqdh}
+          and jgid = #{jgid}
+    </update>
+
+</mapper>
+

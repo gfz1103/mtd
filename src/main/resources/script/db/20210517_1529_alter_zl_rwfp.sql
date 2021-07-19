@@ -1,0 +1,3 @@
+ALTER TABLE `his`.`zl_rwfp`
+DROP COLUMN `YYZT`,
+DROP COLUMN `YZZT`;

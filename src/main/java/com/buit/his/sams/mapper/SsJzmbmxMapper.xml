@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 手术/麻醉记账模板明细表 -->
+<mapper namespace="com.buit.his.sams.dao.SsJzmbmxDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        JLXH as jlxh,JGID as jgid,SSKSDM as ssksdm,MBMC as mbmc,XH as xh,SFXMLB as sfxmlb,SFXMDM as sfxmdm,SL as sl,JZMBZB_JLXH as jzmbzbJlxh
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO SS_JZMBMX (
+            JLXH ,
+            JGID ,
+            SSKSDM ,
+            MBMC ,
+            XH ,
+            SFXMLB ,
+            SFXMDM ,
+            SL ,
+            JZMBZB_JLXH 
+        ) VALUES (
+            #{jlxh} ,
+            #{jgid} ,
+            #{ssksdm} ,
+            #{mbmc} ,
+            #{xh} ,
+            #{sfxmlb} ,
+            #{sfxmdm} ,
+            #{sl} ,
+            #{jzmbzbJlxh} 
+        )
+    </insert>
+    
+    <update id="update" >
+    UPDATE SS_JZMBMX
+    <trim prefix="SET" suffixOverrides=",">
+                    <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                        JGID = #{jgid} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(ssksdm)">
+                        SSKSDM = #{ssksdm} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(mbmc)">
+                        MBMC = #{mbmc} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(xh)">
+                        XH = #{xh} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(sfxmlb)">
+                        SFXMLB = #{sfxmlb} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(sfxmdm)">
+                        SFXMDM = #{sfxmdm} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(sl)">
+                        SL = #{sl} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(jzmbzbJlxh)">
+                        JZMBZB_JLXH = #{jzmbzbJlxh} 
+                    </if>
+        </trim>
+            WHERE
+        JLXH = #{jlxh} 
+        </update>
+
+    <delete id="deleteById">
+        DELETE FROM SS_JZMBMX WHERE
+        JLXH = #{jlxh} 
+    </delete>
+    
+    <delete id="removeByEntity">
+        DELETE FROM SS_JZMBMX <include refid="where"/>  
+    </delete>
+    
+    <select id="getById" resultType="SsJzmbmx">
+        SELECT <include refid="columns" />
+            FROM SS_JZMBMX 
+            WHERE 
+        JLXH = #{jlxh} 
+    </select>
+    
+    <sql id="where">
+        <where>                          
+                <if test="@sqlt.Ognl@isNotEmpty(jlxh)">
+                     AND JLXH = #{jlxh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                     AND JGID = #{jgid}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(ssksdm)">
+                     AND SSKSDM = #{ssksdm}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(mbmc)">
+                     AND MBMC = #{mbmc}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(xh)">
+                     AND XH = #{xh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(sfxmlb)">
+                     AND SFXMLB = #{sfxmlb}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(sfxmdm)">
+                     AND SFXMDM = #{sfxmdm}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(sl)">
+                     AND SL = #{sl}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(jzmbzbJlxh)">
+                     AND JZMBZB_JLXH = #{jzmbzbJlxh}
+                </if>
+        </where>
+    </sql>
+        
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM SS_JZMBMX 
+        <include refid="where"/>    
+    </select>
+    
+    <select id="findByEntity" resultType="SsJzmbmx">
+        SELECT <include refid="columns" />
+        FROM SS_JZMBMX 
+        <include refid="where"/>
+        
+        <if test="@sqlt.Ognl@orderIsNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+    <!--     业务sql      -->
+</mapper>
+

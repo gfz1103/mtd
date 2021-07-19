@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 隔离标志表 -->
+<mapper namespace="com.buit.his.sams.dao.SsGlbzDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        JLXH as jlxh,JGID as jgid,GLBZ as glbz,PYM as pym,WBM as wbm,ZT as zt
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO SS_GLBZ (
+            JLXH ,
+            JGID ,
+            GLBZ ,
+            PYM ,
+            WBM ,
+            ZT 
+        ) VALUES (
+            #{jlxh} ,
+            #{jgid} ,
+            #{glbz} ,
+            #{pym} ,
+            #{wbm} ,
+            #{zt} 
+        )
+    </insert>
+    
+    <update id="update" >
+    UPDATE SS_GLBZ
+    <trim prefix="SET" suffixOverrides=",">
+                    <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                        JGID = #{jgid} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(glbz)">
+                        GLBZ = #{glbz} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(pym)">
+                        PYM = #{pym} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(wbm)">
+                        WBM = #{wbm} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zt)">
+                        ZT = #{zt} 
+                    </if>
+        </trim>
+            WHERE
+        JLXH = #{jlxh} 
+        </update>
+
+    <delete id="deleteById">
+        DELETE FROM SS_GLBZ WHERE
+        JLXH = #{jlxh} 
+    </delete>
+    
+    <delete id="removeByEntity">
+        DELETE FROM SS_GLBZ <include refid="where"/>  
+    </delete>
+    
+    <select id="getById" resultType="SsGlbz">
+        SELECT <include refid="columns" />
+            FROM SS_GLBZ 
+            WHERE 
+        JLXH = #{jlxh} 
+    </select>
+    
+    <sql id="where">
+        <where>                          
+                <if test="@sqlt.Ognl@isNotEmpty(jlxh)">
+                     AND JLXH = #{jlxh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                     AND JGID = #{jgid}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(glbz)">
+                     AND GLBZ = #{glbz}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(pym)">
+                     AND PYM = #{pym}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(wbm)">
+                     AND WBM = #{wbm}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zt)">
+                     AND ZT = #{zt}
+                </if>
+        </where>
+    </sql>
+        
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM SS_GLBZ 
+        <include refid="where"/>    
+    </select>
+    
+    <select id="findByEntity" resultType="SsGlbz">
+        SELECT <include refid="columns" />
+        FROM SS_GLBZ 
+        <include refid="where"/>
+        
+        <if test="@sqlt.Ognl@orderIsNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+    <!--     业务sql      -->
+</mapper>
+

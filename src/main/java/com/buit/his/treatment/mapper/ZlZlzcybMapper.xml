@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 治疗小组成员表 -->
+<mapper namespace="com.buit.his.treatment.dao.ZlZlzcybDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        ZLZCYID as zlzcyid,JGID as jgid,ZLZID as zlzid,ZLSDM as zlsdm,ZLSKS as zlsks
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO ZL_ZLZCYB (
+            ZLZCYID ,
+            JGID ,
+            ZLZID ,
+            ZLSDM ,
+            ZLSKS
+        ) VALUES (
+            #{zlzcyid} ,
+            #{jgid} ,
+            #{zlzid} ,
+            #{zlsdm} ,
+            #{zlsks}
+        )
+    </insert>
+
+    <update id="update" >
+        UPDATE ZL_ZLZCYB SET
+            JGID = #{jgid} ,
+            ZLZID = #{zlzid} ,
+            ZLSDM = #{zlsdm} ,
+            ZLSKS = #{zlsks}
+        WHERE
+            ZLZCYID = #{zlzcyid}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM ZL_ZLZCYB WHERE
+        ZLZCYID = #{zlzcyid}
+    </delete>
+
+    <delete id="removeByEntity">
+        DELETE FROM ZL_ZLZCYB <include refid="where"/>
+    </delete>
+
+    <select id="getById" resultType="ZlZlzcyb">
+        SELECT <include refid="columns" />
+            FROM ZL_ZLZCYB
+            WHERE
+        ZLZCYID = #{zlzcyid}
+    </select>
+
+    <sql id="where">
+        <where>
+<!--                <if test="@sqlt.Ognl@isNotEmpty(zlzcyid)"> -->
+<!--                     AND ZLZCYID = #{zlzcyid} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(jgid)"> -->
+<!--                     AND JGID = #{jgid} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(zlzid)"> -->
+<!--                     AND ZLZID = #{zlzid} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(zlsdm)"> -->
+<!--                     AND ZLSDM = #{zlsdm} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(zlsks)"> -->
+<!--                     AND ZLSKS = #{zlsks} -->
+<!--                </if> -->
+        </where>
+    </sql>
+
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM ZL_ZLZCYB
+        <include refid="where"/>
+    </select>
+
+    <select id="findByEntity" resultType="ZlZlzcyb">
+        SELECT <include refid="columns" />
+        FROM ZL_ZLZCYB
+        <include refid="where"/>
+
+        <if test="@sqlt.Ognl@orderIsNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+    <!--     业务sql      -->
+    <select id="queryByZlzID" resultType="com.buit.his.treatment.response.ZlZlzcybResp">
+        SELECT a.ZLZCYID,
+               a.JGID,
+               a.ZLZID,
+               a.ZLSDM,
+               b.PERSONNAME as zlsxm,
+               a.ZLSKS
+        FROM ZL_ZLZCYB a
+                 INNER JOIN hr_personnel b ON a.ZLSDM = b.PERSONID
+        where ZLZID = #{zlzid}
+    </select>
+
+    <insert id="batchInsert">
+        INSERT INTO ZL_ZLZCYB (
+        ZLZCYID ,
+        JGID ,
+        ZLZID ,
+        ZLSDM ,
+        ZLSKS
+        ) VALUES
+        <foreach collection="list" item="r" separator=",">
+            ( #{r.zlzcyid} ,
+            #{r.jgid} ,
+            #{r.zlzid} ,
+            #{r.zlsdm} ,
+            #{r.zlsks} )
+        </foreach>
+
+    </insert>
+
+    <delete id="deleteByZlzId">
+        DELETE
+        FROM ZL_ZLZCYB
+        WHERE ZLZID = #{zlzid}
+    </delete>
+
+    <select id="queryZlsList" resultType="com.buit.his.treatment.response.ZlsMsgResp">
+        SELECT zlz.JGID, zlzcyb.ZLSDM, zlzcyb.ZLSKS, zlz.ZLZID, per.PERSONNAME as zlsxm
+        FROM zl_zlz zlz
+                 INNER JOIN zl_zlzcyb zlzcyb ON zlz.ZLZID = zlzcyb.ZLZID
+                 INNER JOIN hr_personnel per ON zlzcyb.ZLSDM = per.PERSONID
+        WHERE ZLLB = #{zllb}
+          AND zlz.JGID = #{jgid}
+    </select>
+</mapper>
+

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 手术/麻醉记账模板主表 -->
+<mapper namespace="com.buit.his.sams.dao.SsJzmbzbDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        JLXH as jlxh,JGID as jgid,MBLX as mblx,MBMC as mbmc,LX as lx,CJSJ as cjsj,CJKSDM as cjksdm,CJRDM as cjrdm
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO SS_JZMBZB (
+            JLXH ,
+            JGID ,
+            MBLX ,
+            MBMC ,
+            LX ,
+            CJSJ ,
+            CJKSDM ,
+            CJRDM 
+        ) VALUES (
+            #{jlxh} ,
+            #{jgid} ,
+            #{mblx} ,
+            #{mbmc} ,
+            #{lx} ,
+            #{cjsj} ,
+            #{cjksdm} ,
+            #{cjrdm} 
+        )
+    </insert>
+    
+    <update id="update" >
+    UPDATE SS_JZMBZB
+    <trim prefix="SET" suffixOverrides=",">
+                    <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                        JGID = #{jgid} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(mblx)">
+                        MBLX = #{mblx} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(mbmc)">
+                        MBMC = #{mbmc} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(lx)">
+                        LX = #{lx} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(cjsj)">
+                        CJSJ = #{cjsj} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(cjksdm)">
+                        CJKSDM = #{cjksdm} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(cjrdm)">
+                        CJRDM = #{cjrdm} 
+                    </if>
+        </trim>
+            WHERE
+        JLXH = #{jlxh} 
+        </update>
+
+    <delete id="deleteById">
+        DELETE FROM SS_JZMBZB WHERE
+        JLXH = #{jlxh} 
+    </delete>
+    
+    <delete id="removeByEntity">
+        DELETE FROM SS_JZMBZB <include refid="where"/>  
+    </delete>
+    
+    <select id="getById" resultType="SsJzmbzb">
+        SELECT <include refid="columns" />
+            FROM SS_JZMBZB 
+            WHERE 
+        JLXH = #{jlxh} 
+    </select>
+    
+    <sql id="where">
+        <where>                          
+                <if test="@sqlt.Ognl@isNotEmpty(jlxh)">
+                     AND JLXH = #{jlxh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                     AND JGID = #{jgid}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(mblx)">
+                     AND MBLX = #{mblx}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(mbmc)">
+                     AND MBMC = #{mbmc}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(lx)">
+                     AND LX = #{lx}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(cjsj)">
+                     AND CJSJ = #{cjsj}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(cjksdm)">
+                     AND CJKSDM = #{cjksdm}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(cjrdm)">
+                     AND CJRDM = #{cjrdm}
+                </if>
+        </where>
+    </sql>
+        
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM SS_JZMBZB 
+        <include refid="where"/>    
+    </select>
+    
+    <select id="findByEntity" resultType="SsJzmbzb">
+        SELECT <include refid="columns" />
+        FROM SS_JZMBZB 
+        <include refid="where"/>
+        
+        <if test="@sqlt.Ognl@orderIsNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+    <!--     业务sql      -->
+</mapper>
+

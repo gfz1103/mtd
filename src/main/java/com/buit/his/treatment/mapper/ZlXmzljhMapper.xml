@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 治疗项目治疗计划表 -->
+<mapper namespace="com.buit.his.treatment.dao.ZlXmzljhDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        JLXH as jlxh,JGID as jgid,ZLKSDM as zlksdm,ZLXMMC as zlxmmc,PXH as pxh,ZLPC as zlpc,SJ as sj,YL as yl,ZLFF as zlff,ZLBW as zlbw,ZLCS as zlcs,BZXX as bzxx,
+        ZLXM_JLXH as zlxmJlxh
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO ZL_XMZLJH (
+            JLXH ,
+            JGID ,
+            ZLKSDM ,
+            ZLXMMC ,
+            PXH ,
+            ZLPC ,
+            SJ ,
+            YL ,
+            ZLFF ,
+            ZLBW ,
+            ZLCS ,
+            BZXX,
+            ZLXM_JLXH
+        ) VALUES (
+            #{jlxh} ,
+            #{jgid} ,
+            #{zlksdm} ,
+            #{zlxmmc} ,
+            #{pxh} ,
+            #{zlpc} ,
+            #{sj} ,
+            #{yl} ,
+            #{zlff} ,
+            #{zlbw} ,
+            #{zlcs} ,
+            #{bzxx},
+            #{zlxmJlxh}
+        )
+    </insert>
+
+    <update id="update" >
+    UPDATE ZL_XMZLJH
+    <trim prefix="SET" suffixOverrides=",">
+                    <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                        JGID = #{jgid} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zlksdm)">
+                        ZLKSDM = #{zlksdm} ,
+                    </if>
+<!--                    <if test="@sqlt.Ognl@isNotEmpty(zlxmmc)">
+                        ZLXMMC = #{zlxmmc} ,
+                    </if>-->
+                    <if test="@sqlt.Ognl@isNotEmpty(pxh)">
+                        PXH = #{pxh} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zlpc)">
+                        ZLPC = #{zlpc} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(sj)">
+                        SJ = #{sj} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(yl)">
+                        YL = #{yl} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zlff)">
+                        ZLFF = #{zlff} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zlbw)">
+                        ZLBW = #{zlbw} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zlcs)">
+                        ZLCS = #{zlcs} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(bzxx)">
+                        BZXX = #{bzxx} ,
+                    </if>
+        <!--                    <if test="@sqlt.Ognl@isNotEmpty(zlxmJlxh)">
+                                ZLXM_JLXH = #{zlxmJlxh}
+                            </if>-->
+        </trim>
+            WHERE
+        JLXH = #{jlxh}
+        </update>
+
+    <delete id="deleteById">
+        DELETE FROM ZL_XMZLJH WHERE
+        JLXH = #{jlxh}
+    </delete>
+
+    <delete id="removeByEntity">
+        DELETE FROM ZL_XMZLJH <include refid="where"/>
+    </delete>
+
+    <select id="getById" resultType="ZlXmzljh">
+        SELECT <include refid="columns" />
+            FROM ZL_XMZLJH
+            WHERE
+        JLXH = #{jlxh}
+    </select>
+
+    <sql id="where">
+        <where>
+                <if test="@sqlt.Ognl@isNotEmpty(jlxh)">
+                     AND JLXH = #{jlxh}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                     AND JGID = #{jgid}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zlksdm)">
+                     AND ZLKSDM = #{zlksdm}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zlxmmc)">
+                     AND ZLXMMC = #{zlxmmc}
+                </if>
+                <if test="@sqlt.Ognl@isNotEmpty(zlxmJlxh)">
+                    ZLXM_JLXH = #{zlxmJlxh}
+                </if>
+<!--                <if test="@sqlt.Ognl@isNotEmpty(pxh)"> -->
+<!--                     AND PXH = #{pxh} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(zlpc)"> -->
+<!--                     AND ZLPC = #{zlpc} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(sj)"> -->
+<!--                     AND SJ = #{sj} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(yl)"> -->
+<!--                     AND YL = #{yl} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(zlff)"> -->
+<!--                     AND ZLFF = #{zlff} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(zlbw)"> -->
+<!--                     AND ZLBW = #{zlbw} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(zlcs)"> -->
+<!--                     AND ZLCS = #{zlcs} -->
+<!--                </if> -->
+        </where>
+    </sql>
+
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM ZL_XMZLJH
+        <include refid="where"/>
+    </select>
+
+    <select id="findByEntity" resultType="ZlXmzljh">
+        SELECT <include refid="columns" />
+        FROM ZL_XMZLJH
+        <include refid="where"/>
+
+        <if test="@sqlt.Ognl@orderIsNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+    <!--     业务sql      -->
+    <!--查询最大的排序号-->
+    <select id="queryMaxPxh" resultType="java.lang.Integer">
+       select IFNULL(max(pxh),0) from ZL_XMZLJH where jgid=#{jgid} and zlksdm=#{zlksdm} and zlxmmc=#{zlxmmc} and jlxh!=#{jlxh}
+    </select>
+
+    <select id="checkIsExitZljh" resultType="java.lang.String">
+        select xm.ZLXMMC
+        from zl_xm xm
+        LEFT JOIN zl_xmzljh zljh ON xm.jlxh = zljh.ZLXM_JLXH
+        where xm.jgid = #{jgid} and zljh.JLXH IS NULL
+        AND xm.jlxh in
+        <foreach collection="zlxmJlxhList" separator="," open="(" close=")" item="item" >
+            #{item}
+        </foreach>
+    </select>
+
+</mapper>
+

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 门诊退费申请明细表 -->
+<mapper namespace="com.buit.his.sams.dao.SsMztfsqmxDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        JLXH as jlxh,JGID as jgid,SSKSDM as ssksdm,TFSQDH as tfsqdh,XH as xh,TFXMLB as tfxmlb,TFXMDM as tfxmdm,TFSL as tfsl,DJ as dj,TFJE as tfje,ZT as zt,JZDH as jzdh,JZXH as jzxh
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO SS_MZTFSQMX (
+            JLXH ,
+            JGID ,
+            SSKSDM ,
+            TFSQDH ,
+            XH ,
+            TFXMLB ,
+            TFXMDM ,
+            TFSL ,
+            DJ ,
+            TFJE ,
+            ZT ,
+            JZDH ,
+            JZXH 
+        ) VALUES (
+            #{jlxh} ,
+            #{jgid} ,
+            #{ssksdm} ,
+            #{tfsqdh} ,
+            #{xh} ,
+            #{tfxmlb} ,
+            #{tfxmdm} ,
+            #{tfsl} ,
+            #{dj} ,
+            #{tfje} ,
+            #{zt} ,
+            #{jzdh} ,
+            #{jzxh} 
+        )
+    </insert>
+    
+    <update id="update" >
+    UPDATE SS_MZTFSQMX
+    <trim prefix="SET" suffixOverrides=",">
+                    <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                        JGID = #{jgid} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(ssksdm)">
+                        SSKSDM = #{ssksdm} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(tfsqdh)">
+                        TFSQDH = #{tfsqdh} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(xh)">
+                        XH = #{xh} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(tfxmlb)">
+                        TFXMLB = #{tfxmlb} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(tfxmdm)">
+                        TFXMDM = #{tfxmdm} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(tfsl)">
+                        TFSL = #{tfsl} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(dj)">
+                        DJ = #{dj} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(tfje)">
+                        TFJE = #{tfje} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(zt)">
+                        ZT = #{zt} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(jzdh)">
+                        JZDH = #{jzdh} ,
+                    </if>
+                    <if test="@sqlt.Ognl@isNotEmpty(jzxh)">
+                        JZXH = #{jzxh} 
+                    </if>
+        </trim>
+            WHERE
+        JLXH = #{jlxh} 
+        </update>
+
+    <delete id="deleteById">
+        DELETE FROM SS_MZTFSQMX WHERE
+        JLXH = #{jlxh} 
+    </delete>
+    
+    <delete id="removeByEntity">
+        DELETE FROM SS_MZTFSQMX <include refid="where"/>  
+    </delete>
+    
+    <select id="getById" resultType="SsMztfsqmx">
+        SELECT <include refid="columns" />
+            FROM SS_MZTFSQMX 
+            WHERE 
+        JLXH = #{jlxh} 
+    </select>
+    
+    <sql id="where">
+        <where>                          
+<!--                <if test="@sqlt.Ognl@isNotEmpty(jlxh)"> -->
+<!--                     AND JLXH = #{jlxh} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(jgid)"> -->
+<!--                     AND JGID = #{jgid} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(ssksdm)"> -->
+<!--                     AND SSKSDM = #{ssksdm} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(tfsqdh)"> -->
+<!--                     AND TFSQDH = #{tfsqdh} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(xh)"> -->
+<!--                     AND XH = #{xh} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(tfxmlb)"> -->
+<!--                     AND TFXMLB = #{tfxmlb} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(tfxmdm)"> -->
+<!--                     AND TFXMDM = #{tfxmdm} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(tfsl)"> -->
+<!--                     AND TFSL = #{tfsl} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(dj)"> -->
+<!--                     AND DJ = #{dj} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(tfje)"> -->
+<!--                     AND TFJE = #{tfje} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(zt)"> -->
+<!--                     AND ZT = #{zt} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(jzdh)"> -->
+<!--                     AND JZDH = #{jzdh} -->
+<!--                </if> -->
+<!--                <if test="@sqlt.Ognl@isNotEmpty(jzxh)"> -->
+<!--                     AND JZXH = #{jzxh} -->
+<!--                </if> -->
+        </where>
+    </sql>
+        
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM SS_MZTFSQMX 
+        <include refid="where"/>    
+    </select>
+    
+    <select id="findByEntity" resultType="SsMztfsqmx">
+        SELECT <include refid="columns" />
+        FROM SS_MZTFSQMX 
+        <include refid="where"/>
+        
+        <if test="@sqlt.Ognl@orderIsNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+    <!--     业务sql      -->
+</mapper>
+

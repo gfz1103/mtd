@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 手术安排表 -->
+<mapper namespace="com.buit.his.sams.dao.SsSsapDao">
+
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="columns">
+        JLXH as jlxh,JGID as jgid,SSKSDM as ssksdm,SQDH as sqdh,APSSSJ as apsssj,SSJ as ssj,TC as tc,APRDM as aprdm,MZYSDM as mzysdm,MZZSDM as mzzsdm,XHHSDMY as xhhsdmy,XHHSDME as xhhsdme,XSHSDMY as xshsdmy,XSHSDME as xshsdme,CZSJ as czsj,ZT as zt, SSJZZT as ssjzzt, MZJZZT as mzjzzt
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO SS_SSAP (
+            JLXH ,
+            JGID ,
+            SSKSDM ,
+            SQDH ,
+            APSSSJ ,
+            SSJ,
+            TC,
+            APRDM,
+            MZYSDM,
+            MZZSDM,
+            XHHSDMY,
+            XHHSDME,
+            XSHSDMY,
+            XSHSDME,
+            CZSJ,
+            ZT,
+            SSJZZT,
+            MZJZZT)
+        VALUES (#{jlxh},
+                #{jgid},
+                #{ssksdm},
+                #{sqdh},
+                #{apsssj},
+                #{ssj},
+                #{tc},
+                #{aprdm},
+                #{mzysdm},
+                #{mzzsdm},
+                #{xhhsdmy},
+                #{xhhsdme},
+                #{xshsdmy},
+                #{xshsdme},
+                #{czsj},
+                #{zt},
+                #{ssjzzt},
+                #{mzjzzt})
+    </insert>
+
+    <update id="update" >
+        UPDATE SS_SSAP
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                JGID = #{jgid} ,
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(ssksdm)">
+                SSKSDM = #{ssksdm} ,
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(sqdh)">
+                SQDH = #{sqdh} ,
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(apsssj)">
+                APSSSJ = #{apsssj} ,
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(ssj)">
+                SSJ = #{ssj} ,
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(tc)">
+                TC = #{tc} ,
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(aprdm)">
+                APRDM = #{aprdm} ,
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(mzysdm)">
+                MZYSDM = #{mzysdm} ,
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(mzzsdm)">
+                MZZSDM = #{mzzsdm} ,
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(xhhsdmy)">
+                XHHSDMY = #{xhhsdmy} ,
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(xhhsdme)">
+                XHHSDME = #{xhhsdme} ,
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(xshsdmy)">
+                XSHSDMY = #{xshsdmy} ,
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(xshsdme)">
+                XSHSDME = #{xshsdme} ,
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(czsj)">
+                CZSJ = #{czsj},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zt)">
+                ZT = #{zt},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(ssjzzt)">
+                SSJZZT = #{ssjzzt},
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(mzjzzt)">
+                MZJZZT = #{mzjzzt}
+            </if>
+        </trim>
+        WHERE
+        JLXH = #{jlxh}
+    </update>
+
+
+    <delete id="deleteById">
+        DELETE FROM SS_SSAP WHERE
+        JLXH = #{jlxh}
+    </delete>
+
+    <delete id="removeByEntity">
+        DELETE FROM SS_SSAP <include refid="where"/>
+    </delete>
+
+    <select id="getById" resultType="SsSsap">
+        SELECT <include refid="columns" />
+        FROM SS_SSAP
+        WHERE
+        JLXH = #{jlxh}
+    </select>
+
+    <sql id="where">
+        <where>
+            <if test="@sqlt.Ognl@isNotEmpty(jlxh)">
+                 AND JLXH = #{jlxh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(jgid)">
+                 AND JGID = #{jgid}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(ssksdm)">
+                 AND SSKSDM = #{ssksdm}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(sqdh)">
+                 AND SQDH = #{sqdh}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(apsssj)">
+                 AND APSSSJ = #{apsssj}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(ssj)">
+                 AND SSJ = #{ssj}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(tc)">
+                 AND TC = #{tc}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(aprdm)">
+                 AND APRDM = #{aprdm}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(mzysdm)">
+                 AND MZYSDM = #{mzysdm}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(mzzsdm)">
+                 AND MZZSDM = #{mzzsdm}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(xhhsdmy)">
+                 AND XHHSDMY = #{xhhsdmy}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(xhhsdme)">
+                 AND XHHSDME = #{xhhsdme}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(xshsdmy)">
+                AND XSHSDMY = #{xshsdmy}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(xshsdme)">
+                AND XSHSDME = #{xshsdme}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(czsj)">
+                AND CZSJ = #{czsj}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zt)">
+                AND ZT = #{zt}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(ssjzzt)">
+                AND SSJZZT = #{ssjzzt}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(mzjzzt)">
+                AND MZJZZT = #{mzjzzt}
+            </if>
+        </where>
+    </sql>
+
+    <select id="findByEntityCount" resultType="long">
+        SELECT count(*) FROM SS_SSAP
+        <include refid="where"/>
+    </select>
+
+    <select id="findByEntity" resultType="SsSsap">
+        SELECT <include refid="columns" />
+        FROM SS_SSAP
+        <include refid="where"/>
+
+        <if test="@sqlt.Ognl@orderIsNotEmpty(sortColumns)">
+            ORDER BY ${sortColumns}
+        </if>
+    </select>
+    <!--     业务sql      -->
+
+    <!--手术安排一览表分页查询-->
+    <select id="ssapView" resultType="com.buit.his.sams.response.SsSsapQueryPageResp">
+        select
+            sq.SQDH as jlxh,
+            sq.JGID as jgid,
+            sq.SQDH as sqdh,
+            sq.SQLX as brlx,
+            sq.MZHM as mzhm,
+            sq.ZYHM as zyhm,
+            sq.ZYH as zyh,
+            sq.BRKS as ksdm,
+            sq.SSKS as SSKS,
+            sq.ssmc as ssmc,
+            sq.SSYS as ssysdm,
+            sq.mzdm as mzffdm,
+            sq.MZMC as mzmc,
+            sq.YWBZ as jjlx,
+            sq.SSrq as sssj,
+            IFNULL(ap.TC, sq.SSTC) as tc,
+            im.BRXM as brxm,
+            im.BRXB as brxb,
+            sq.SQYS as sqrdm,
+            sq.SQRQ as sqsj,
+            ap.APRDM as aprdm,
+            IFNULL(ap.MZYSDM, sq.MZYS) as mzysdm,
+            ap.MZZSDM as mzzsdm,
+            ap.XHHSDMY as xhhsdmy,
+            ap.XHHSDME as xhhsdme,
+            ap.XSHSDMY as xshsdmy,
+            ap.XSHSDME as xshsdme,
+            ap.CZSJ as czsj,
+            ap.APSSSJ as apsssj,
+            ap.ssj as ssj,
+            ap.zt,
+            IFNULL(ap.SSJZZT, 0) as ssjzzt,
+            IFNULL(ap.MZJZZT, 0) as mzjzzt
+        FROM opt_sssq sq
+            INNER JOIN cis_hzyz hzyz ON (hzyz.YZLX = 3 AND hzyz.ZFBZ = 0 AND hzyz.FHBZ = 1
+                                        AND sq.zfbz = 0 AND (sq.zdssbz = 0 OR (sq.zdssbz and sq.spbz=1))
+                                        AND sq.sqdh = hzyz.SQID)
+            INNER JOIN im_hzry im on sq.ZYH = im.ZYH
+            LEFT JOIN SS_SSAP ap on ap.SQDH = sq.SQDH
+        <where>
+            <if test="@sqlt.Ognl@isNotEmpty(ssj)">
+                AND ap.ssj = #{ssj}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(startDate)">
+                AND ap.apsssj &gt;= #{startDate}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(endDate)">
+                AND ap.apsssj &lt;= #{endDate}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zt)">
+                AND ap.zt in (<foreach collection="zt" item="z" separator=",">#{z}</foreach>)
+            </if>
+        </where>
+    </select>
+    <select id="querySsapPage" resultType="com.buit.his.sams.response.SsSsapQueryPageResp">
+        SELECT
+            ssap.jlxh as jlxh,
+            sssq.jgid as jgid,
+            sssq.sqdh as sqdh,
+            sssq.mzhm as mzhm,
+            sssq.ZYHM as zyhm,
+            sssq.zyh as zyh,
+            sssq.BRKS as ksdm,
+            sssq.SSKS as ssks,
+            sssq.ywbz as jjlx,
+            sssq.SSMC as ssmc,
+            sssq.SSRQ as sssj,
+            sssq.sslx as sslx,
+            sssq.SSYS as ssysdm,
+            sssq.mzdm as mzffdm,
+            sssq.MZMC as mzmc,
+            ssap.APSSSJ as apsssj,
+            ssap.SSJ as ssj,
+            IFNULL(ssap.TC, sssq.SSTC) as tc,
+            IFNULL(ssap.MZYSDM, sssq.MZYS) as mzysdm,
+            ssap.APRDM as aprdm,
+            ssap.zt as zt,
+            IFNULL(ssap.SSJZZT, 0) as ssjzzt,
+            IFNULL(ssap.MZJZZT, 0) as mzjzzt
+        FROM
+            opt_sssq sssq
+            INNER JOIN cis_hzyz hzyz ON (hzyz.YZLX = 3 AND hzyz.ZFBZ = 0 AND hzyz.FHBZ = 1
+                                        AND sssq.zfbz = 0 AND (sssq.zdssbz = 0 OR (sssq.zdssbz and sssq.spbz=1))
+                                        AND sssq.sqdh = hzyz.SQID)
+            LEFT JOIN ss_ssap ssap ON sssq.SQDH = ssap.SQDH
+        <where>
+            <if test="@sqlt.Ognl@isNotEmpty(ssksdm)">
+                AND sssq.SSKS = #{ssksdm}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(jjlx)">
+                and sssq.ywbz=#{jjlx}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(startDate)">
+                AND sssq.ssrq &gt;= #{startDate}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(endDate)">
+                AND sssq.ssrq &lt;= #{endDate}
+            </if>
+            <if test="@sqlt.Ognl@isNotEmpty(zt)">
+                <if test="zt==0">
+                    AND (ssap.zt is null or ssap.zt =0)
+                </if>
+                <if test="zt!=0">
+                    AND ssap.zt = #{zt}
+                </if>
+            </if>
+        </where>
+    </select>
+
+</mapper>
+
